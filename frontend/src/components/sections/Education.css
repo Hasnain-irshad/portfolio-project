@@ -1,0 +1,191 @@
+.education {
+    padding: 80px 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.education-timeline {
+    position: relative;
+    margin-top: 50px;
+}
+
+.education-timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 3px;
+    height: 100%;
+    background: linear-gradient(180deg, #667eea, #764ba2);
+}
+
+.education-item {
+    margin-bottom: 50px;
+    position: relative;
+}
+
+.education-item.left {
+    margin-left: 0;
+    margin-right: 50%;
+    padding-right: 30px;
+}
+
+.education-item.right {
+    margin-left: 50%;
+    margin-right: 0;
+    padding-left: 30px;
+}
+
+.education-content {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.education-content:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.timeline-marker {
+    position: absolute;
+    left: 50%;
+    top: 25px;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 50px;
+    background: white;
+    border: 4px solid #667eea;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: #667eea;
+    z-index: 10;
+    box-shadow: 0 0 0 5px rgba(102, 126, 234, 0.1);
+}
+
+.education-header {
+    margin-bottom: 15px;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 15px;
+}
+
+.education-degree {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #333;
+    margin: 0 0 5px 0;
+}
+
+.education-field {
+    font-size: 1.1rem;
+    color: #667eea;
+    font-weight: 600;
+    margin: 0;
+}
+
+.education-info {
+    margin: 15px 0;
+}
+
+.education-school,
+.education-location,
+.education-duration {
+    font-size: 0.95rem;
+    color: #555;
+    margin: 8px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.education-school i,
+.education-location i,
+.education-duration i {
+    color: #667eea;
+    min-width: 20px;
+}
+
+.education-grade {
+    font-size: 0.95rem;
+    color: #28a745;
+    font-weight: 600;
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.education-grade i {
+    color: #ffc107;
+}
+
+.education-description {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.6;
+    margin: 15px 0;
+    font-style: italic;
+}
+
+.education-activities {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.education-activities h4 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0 0 10px 0;
+}
+
+.education-activities ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.education-activities li {
+    font-size: 0.9rem;
+    color: #555;
+    margin: 8px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.education-activities i {
+    color: #28a745;
+    min-width: 15px;
+}
+
+@media (max-width: 768px) {
+    .education-timeline::before {
+        left: 20px;
+    }
+
+    .education-item.left,
+    .education-item.right {
+        margin-left: 0;
+        margin-right: 0;
+        padding-left: 60px;
+        padding-right: 0;
+    }
+
+    .timeline-marker {
+        left: 20px;
+    }
+
+    .education {
+        padding: 50px 20px;
+    }
+
+    .education-degree {
+        font-size: 1.2rem;
+    }
+}

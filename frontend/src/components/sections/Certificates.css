@@ -1,0 +1,94 @@
+.certificates {
+    background: var(--color-bg);
+}
+
+.certificates-grid {
+    margin-top: var(--spacing-2xl);
+}
+
+.certificate-card {
+    overflow: hidden;
+    transition: all var(--transition-base);
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-bg-tertiary);
+}
+
+.certificate-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: var(--shadow-2xl), 0 0 30px rgba(99, 102, 241, 0.2);
+    border-color: var(--color-primary);
+}
+
+.certificate-image {
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    background: var(--color-bg-tertiary);
+    position: relative;
+}
+
+.certificate-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-slow);
+}
+
+.certificate-card:hover .certificate-image img {
+    transform: scale(1.08);
+}
+
+.certificate-content {
+    padding: var(--spacing-lg);
+}
+
+.certificate-title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text);
+    margin-bottom: var(--spacing-sm);
+}
+
+.certificate-issuer,
+.certificate-date,
+.certificate-id {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--spacing-xs);
+}
+
+.certificate-issuer i,
+.certificate-date i {
+    color: var(--color-primary);
+    width: 16px;
+}
+
+.certificate-id {
+    margin-top: var(--spacing-sm);
+}
+
+.certificate-id strong {
+    color: var(--color-text-secondary);
+}
+
+.certificate-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    margin-top: var(--spacing-md);
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    color: white;
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    transition: all var(--transition-fast);
+}
+
+.certificate-link:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md), 0 0 20px rgba(99, 102, 241, 0.5);
+}
