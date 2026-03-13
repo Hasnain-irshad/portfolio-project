@@ -1,118 +1,110 @@
 .projects {
-    background: var(--color-bg);
-}
-
-.projects-grid {
-    margin-top: var(--spacing-2xl);
+    background: transparent;
 }
 
 .project-card {
-    position: relative;
     overflow: hidden;
-    background: var(--color-bg-secondary);
-    border: 1px solid var(--color-bg-tertiary);
-    transition: all var(--transition-base);
+    position: relative;
 }
 
-.project-card:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: var(--shadow-2xl), 0 0 40px rgba(99, 102, 241, 0.25);
+.project-card.featured {
     border-color: var(--color-primary);
+    box-shadow: 0 0 20px rgba(242, 101, 42, 0.1);
 }
 
 .featured-badge {
-    position: absolute !important;
+    position: absolute;
     top: var(--spacing-md);
     right: var(--spacing-md);
-    z-index: 10;
-    box-shadow: var(--shadow-lg);
+    background: var(--color-primary);
+    color: white;
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    z-index: 2;
 }
 
 .project-image {
-    position: relative;
     width: 100%;
-    height: 200px;
+    height: 220px;
     overflow: hidden;
-    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-    background: var(--color-bg-tertiary);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-md);
 }
 
 .project-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform var(--transition-slow);
+    transition: transform 0.3s ease;
 }
 
 .project-card:hover .project-image img {
-    transform: scale(1.1);
+    transform: scale(1.06);
 }
 
-.project-image-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(to bottom,
-            transparent 0%,
-            rgba(0, 0, 0, 0.3) 100%);
-    opacity: 0;
-    transition: opacity var(--transition-base);
-}
-
-.project-card:hover .project-image-overlay {
-    opacity: 1;
-}
+.project-card.card { padding: 0; }
+.project-card .tilt-inner { display: block; }
+.tilt-wrapper { border-radius: 12px; overflow: hidden; }
+.tilt-container { perspective: 1200px; }
+.tilt-container .tilt-inner { transition: transform 350ms ease; transform-style: preserve-3d; }
+.tilt-container:hover .tilt-inner { transform: rotateX(4deg) rotateY(-4deg); }
 
 .project-content {
-    padding: var(--spacing-lg);
     display: flex;
     flex-direction: column;
     gap: var(--spacing-sm);
+    padding: var(--spacing-md);
 }
 
 .project-title {
     font-size: var(--font-size-xl);
-    font-weight: var(--font-weight-bold);
     color: var(--color-text);
-    margin-bottom: var(--spacing-xs);
 }
 
 .project-description {
     color: var(--color-text-secondary);
-    font-size: var(--font-size-sm);
     line-height: 1.6;
-    margin-bottom: var(--spacing-sm);
 }
 
 .project-tech {
     display: flex;
     flex-wrap: wrap;
     gap: var(--spacing-xs);
-    margin-bottom: var(--spacing-md);
+    margin: var(--spacing-sm) 0;
+}
+
+.tech-tag {
+    background: var(--color-surface-soft);
+    color: var(--color-text-secondary);
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    border: 1px solid var(--color-border);
 }
 
 .project-links {
     display: flex;
-    gap: var(--spacing-sm);
+    gap: var(--spacing-md);
     margin-top: auto;
-    flex-wrap: wrap;
+    padding-top: var(--spacing-md);
 }
 
-.tilt-wrapper {
-    height: 100%;
+.project-link {
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-xs);
+    color: var(--color-primary);
+    font-weight: 600;
+    transition: color var(--transition-fast);
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .project-card:hover {
-        transform: translateY(-5px) scale(1);
-    }
+.project-link:hover {
+    color: var(--color-primary-hover);
+}
 
-    .project-image {
-        height: 180px;
-    }
+@media (max-width: 768px) {
+    .projects-grid { grid-template-columns: 1fr !important; }
 }

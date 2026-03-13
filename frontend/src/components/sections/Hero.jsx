@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import Button from '../common/Button';
 import './Hero.css';
 
 const Hero = ({ profile, resume }) => {
@@ -30,7 +29,7 @@ const Hero = ({ profile, resume }) => {
     };
 
     return (
-        <section id="home" className="hero">
+        <section id="home" className="hero" style={profile?.backgroundImage?.url ? { backgroundImage: `url(${profile.backgroundImage.url})`, backgroundSize: 'cover', backgroundPosition: 'center' } : {}}>
             <div className="hero-background">
                 <div className="hero-gradient"></div>
             </div>
@@ -54,21 +53,16 @@ const Hero = ({ profile, resume }) => {
                         </p>
 
                         <div className="hero-buttons">
-                            <Button
-                                variant="primary"
-                                size="large"
+                            <button
+                                className="btn btn-primary"
                                 onClick={() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })}
                             >
                                 Get In Touch
-                            </Button>
+                            </button>
                             {resume && (
-                                <Button
-                                    variant="outline"
-                                    size="large"
-                                    onClick={handleDownloadResume}
-                                >
+                                <button className="btn btn-outline" onClick={handleDownloadResume}>
                                     Download Resume
-                                </Button>
+                                </button>
                             )}
                         </div>
 
@@ -98,9 +92,9 @@ const Hero = ({ profile, resume }) => {
                             transition={{ duration: 0.6, delay: 0.2 }}
                             className="hero-image"
                         >
+                            <div className="hero-accent-shape"></div>
                             <div className="image-wrapper">
                                 <img src={profile.profileImage.url} alt={profile.name} />
-                                <div className="image-glow"></div>
                             </div>
                         </motion.div>
                     )}

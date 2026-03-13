@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+dotenv.config();   // Load .env variables
 import connectDB from "./config/db.js";
 import { errorHandler, notFound } from "./middleware/errorHandler.js";
 
@@ -15,8 +16,10 @@ import certificateRoutes from "./routes/certificateRoutes.js";
 import contactRoutes from "./routes/contactRoutes.js";
 import achievementRoutes from "./routes/achievementRoutes.js";
 import educationRoutes from "./routes/educationRoutes.js";
-
-dotenv.config();   // Load .env variables
+import blogRoutes from "./routes/blogRoutes.js";
+import publicationRoutes from "./routes/publicationRoutes.js";
+import activityRoutes from "./routes/activityRoutes.js";
+import dashboardRoutes from "./routes/dashboardRoutes.js";
 
 const app = express();
 
@@ -48,6 +51,10 @@ app.use("/api/certificates", certificateRoutes);
 app.use("/api/contact", contactRoutes);
 app.use("/api/achievements", achievementRoutes);
 app.use("/api/education", educationRoutes);
+app.use("/api/blogs", blogRoutes);
+app.use("/api/publications", publicationRoutes);
+app.use("/api/activities", activityRoutes);
+app.use("/api/dashboard", dashboardRoutes);
 // 404 Handler
 app.use(notFound);
 

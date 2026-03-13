@@ -4,7 +4,7 @@ export const authMiddleware = (req, res, next) => {
   let token = req.header("Authorization");
 
   if (!token) {
-    return res.status(401).json({ message: "Access denied. No token provided." });
+    return res.status(401).json({ message: "Unauthorized access: No token provided" });
   }
 
   // Remove "Bearer " prefix if present
@@ -14,10 +14,11 @@ export const authMiddleware = (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.admin = decoded;
+    // Attach only the admin id to req.admin as requested
+    req.admin = decoded.id;
     next();
   } catch (error) {
-    return res.status(401).json({ message: "Invalid token" });
+    return res.status(401).json({ message: "Unauthorized access: Invalid token" });
   }
 };
 

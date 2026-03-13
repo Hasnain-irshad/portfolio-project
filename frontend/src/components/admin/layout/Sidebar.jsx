@@ -15,6 +15,9 @@ const Sidebar = () => {
         { path: '/admin/education', icon: '🎓', label: 'Education' },
         { path: '/admin/achievements', icon: '🏆', label: 'Achievements' },
         { path: '/admin/certificates', icon: '📜', label: 'Certificates' },
+        { path: '/admin/blogs', icon: '📝', label: 'Blogs' },
+        { path: '/admin/publications', icon: '📚', label: 'Publications' },
+        { path: '/admin/activities', icon: '🔄', label: 'Activities' },
     ];
 
     return (

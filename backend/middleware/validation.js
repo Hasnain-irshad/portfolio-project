@@ -23,7 +23,7 @@ export const validators = {
         body('phone').optional().isMobilePhone().withMessage('Valid phone number required'),
     ],
 
-        // Achievement validations
+    // Achievement validations
     achievement: [
         body('title').trim().notEmpty().withMessage('Achievement title is required'),
         body('description').trim().notEmpty().withMessage('Description is required')
@@ -81,6 +81,26 @@ export const validators = {
         body('subject').trim().notEmpty().withMessage('Subject is required'),
         body('message').trim().notEmpty().withMessage('Message is required')
             .isLength({ max: 2000 }).withMessage('Message cannot exceed 2000 characters'),
+    ],
+
+    // Blog validations
+    blog: [
+        body('title').trim().notEmpty().withMessage('Blog title is required'),
+        body('content').trim().notEmpty().withMessage('Blog content is required')
+            .isLength({ max: 5000 }).withMessage('Content cannot exceed 5000 characters'),
+    ],
+
+    // Publication validations
+    publication: [
+        body('title').trim().notEmpty().withMessage('Publication title is required'),
+        body('abstract').trim().notEmpty().withMessage('Abstract is required')
+            .isLength({ max: 5000 }).withMessage('Abstract cannot exceed 5000 characters'),
+        body('year').notEmpty().withMessage('Publication year is required'),
+    ],
+
+    // Activity validations
+    activity: [
+        body('title').trim().notEmpty().withMessage('Activity title is required'),
     ],
 
     // Auth validations

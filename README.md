@@ -1,100 +1,92 @@
-# Dynamic Portfolio System
+# 🚀 Professional MERN Portfolio & Admin System
 
-A fully dynamic, production-ready personal portfolio system with a separate admin dashboard. Built with MERN stack (MongoDB, Express, React, Node.js).
+A high-performance, fully dynamic portfolio system with an integrated Admin Dashboard. Built with the MERN stack (MongoDB, Express, React, Node.js), this project offers a seamless experience for both viewers and administrators.
 
-## 🌟 Features
+## ✨ Features
 
-### Portfolio Frontend
-- ✨ Fully responsive and modern UI
-- 🎨 Smooth animations with Framer Motion
-- 📱 Mobile-first design
-- 🚀 Fast loading with optimized assets
-- 📧 Contact form with backend integration
-- 📄 Dynamic resume download
-- 🔄 Auto-updates when content changes
+### 💻 Public Portfolio
+- **Modern UI/UX**: Stunning design with a dark/light mode aesthetic.
+- **Dynamic Content**: Every section (Bio, Projects, Skills, etc.) is managed via the admin panel.
+- **Responsive**: Fully optimized for mobile, tablet, and desktop.
+- **Micro-animations**: Smooth transitions and hover effects for a premium feel.
+- **Contact System**: Integrated contact form with backend validation and email notifications.
 
-### Admin Dashboard
-- 🔐 Secure JWT authentication
-- 📝 Complete CRUD operations for all sections
-- 🖼️ Image & PDF upload (Cloudinary integration)
-- 👁️ Visibility toggle for each section
-- 📊 Clean, intuitive interface
-- 🎯 Real-time updates
+### 🔐 Admin Dashboard
+- **Secure Authentication**: Refined JWT-based auth with bcrypt password hashing.
+- **Full CRUD**: Manage Projects, Certificates, Experience, Education, and more.
+- **Asset Management**: Seamless image and PDF uploads integrated with Cloudinary.
+- **Visibility Control**: Toggle sections on/off with a single click.
+- **Analytics**: At-a-glance dashboard stats for engagements and content.
 
-### Backend API
-- 🛡️ Robust authentication system
-- 📦 RESTful API architecture
-- ✅ Request validation
-- 🔒 Secure file uploads
-- 🌐 CORS enabled
-- 📝 Comprehensive error handling
+### 🛠️ Backend API
+- **RESTful Design**: Clean, scalable API architecture.
+- **Security First**: Middleware-protected routes and input validation.
+- **Global Error Handling**: Robust error management and standardized API responses.
 
 ## 📁 Project Structure
 
 ```
 portfolio-project/
 ├── backend/                 # Node.js + Express API
-│   ├── config/             # Database & Cloudinary config
-│   ├── controllers/        # Route controllers
-│   ├── middleware/         # Auth, validation, error handling
-│   ├── models/             # Mongoose schemas
-│   ├── routes/             # API routes
-│   ├── utils/              # Helper functions
-│   └── server.js           # Entry point
+│   ├── config/             # DB & Cloudinary configurations
+│   ├── controllers/        # Business logic for routes
+│   ├── middleware/         # Auth, validation, & error handlers
+│   ├── models/             # Mongoose schemas (MongoDB)
+│   ├── routes/             # API endpoint definitions
+│   └── server.js           # API entry point
 │
-├── frontend/                # Portfolio Site (Vite + React)
-│   ├── src/
-│   │   ├── components/     # React components
-│   │   ├── services/       # API integration
-│   │   └── styles/         # Global CSS
-│   └── index.html
-│
-├── admin/                   # Admin Dashboard (Vite + React)
-│   ├── src/
-│   │   ├── components/     # Dashboard components
-│   │   ├── pages/          # Dashboard pages
-│   │   ├── context/        # Auth context
-│   │   └── services/       # API integration
-│   └── index.html
-│
-└── docs/                    # Documentation
-    ├── API_ENDPOINTS.md
-    ├── SETUP.md
-    └── DEPLOYMENT.md
+└── frontend/                # React + Vite Application
+    ├── src/
+    │   ├── components/     # UI components (Public & Admin)
+    │   ├── contexts/       # Auth & Theme state management
+    │   ├── pages/          # Individual page views
+    │   │   ├── admin/      # Integrated Admin Dashboard pages
+    │   │   └── ...         # Public portfolio pages
+    │   └── services/       # Axios API services
+    └── index.html
 ```
 
 ## 🚀 Quick Start
 
-### Prerequisites
-- Node.js 18+
-- MongoDB Atlas account (free tier available)
-- Cloudinary account (free tier available)
+### 1. Prerequisites
+- **Node.js**: v18.0.0+
+- **MongoDB**: Atlas account or local instance
+- **Cloudinary**: Account for media storage
 
-### Installation
+### 2. Installation
 
-1. **Clone & Install**
 ```bash
-git clone <your-repo>
+# Clone the repository
+git clone https://github.com/your-username/portfolio-project.git
 cd portfolio-project
 
-# Install backend dependencies
+# Setup Backend
 cd backend
 npm install
 
-# Install frontend dependencies
+# Setup Frontend
 cd ../frontend
-npm install
-
-# Install admin dependencies (once created)
-cd ../admin
 npm install
 ```
 
-2. **Configure Environment Variables**
+### 3. Environment Setup
 
-Create `.env` files in `backend`, `frontend`, and `admin` directories (see `.env.example` files).
+Create a `.env` file in the `backend` directory:
+```env
+PORT=5000
+MONGO_URI=your_mongodb_uri
+JWT_SECRET=your_jwt_secret
+CLOUDINARY_CLOUD_NAME=your_name
+CLOUDINARY_API_KEY=your_key
+CLOUDINARY_API_SECRET=your_secret
+```
 
-3. **Start Development Servers**
+Create a `.env` file in the `frontend` directory:
+```env
+VITE_API_URL=http://localhost:5000/api
+```
+
+### 4. Running the App
 
 ```bash
 # Terminal 1: Backend
@@ -104,152 +96,31 @@ npm run dev
 # Terminal 2: Frontend
 cd frontend
 npm run dev
-
-# Terminal 3: Admin
-cd admin
-npm run dev
 ```
 
-4. **Access the Applications**
-- Portfolio Frontend: http://localhost:5173
-- Admin Dashboard: http://localhost:5174
-- Backend API: http://localhost:5000
+## 📝 API Reference
 
-## 📚 Documentation
+| Method | Endpoint | Description | Access |
+| :--- | :--- | :--- | :--- |
+| `POST` | `/api/auth/signup` | Register new admin | Public |
+| `POST` | `/api/auth/login` | Login & get JWT | Public |
+| `GET` | `/api/dashboard` | Get dashboard stats | Private |
+| `GET` | `/api/projects` | Get all projects | Public |
+| `POST` | `/api/projects` | Create project | Private |
 
-- **[Setup Guide](./docs/SETUP.md)** - Detailed setup instructions
-- **[API Documentation](./docs/API_ENDPOINTS.md)** - Complete API reference
-- **[Deployment Guide](./docs/DEPLOYMENT.md)** - Deploy to production
+*See `/docs/API_ENDPOINTS.md` for the full reference.*
 
-## 🛠️ Tech Stack
-
-### Backend
--Express.js - Web framework
-- MongoDB + Mongoose - Database
-- JWT - Authentication
-- Cloudinary - File storage
-- Multer - File uploads
-- Bcrypt - Password hashing
-
-### Frontend & Admin
-- React - UI library
-- Vite - Build tool
-- Axios - HTTP client
-- Framer Motion - Animations
-- CSS3 - Styling
-
-## 📝 API Endpoints
-
-### Public Endpoints
-- `GET /api/profile` - Get profile data
-- `GET /api/resume` - Get active resume
-- `GET /api/projects` - Get all projects
-- `GET /api/skills` - Get all skills
-- `GET /api/experience` - Get work experience
-- `GET /api/certificates` - Get certificates
-- `POST /api/contact` - Submit contact form
-
-### Protected Endpoints (Admin)
-All CRUD operations for:
-- Profile management
-- Resume upload
-- Projects (with image uploads)
-- Skills
-- Experience
-- Certificates
-- Contact messages
-
-See [API_ENDPOINTS.md](./docs/API_ENDPOINTS.md) for complete documentation.
-
-## 🎨 Customization
-
-### Colors & Theming
-Edit `frontend/src/styles/index.css` to customize:
-- Color palette
-- Typography
-- Spacing
-- Animations
-
-### Content Structure
-All content is managed through the admin dashboard - no code changes needed!
-
-## 🚀 Deployment
-
-### Recommended Stack
-- **Backend**: Render / Railway (free tier available)
-- **Frontend**: Vercel / Netlify (free)
-- **Admin**: Vercel / Netlify (free)
-- **Database**: MongoDB Atlas (free tier)
-- **Storage**: Cloudinary (free tier)
-
-See [DEPLOYMENT.md](./docs/DEPLOYMENT.md) for step-by-step deployment instructions.
-
-## 📦 Features Breakdown
-
-### Content Management
-- ✅ Personal profile & bio
-- ✅ Profile picture upload
-- ✅ Resume PDF upload & management
-- ✅ Projects with multiple images
-- ✅ Skills by category with proficiency levels
-- ✅ Work experience timeline
-- ✅ Certificates with credential verification
-- ✅ Contact form submissions
-
-### Admin Features
-- ✅ Secure authentication
-- ✅ Upload/update/delete all content
-- ✅ Toggle visibility for each section
-- ✅ View contact form submissions
-- ✅ Manage multiple resumes
-- ✅ Order/prioritize items
-
-### Frontend Features
-- ✅ Responsive design (mobile, tablet, desktop)
-- ✅ Smooth scrolling navigation
-- ✅ Animated sections
-- ✅ Contact form with validation
-- ✅ Social media links
-- ✅ SEO optimized
-- ✅ Fast loading
-
-## 🔒 Security Features
-
-- JWT authentication for admin
-- Password hashing with bcrypt
-- Request validation
-- CORS protection
-- Environment variables for sensitive data
-- Secure file uploads to Cloudinary
-
-## 📊 Performance
-
-- Lazy loading of images
-- Optimized builds with Vite
-- CDN delivery via Cloudinary
-- Minimal bundle size
-- Server-side caching support
+## 🛡️ Security Features
+- **Passwords**: Hashed with salt (bcryptjs).
+- **Sessions**: JWT tokens with 7-day expiration.
+- **Validation**: Strict request body checks using Express Validator.
+- **CORS**: Restricted origins for production safety.
 
 ## 🤝 Contributing
-
-This is a personal portfolio system template. Feel free to fork and customize for your own use!
+Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## 📄 License
-
-MIT License - feel free to use for personal or commercial projects.
-
-## 🆘 Support
-
-- 📖 Check documentation in `/docs`
-- 🐛 Report issues on GitHub
-- 💬 See troubleshooting section in SETUP.md
-
-## 🎉 Acknowledgments
-
-- Built with modern best practices
-- Inspired by professional portfolio designs
-- Uses industry-standard technologies
+This project is licensed under the MIT License.
 
 ---
-
-**Made with ❤️ using React, Node.js, and MongoDB**
+**Made with ❤️ by [Hasnain Irshad](https://github.com/Hasnain-irshad)**

@@ -20,9 +20,9 @@ export const adminAuthAPI = {
         const api = createAdminAPI();
         return api.post('/auth/login', { email, password });
     },
-    register: (name, email, password) => {
+    signup: (name, email, password) => {
         const api = createAdminAPI();
-        return api.post('/auth/register', { name, email, password });
+        return api.post('/auth/signup', { name, email, password });
     },
     getMe: (token) => {
         const api = createAdminAPI(token);
@@ -36,8 +36,10 @@ export const adminProfileAPI = {
     create: (token, data) => createAdminAPI(token).put('/profile', data),
     update: (token, data) => createAdminAPI(token).put('/profile', data),
     uploadAvatar: (token, formData) => {
-        // Let the axios/browser set the multipart Content-Type (with boundary)
         return createAdminAPI(token).post('/profile/image', formData);
+    },
+    uploadBackground: (token, formData) => {
+        return createAdminAPI(token).post('/profile/background', formData);
     }
 };
 
@@ -114,6 +116,45 @@ export const adminAchievementsAPI = {
     update: (token, id, data) => createAdminAPI(token).put(`/achievements/${id}`, data),
     delete: (token, id) => createAdminAPI(token).delete(`/achievements/${id}`),
     toggleVisibility: (token, id) => createAdminAPI(token).patch(`/achievements/${id}/visibility`)
+};
+
+// Blogs Admin APIs
+export const adminBlogsAPI = {
+    getAll: (token) => createAdminAPI(token).get('/blogs/admin/all'),
+    create: (token, formData) => {
+        return createAdminAPI(token).post('/blogs', formData);
+    },
+    update: (token, id, formData) => {
+        return createAdminAPI(token).put(`/blogs/${id}`, formData);
+    },
+    delete: (token, id) => createAdminAPI(token).delete(`/blogs/${id}`),
+    toggleVisibility: (token, id) => createAdminAPI(token).patch(`/blogs/${id}/visibility`)
+};
+
+// Publications Admin APIs
+export const adminPublicationsAPI = {
+    getAll: (token) => createAdminAPI(token).get('/publications/admin/all'),
+    create: (token, formData) => {
+        return createAdminAPI(token).post('/publications', formData);
+    },
+    update: (token, id, formData) => {
+        return createAdminAPI(token).put(`/publications/${id}`, formData);
+    },
+    delete: (token, id) => createAdminAPI(token).delete(`/publications/${id}`),
+    toggleVisibility: (token, id) => createAdminAPI(token).patch(`/publications/${id}/visibility`)
+};
+
+// Activities Admin APIs
+export const adminActivitiesAPI = {
+    getAll: (token) => createAdminAPI(token).get('/activities/admin/all'),
+    create: (token, formData) => {
+        return createAdminAPI(token).post('/activities', formData);
+    },
+    update: (token, id, formData) => {
+        return createAdminAPI(token).put(`/activities/${id}`, formData);
+    },
+    delete: (token, id) => createAdminAPI(token).delete(`/activities/${id}`),
+    toggleVisibility: (token, id) => createAdminAPI(token).patch(`/activities/${id}/visibility`)
 };
 
 export default createAdminAPI;

@@ -60,4 +60,22 @@ export const contactAPI = {
     submit: (data) => api.post('/contact', data),
 };
 
+// Blogs API
+export const blogsAPI = {
+    getAll: () => api.get('/blogs'),
+    getById: (id) => api.get(`/blogs/${id}`),
+};
+
+// Publications API
+export const publicationsAPI = {
+    getAll: (params) => api.get('/publications', { params }),
+    getById: (id) => api.get(`/publications/${id}`),
+};
+
+// Activities API
+export const activitiesAPI = {
+    getAll: () => api.get('/activities'),
+    getById: (id) => api.get(`/activities/${id}`),
+};
+
 export default api;

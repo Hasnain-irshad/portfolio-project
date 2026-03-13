@@ -12,14 +12,16 @@ export const sendEmail = async (to, subject, htmlContent) => {
         
         // Create transporter
         const transporter = nodemailer.createTransport({
-            service: process.env.EMAIL_SERVICE || 'gmail',
+            host: process.env.EMAIL_HOST || 'smtp.gmail.com',
+            port: process.env.EMAIL_PORT || 465,
+            secure: process.env.EMAIL_PORT == 465, // true for 465, false for other ports
             auth: {
                 user: process.env.EMAIL_USER,
-                pass: process.env.EMAIL_PASSWORD
+                pass: process.env.EMAIL_PASS
             }
         });
 
-        console.log(`🔐 Using email account: ${process.env.EMAIL_USER}`);
+        console.log(`🔐 Using email account: ${process.env.EMAIL_USER} via ${process.env.EMAIL_HOST || 'gmail'}`);
 
         // Email options
         const mailOptions = {
@@ -72,7 +74,7 @@ export const sendContactConfirmation = async (userEmail, name) => {
         <p>Hi ${name},</p>
         <p>I have received your message and will get back to you as soon as possible.</p>
         <p>Best regards,</p>
-        <p>${process.env.PORTFOLIO_OWNER_NAME || 'Your Portfolio Owner'}</p>
+        <p>${process.env.PORTFOLIO_OWNER_NAME || 'Hasnain Irshad'}</p>
     `;
 
     return sendEmail(userEmail, 'We Received Your Message', htmlContent);

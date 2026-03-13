@@ -21,6 +21,7 @@ const ProfileManagement = () => {
         twitter: ''
     });
     const [avatar, setAvatar] = useState(null);
+    const [backgroundImg, setBackgroundImg] = useState(null);
 
     useEffect(() => {
         fetchProfile();
@@ -54,6 +55,10 @@ const ProfileManagement = () => {
         setAvatar(e.target.files[0]);
     };
 
+    const handleBackgroundChange = (e) => {
+        setBackgroundImg(e.target.files[0]);
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -83,6 +88,21 @@ const ProfileManagement = () => {
             fetchProfile();
         } catch (error) {
             showToast('Failed to upload avatar', 'error');
+        }
+    };
+
+    const handleBackgroundUpload = async () => {
+        if (!backgroundImg) return;
+
+        try {
+            const fd = new FormData();
+            fd.append('image', backgroundImg);
+            await adminProfileAPI.uploadBackground(token, fd);
+            showToast('Background image uploaded successfully!');
+            setBackgroundImg(null);
+            fetchProfile();
+        } catch (error) {
+            showToast('Failed to upload background image', 'error');
         }
     };
 
@@ -245,9 +265,9 @@ const ProfileManagement = () => {
 
                 <div className="avatar-section">
                     <h3 className="form-section-title">Profile Avatar</h3>
-                    {formData.avatar && (
+                    {formData.profileImage?.url && (
                         <div className="current-avatar">
-                            <img src={formData.avatar.url} alt="Profile" />
+                            <img src={formData.profileImage.url} alt="Profile" />
                         </div>
                     )}
                     <div className="form-group">
@@ -261,6 +281,29 @@ const ProfileManagement = () => {
                         {avatar && (
                             <button type="button" onClick={handleAvatarUpload} className="btn-primary" style={{ marginTop: '12px' }}>
                                 Upload Avatar
+                            </button>
+                        )}
+                    </div>
+                </div>
+
+                <div className="avatar-section" style={{ marginTop: '2rem' }}>
+                    <h3 className="form-section-title">Portfolio Background Image</h3>
+                    {formData.backgroundImage?.url && (
+                        <div className="current-avatar" style={{ borderRadius: '12px', overflow: 'hidden' }}>
+                            <img src={formData.backgroundImage.url} alt="Background" style={{ borderRadius: '12px', maxHeight: '200px', objectFit: 'cover' }} />
+                        </div>
+                    )}
+                    <div className="form-group">
+                        <label className="form-label">Upload New Background</label>
+                        <input
+                            type="file"
+                            onChange={handleBackgroundChange}
+                            className="form-input"
+                            accept="image/*"
+                        />
+                        {backgroundImg && (
+                            <button type="button" onClick={handleBackgroundUpload} className="btn-primary" style={{ marginTop: '12px' }}>
+                                Upload Background
                             </button>
                         )}
                     </div>

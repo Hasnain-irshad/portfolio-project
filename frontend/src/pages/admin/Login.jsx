@@ -99,6 +99,7 @@ const Login = () => {
                 </form>
 
                 <div className="login-footer">
+                    <p>Don't have an account? <a href="/admin/signup">Signup here</a></p>
                     <a href="/" className="back-to-site">← Back to Portfolio</a>
                 </div>
             </div>

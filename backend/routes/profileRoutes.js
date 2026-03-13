@@ -3,6 +3,7 @@ import {
     getProfile,
     updateProfile,
     uploadProfileImage,
+    uploadBackgroundImage,
     toggleVisibility
 } from '../controllers/profileController.js';
 import { authMiddleware } from '../middleware/authMiddleware.js';
@@ -17,6 +18,7 @@ router.get('/', getProfile);
 // Protected routes (Admin only)
 router.put('/', authMiddleware, validators.profile, validate, updateProfile);
 router.post('/image', authMiddleware, upload.single('image'), uploadProfileImage);
+router.post('/background', authMiddleware, upload.single('image'), uploadBackgroundImage);
 router.patch('/visibility', authMiddleware, toggleVisibility);
 
 export default router;

@@ -1,0 +1,131 @@
+.currently-doing {
+    padding: 80px 0;
+}
+
+.activities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 24px;
+}
+
+.activity-card {
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    transition: all 0.3s ease;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+}
+
+.activity-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    border-color: var(--color-primary);
+}
+
+/* Active pulse indicator */
+.activity-pulse {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    z-index: 2;
+    background: rgba(242, 101, 42, 0.12);
+    padding: 4px 12px;
+    border-radius: 20px;
+}
+
+.pulse-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--color-primary);
+    border-radius: 50%;
+    animation: activityPulse 2s infinite;
+}
+
+@keyframes activityPulse {
+    0% { box-shadow: 0 0 0 0 rgba(242, 101, 42, 0.5); }
+    70% { box-shadow: 0 0 0 8px rgba(242, 101, 42, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(242, 101, 42, 0); }
+}
+
+.pulse-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.activity-image {
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+}
+
+.activity-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.activity-card:hover .activity-image img {
+    transform: scale(1.05);
+}
+
+.activity-content {
+    padding: 20px;
+}
+
+.activity-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: var(--color-text);
+}
+
+.activity-role {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-bottom: 8px;
+}
+
+.activity-date {
+    font-size: 12px;
+    color: var(--color-text-muted);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 10px;
+}
+
+.activity-description {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin-bottom: 12px;
+}
+
+.activity-attachment {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--color-primary);
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.activity-attachment:hover {
+    color: var(--color-primary-hover);
+}
+
+@media (max-width: 768px) {
+    .activities-grid { grid-template-columns: 1fr; }
+    .activity-image { height: 160px; }
+}

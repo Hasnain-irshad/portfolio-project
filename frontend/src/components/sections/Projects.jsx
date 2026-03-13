@@ -1,7 +1,5 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import Badge from '../common/Badge';
-import Button from '../common/Button';
 import './Projects.css';
 
 const Projects = ({ projects }) => {
@@ -22,14 +20,13 @@ const Projects = ({ projects }) => {
                             transition={{ duration: 0.5, delay: index * 0.1 }}
                             className={`project-card card ${project.featured ? 'featured' : ''}`}
                         >
-                            {project.featured && <Badge variant="secondary" className="featured-badge">Featured</Badge>}
+                            {project.featured && <span className="featured-badge">Featured</span>}
 
                             <div className="tilt-container">
                                 <div className="tilt-inner tilt-wrapper">
                                     {project.images && project.images.length > 0 && (
                                         <div className="project-image">
                                             <img src={project.images[0].url} alt={project.title} />
-                                            <div className="project-image-overlay"></div>
                                         </div>
                                     )}
 
@@ -40,33 +37,21 @@ const Projects = ({ projects }) => {
                                         {project.technologies && project.technologies.length > 0 && (
                                             <div className="project-tech">
                                                 {project.technologies.map((tech, idx) => (
-                                                    <Badge key={idx} variant="primary" size="small">{tech}</Badge>
+                                                    <span key={idx} className="tech-tag">{tech}</span>
                                                 ))}
                                             </div>
                                         )}
 
                                         <div className="project-links">
                                             {project.liveUrl && (
-                                                <Button
-                                                    variant="primary"
-                                                    size="small"
-                                                    onClick={() => window.open(project.liveUrl, '_blank')}
-                                                    icon={<i className="fas fa-external-link-alt"></i>}
-                                                    iconPosition="left"
-                                                >
-                                                    Live Demo
-                                                </Button>
+                                                <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="project-link">
+                                                    <i className="fas fa-external-link-alt"></i> Live Demo
+                                                </a>
                                             )}
                                             {project.githubUrl && (
-                                                <Button
-                                                    variant="ghost"
-                                                    size="small"
-                                                    onClick={() => window.open(project.githubUrl, '_blank')}
-                                                    icon={<i className="fab fa-github"></i>}
-                                                    iconPosition="left"
-                                                >
-                                                    Code
-                                                </Button>
+                                                <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="project-link">
+                                                    <i className="fab fa-github"></i> Code
+                                                </a>
                                             )}
                                         </div>
                                     </div>

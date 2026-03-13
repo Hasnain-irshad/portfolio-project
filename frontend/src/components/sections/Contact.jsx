@@ -4,7 +4,7 @@ import Button from '../common/Button';
 import { contactAPI } from '../../services/api';
 import './Contact.css';
 
-const Contact = () => {
+const Contact = ({ profile }) => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -53,95 +53,120 @@ const Contact = () => {
                     className="contact-content"
                 >
                     <div className="contact-info">
-                        <h3>Let's work together!</h3>
-                        <p>Have a project in mind or just want to say hi? Feel free to drop me a message!</p>
+                        <div className="info-header">
+                            <h3>Let's work together!</h3>
+                            <p>Have a project in mind or just want to say hi? Feel free to drop me a message!</p>
+                        </div>
 
                         <div className="contact-details">
                             <div className="contact-detail">
-                                <i className="fas fa-envelope"></i>
-                                <div>
+                                <div className="detail-icon">
+                                    <i className="fas fa-envelope"></i>
+                                </div>
+                                <div className="detail-info">
                                     <h4>Email</h4>
-                                    <p>your@email.com</p>
+                                    <p>{profile?.email || 'your@email.com'}</p>
                                 </div>
                             </div>
 
                             <div className="contact-detail">
-                                <i className="fas fa-map-marker-alt"></i>
-                                <div>
+                                <div className="detail-icon">
+                                    <i className="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div className="detail-info">
                                     <h4>Location</h4>
-                                    <p>Your City, Country</p>
+                                    <p>{profile?.location || 'Your City, Country'}</p>
+                                </div>
+                            </div>
+
+                            <div className="contact-detail">
+                                <div className="detail-icon">
+                                    <i className="fas fa-clock"></i>
+                                </div>
+                                <div className="detail-info">
+                                    <h4>Work Hours</h4>
+                                    <p>Mon - Fri: 9am - 6pm</p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <form className="contact-form" onSubmit={handleSubmit}>
-                        {success && (
-                            <div className="alert alert-success">
-                                <i className="fas fa-check-circle"></i> Message sent successfully! I'll get back to you soon.
+                    <div className="contact-form-container">
+                        <form className="contact-form" onSubmit={handleSubmit}>
+                            {success && (
+                                <div className="alert alert-success">
+                                    <i className="fas fa-check-circle"></i> Message sent successfully! I'll get back to you soon.
+                                </div>
+                            )}
+
+                            {error && (
+                                <div className="alert alert-error">
+                                    <i className="fas fa-exclamation-circle"></i> {error}
+                                </div>
+                            )}
+
+                            <div className="form-row">
+                                <div className="form-group">
+                                    <input
+                                        type="text"
+                                        name="name"
+                                        placeholder="Your Name"
+                                        value={formData.name}
+                                        onChange={handleChange}
+                                        required
+                                    />
+                                    <span className="focus-border"></span>
+                                </div>
+
+                                <div className="form-group">
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        placeholder="Your Email"
+                                        value={formData.email}
+                                        onChange={handleChange}
+                                        required
+                                    />
+                                    <span className="focus-border"></span>
+                                </div>
                             </div>
-                        )}
 
-                        {error && (
-                            <div className="alert alert-error">
-                                <i className="fas fa-exclamation-circle"></i> {error}
+                            <div className="form-group">
+                                <input
+                                    type="text"
+                                    name="subject"
+                                    placeholder="Subject"
+                                    value={formData.subject}
+                                    onChange={handleChange}
+                                    required
+                                />
+                                <span className="focus-border"></span>
                             </div>
-                        )}
 
-                        <div className="form-group">
-                            <input
-                                type="text"
-                                name="name"
-                                placeholder="Your Name"
-                                value={formData.name}
-                                onChange={handleChange}
-                                required
-                            />
-                        </div>
+                            <div className="form-group">
+                                <textarea
+                                    name="message"
+                                    placeholder="Your Message"
+                                    rows="5"
+                                    value={formData.message}
+                                    onChange={handleChange}
+                                    required
+                                ></textarea>
+                                <span className="focus-border"></span>
+                            </div>
 
-                        <div className="form-group">
-                            <input
-                                type="email"
-                                name="email"
-                                placeholder="Your Email"
-                                value={formData.email}
-                                onChange={handleChange}
-                                required
-                            />
-                        </div>
-
-                        <div className="form-group">
-                            <input
-                                type="text"
-                                name="subject"
-                                placeholder="Subject"
-                                value={formData.subject}
-                                onChange={handleChange}
-                                required
-                            />
-                        </div>
-
-                        <div className="form-group">
-                            <textarea
-                                name="message"
-                                placeholder="Your Message"
-                                rows="6"
-                                value={formData.message}
-                                onChange={handleChange}
-                                required
-                            ></textarea>
-                        </div>
-
-                        <Button
-                            type="submit"
-                            variant="primary"
-                            size="large"
-                            loading={loading}
-                            disabled={loading}
-                        >
-                            Send Message
-                        </Button>
-                    </form>
+                            <Button
+                                type="submit"
+                                variant="primary"
+                                className="submit-btn"
+                                loading={loading}
+                                disabled={loading}
+                                style={{ width: '100%', padding: '1.2rem' }}
+                            >
+                                {loading ? 'Sending...' : 'Send Message'}
+                            </Button>
+                        </form>
+                    </div>
                 </motion.div>
             </div>
         </section>

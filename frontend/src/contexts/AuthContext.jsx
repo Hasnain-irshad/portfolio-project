@@ -36,6 +36,18 @@ export const AuthProvider = ({ children }) => {
         initAuth();
     }, []);
 
+    const signup = async (name, email, password) => {
+        try {
+            const response = await adminAuthAPI.signup(name, email, password);
+            return { success: true, data: response.data };
+        } catch (error) {
+            return {
+                success: false,
+                error: error.response?.data?.message || 'Signup failed'
+            };
+        }
+    };
+
     const login = async (email, password) => {
         try {
             const response = await adminAuthAPI.login(email, password);
@@ -64,6 +76,7 @@ export const AuthProvider = ({ children }) => {
         admin,
         token,
         loading,
+        signup,
         login,
         logout,
         isAuthenticated: !!token

@@ -9,6 +9,9 @@ import Projects from '../components/sections/Projects';
 import Achievements from '../components/sections/Achievements';
 import Education from '../components/sections/Education';
 import Certificates from '../components/sections/Certificates';
+import Blogs from '../components/sections/Blogs';
+import Publications from '../components/sections/Publications';
+import CurrentlyDoing from '../components/sections/CurrentlyDoing';
 import Contact from '../components/sections/Contact';
 import Loading from '../components/common/Loading';
 import {
@@ -19,7 +22,10 @@ import {
     experienceAPI,
     certificatesAPI,
     achievementsAPI,
-    educationAPI
+    educationAPI,
+    blogsAPI,
+    publicationsAPI,
+    activitiesAPI
 } from '../services/api';
 
 function PublicPortfolio() {
@@ -32,13 +38,16 @@ function PublicPortfolio() {
         experience: [],
         achievements: [],
         education: [],
-        certificates: []
+        certificates: [],
+        blogs: [],
+        publications: [],
+        activities: []
     });
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const [profile, resume, projects, skills, experience, achievements, education, certificates] = await Promise.all([
+                const [profile, resume, projects, skills, experience, achievements, education, certificates, blogs, publications, activities] = await Promise.all([
                     profileAPI.get().catch(() => ({ data: { data: null } })),
                     resumeAPI.get().catch(() => ({ data: { data: null } })),
                     projectsAPI.getAll().catch(() => ({ data: { data: [] } })),
@@ -46,7 +55,10 @@ function PublicPortfolio() {
                     experienceAPI.getAll().catch(() => ({ data: { data: [] } })),
                     achievementsAPI.getAll().catch(() => ({ data: { data: [] } })),
                     educationAPI.getAll().catch(() => ({ data: { data: [] } })),
-                    certificatesAPI.getAll().catch(() => ({ data: { data: [] } }))
+                    certificatesAPI.getAll().catch(() => ({ data: { data: [] } })),
+                    blogsAPI.getAll().catch(() => ({ data: { data: [] } })),
+                    publicationsAPI.getAll().catch(() => ({ data: { data: [] } })),
+                    activitiesAPI.getAll().catch(() => ({ data: { data: [] } }))
                 ]);
 
                 setData({
@@ -57,7 +69,10 @@ function PublicPortfolio() {
                     experience: experience.data.data,
                     achievements: achievements.data.data,
                     education: education.data.data,
-                    certificates: certificates.data.data
+                    certificates: certificates.data.data,
+                    blogs: blogs.data.data,
+                    publications: publications.data.data,
+                    activities: activities.data.data
                 });
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -68,6 +83,16 @@ function PublicPortfolio() {
 
         fetchData();
     }, []);
+
+    // Apply dynamic background image to body
+    useEffect(() => {
+        if (data.profile?.backgroundImage?.url) {
+            document.body.style.backgroundImage = `url(${data.profile.backgroundImage.url})`;
+        }
+        return () => {
+            document.body.style.backgroundImage = '';
+        };
+    }, [data.profile]);
 
     if (loading) {
         return <Loading />;
@@ -85,7 +110,10 @@ function PublicPortfolio() {
                 <Projects projects={data.projects} />
                 <Achievements achievements={data.achievements} />
                 <Certificates certificates={data.certificates} />
-                <Contact />
+                <Blogs blogs={data.blogs} />
+                <Publications publications={data.publications} />
+                <CurrentlyDoing activities={data.activities} />
+                <Contact profile={data.profile} />
             </main>
             <Footer profile={data.profile} />
         </div>

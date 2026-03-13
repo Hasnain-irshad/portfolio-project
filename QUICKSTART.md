@@ -46,7 +46,7 @@ npm run dev
 ## Step 4: Register Admin
 
 ```bash
-curl -X POST http://localhost:5000/api/auth/register \
+curl -X POST http://localhost:5000/api/auth/signup \
   -H "Content-Type: application/json" \
   -d '{
     "name": "Your Name",
@@ -57,10 +57,11 @@ curl -X POST http://localhost:5000/api/auth/register \
 
 ## Step 5: Add Content
 
-1. Open admin dashboard (when created) at http://localhost:5174
-2. Login with your credentials
-3. Add profile, projects, skills, etc.
-4. Visit http://localhost:5173 to see your portfolio!
+1. Open admin login page at http://localhost:5173/admin/login
+2. Click on "Signup" to create your account (if not already created)
+3. Login with your credentials
+4. Add profile, projects, skills, etc.
+5. Visit http://localhost:5173 to see your portfolio!
 
 ---
 

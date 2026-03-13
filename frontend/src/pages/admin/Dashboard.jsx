@@ -21,6 +21,9 @@ const Dashboard = () => {
         { icon: '⚡', label: 'Add Skill', link: '/admin/skills', color: '#10b981' },
         { icon: '💻', label: 'Add Experience', link: '/admin/experience', color: '#f59e0b' },
         { icon: '📜', label: 'Add Certificate', link: '/admin/certificates', color: '#8b5cf6' },
+        { icon: '📝', label: 'Add Blog', link: '/admin/blogs', color: '#ec4899' },
+        { icon: '📚', label: 'Add Publication', link: '/admin/publications', color: '#14b8a6' },
+        { icon: '🔄', label: 'Add Activity', link: '/admin/activities', color: '#f97316' },
     ];
 
     return (

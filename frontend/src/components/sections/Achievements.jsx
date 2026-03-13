@@ -11,14 +11,14 @@ const Achievements = ({ achievements }) => {
 
     const getCategoryColor = (category) => {
         const colors = {
-            'Award': '#ffc107',
-            'Recognition': '#28a745',
-            'Milestone': '#17a2b8',
-            'Competition': '#dc3545',
-            'Certification': '#6f42c1',
-            'Other': '#6c757d'
+            'Award': '#d97706', // Darker Amber
+            'Recognition': '#059669', // Darker Green
+            'Milestone': '#0284c7', // Darker Blue
+            'Competition': '#dc2626', // Darker Red
+            'Certification': '#7c3aed', // Darker Violet
+            'Other': '#4b5563' // Darker Gray
         };
-        return colors[category] || '#6c757d';
+        return colors[category] || '#4b5563';
     };
 
     return (

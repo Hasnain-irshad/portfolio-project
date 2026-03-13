@@ -34,6 +34,10 @@ const profileSchema = new mongoose.Schema({
         url: String,
         publicId: String
     },
+    backgroundImage: {
+        url: String,
+        publicId: String
+    },
     socialLinks: {
         github: String,
         linkedin: String,
