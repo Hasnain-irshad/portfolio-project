@@ -34,24 +34,17 @@ services:
       - key: PORTFOLIO_OWNER_NAME
         sync: false
       - key: FRONTEND_URL
-        fromService:
-          name: portfolio-frontend
-          type: web
-          property: url
+        sync: false
       - key: ADMIN_URL
-        fromService:
-          name: portfolio-frontend
-          type: web
-          property: url
+        sync: false
 
   # Frontend - React/Vite Static Site
   - type: web
     name: portfolio-frontend
     runtime: static
-    region: oregon
     plan: free
     rootDir: frontend
-    buildCommand: npm install && VITE_API_URL="${VITE_API_URL}/api" npm run build
+    buildCommand: npm install && npm run build
     staticPublishPath: dist
     headers:
       - path: /*
@@ -63,7 +56,4 @@ services:
         destination: /index.html
     envVars:
       - key: VITE_API_URL
-        fromService:
-          name: portfolio-backend
-          type: web
-          property: url
+        sync: false
