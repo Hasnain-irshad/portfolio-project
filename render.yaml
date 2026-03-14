@@ -1,6 +1,18 @@
-envVarGroups:
-  - name: portfolio-shared-secrets
+services:
+  # Backend API - Node.js/Express
+  - type: web
+    name: portfolio-backend
+    runtime: node
+    region: oregon
+    plan: free
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: node server.js
     envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "5000"
       - key: MONGO_URI
         sync: false
       - key: JWT_SECRET
@@ -21,24 +33,6 @@ envVarGroups:
         sync: false
       - key: PORTFOLIO_OWNER_NAME
         sync: false
-
-services:
-  # Backend API - Node.js/Express
-  - type: web
-    name: portfolio-backend
-    runtime: node
-    region: oregon
-    plan: free
-    rootDir: backend
-    buildCommand: npm install
-    startCommand: node server.js
-    envVarGroups:
-      - portfolio-shared-secrets
-    envVars:
-      - key: NODE_ENV
-        value: production
-      - key: PORT
-        value: "5000"
       - key: FRONTEND_URL
         fromService:
           name: portfolio-frontend
