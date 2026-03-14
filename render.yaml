@@ -38,11 +38,9 @@ services:
       - key: ADMIN_URL
         sync: false
 
+staticSites:
   # Frontend - React/Vite Static Site
-  - type: web
-    name: portfolio-frontend
-    runtime: static
-    plan: starter
+  - name: portfolio-frontend
     rootDir: frontend
     buildCommand: npm install && npm run build
     staticPublishPath: dist
