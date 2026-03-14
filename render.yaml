@@ -42,7 +42,7 @@ services:
   - type: web
     name: portfolio-frontend
     runtime: static
-    plan: free
+    plan: starter
     rootDir: frontend
     buildCommand: npm install && npm run build
     staticPublishPath: dist
