@@ -30,7 +30,7 @@ services:
       - key: EMAIL_HOST
         sync: false
       - key: EMAIL_PORT
-        sync: false
+        value: "587"
       - key: PORTFOLIO_OWNER_NAME
         sync: false
       - key: FRONTEND_URL
