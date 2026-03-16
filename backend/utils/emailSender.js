@@ -1,85 +1,89 @@
 import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
 
 /**
- * Create a reusable transporter with retry-friendly settings.
- * Uses port 587 + STARTTLS by default (works more reliably on cloud
- * platforms like Render where port 465 SSL can time out).
+ * Dual-mode email sender:
+ * - If RESEND_API_KEY is set → uses Resend HTTP API (works on Render/cloud)
+ * - Otherwise → uses nodemailer SMTP (works locally)
  */
-const createTransporter = () => {
-    const port = Number(process.env.EMAIL_PORT) || 587;
-    const secure = port === 465; // true only for implicit TLS (465)
 
-    return nodemailer.createTransport({
+// ─── Resend (HTTP) mode ──────────────────────────────────────────────
+const sendViaResend = async (to, subject, htmlContent) => {
+    const resend = new Resend(process.env.RESEND_API_KEY);
+
+    // Use the verified Resend "from" address.
+    // Free tier: onboarding@resend.dev
+    // Custom domain: you@yourdomain.com
+    const fromAddress = process.env.EMAIL_FROM || 'Portfolio <onboarding@resend.dev>';
+
+    console.log(`📨 [Resend] Sending email to ${to} | Subject: ${subject}`);
+
+    const { data, error } = await resend.emails.send({
+        from: fromAddress,
+        to: [to],
+        subject,
+        html: htmlContent,
+        reply_to: process.env.EMAIL_USER // so replies come to your Gmail
+    });
+
+    if (error) {
+        console.error('❌ [Resend] Error:', error);
+        throw new Error(error.message || 'Resend email failed');
+    }
+
+    console.log('✅ [Resend] Email sent. ID:', data?.id);
+    return data;
+};
+
+// ─── Nodemailer SMTP mode (local dev) ────────────────────────────────
+const sendViaSMTP = async (to, subject, htmlContent) => {
+    const port = Number(process.env.EMAIL_PORT) || 587;
+
+    const transporter = nodemailer.createTransport({
         host: process.env.EMAIL_HOST || 'smtp.gmail.com',
         port,
-        secure,
+        secure: port === 465,
         auth: {
             user: process.env.EMAIL_USER,
             pass: process.env.EMAIL_PASS
         },
-        // Generous timeouts for cloud environments
-        connectionTimeout: 30000,  // 30 seconds to establish connection
-        greetingTimeout: 30000,    // 30 seconds for SMTP greeting
-        socketTimeout: 60000,      // 60 seconds for socket inactivity
-        // TLS options
-        tls: {
-            // Do not fail on self-signed certs (some cloud proxies use them)
-            rejectUnauthorized: false
-        },
-        // Use connection pooling so multiple emails reuse the same connection
-        pool: true,
-        maxConnections: 3
+        connectionTimeout: 15000,
+        greetingTimeout: 15000,
+        socketTimeout: 30000
     });
+
+    console.log(`📨 [SMTP] Sending email to ${to} via ${process.env.EMAIL_HOST || 'smtp.gmail.com'}:${port}`);
+
+    const result = await transporter.sendMail({
+        from: process.env.EMAIL_FROM || process.env.EMAIL_USER,
+        to,
+        subject,
+        html: htmlContent
+    });
+
+    console.log('✅ [SMTP] Email sent. Message ID:', result.messageId);
+    return result;
 };
 
+// ─── Public API ──────────────────────────────────────────────────────
 /**
- * Send email with automatic retry
- * @param {String} to - Recipient email
- * @param {String} subject - Email subject
- * @param {String} htmlContent - HTML email body
- * @param {Number} retries - Number of retry attempts (default 2)
+ * Send email – automatically picks the right transport
  */
-export const sendEmail = async (to, subject, htmlContent, retries = 2) => {
-    let lastError;
-
-    for (let attempt = 1; attempt <= retries + 1; attempt++) {
-        try {
-            console.log(`📨 [Attempt ${attempt}] Sending email to ${to} with subject: ${subject}`);
-            console.log(`🔐 Using email account: ${process.env.EMAIL_USER} via ${process.env.EMAIL_HOST || 'smtp.gmail.com'}`);
-
-            const transporter = createTransporter();
-
-            const mailOptions = {
-                from: process.env.EMAIL_FROM || process.env.EMAIL_USER,
-                to,
-                subject,
-                html: htmlContent
-            };
-
-            const result = await transporter.sendMail(mailOptions);
-            console.log('✅ Email sent successfully. Message ID:', result.messageId);
-
-            // Close the pooled connection
-            transporter.close();
-            return result;
-        } catch (error) {
-            lastError = error;
-            console.error(`❌ [Attempt ${attempt}] Error sending email:`, error.message);
-
-            if (attempt <= retries) {
-                const delay = attempt * 3000; // 3s, 6s back-off
-                console.log(`🔄 Retrying in ${delay / 1000}s...`);
-                await new Promise(resolve => setTimeout(resolve, delay));
-            }
+export const sendEmail = async (to, subject, htmlContent) => {
+    try {
+        if (process.env.RESEND_API_KEY) {
+            return await sendViaResend(to, subject, htmlContent);
+        } else {
+            return await sendViaSMTP(to, subject, htmlContent);
         }
+    } catch (error) {
+        console.error('❌ Error sending email:', error.message);
+        throw error;
     }
-
-    console.error('❌ All retry attempts failed. Last error:', lastError?.message);
-    throw lastError;
 };
 
 /**
- * Send contact form notification email
+ * Send contact form notification to admin
  */
 export const sendContactNotification = async (adminEmail, contactData) => {
     const { name, email, subject, message } = contactData;
