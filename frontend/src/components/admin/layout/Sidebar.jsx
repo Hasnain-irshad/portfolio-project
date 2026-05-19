@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './Sidebar.css';
 
-const Sidebar = () => {
+const Sidebar = ({ isOpen = false, onClose = () => {} }) => {
     const location = useLocation();
 
     const menuItems = [
@@ -21,9 +21,16 @@ const Sidebar = () => {
     ];
 
     return (
-        <aside className="admin-sidebar">
+        <aside className={`admin-sidebar ${isOpen ? 'open' : ''}`}>
             <div className="sidebar-header">
                 <h2 className="sidebar-logo">📁 Portfolio Admin</h2>
+                <button
+                    className="sidebar-close"
+                    onClick={onClose}
+                    aria-label="Close menu"
+                >
+                    <i className="fas fa-times"></i>
+                </button>
             </div>
 
             <nav className="sidebar-nav">
@@ -31,6 +38,7 @@ const Sidebar = () => {
                     <Link
                         key={item.path}
                         to={item.path}
+                        onClick={onClose}
                         className={`sidebar-item ${location.pathname === item.path ? 'active' : ''}`}
                     >
                         <span className="sidebar-icon">{item.icon}</span>

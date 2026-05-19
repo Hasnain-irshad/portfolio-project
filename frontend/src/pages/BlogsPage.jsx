@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
 import Loading from '../components/common/Loading';
+import ZoomableImage from '../components/common/ZoomableImage';
 import { blogsAPI, profileAPI } from '../services/api';
 import './BlogsPage.css';
 
@@ -79,7 +80,7 @@ const BlogsPage = () => {
                                     >
                                         {blog.image?.url && (
                                             <div className="blog-image">
-                                                <img src={blog.image.url} alt={blog.title} />
+                                                <ZoomableImage src={blog.image.url} alt={blog.title} />
                                             </div>
                                         )}
 

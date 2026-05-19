@@ -5,6 +5,7 @@ import ReactMarkdown from 'react-markdown';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
 import Loading from '../components/common/Loading';
+import ZoomableImage from '../components/common/ZoomableImage';
 import { blogsAPI, profileAPI } from '../services/api';
 import './BlogDetails.css';
 
@@ -94,7 +95,7 @@ const BlogDetails = () => {
                                 animate={{ opacity: 1, scale: 1 }}
                                 transition={{ duration: 0.6 }}
                             >
-                                <img src={blog.image.url} alt={blog.title} />
+                                <ZoomableImage src={blog.image.url} alt={blog.title} />
                             </motion.div>
                         </div>
                     )}

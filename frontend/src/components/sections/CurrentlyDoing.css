@@ -1,25 +1,27 @@
 .currently-doing {
-    padding: 80px 0;
+    background: transparent;
 }
 
 .activities-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-    gap: 24px;
+    gap: var(--spacing-lg);
 }
 
-.activity-card {
-    border-radius: 12px;
+.activity-card,
+.activity-card.card {
+    border-radius: var(--radius-lg);
     overflow: hidden;
     position: relative;
-    transition: all 0.3s ease;
+    transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
     background: var(--color-surface);
     border: 1px solid var(--color-border);
+    padding: 0;
 }
 
 .activity-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg), 0 0 30px var(--color-primary-glow);
     border-color: var(--color-primary);
 }
 
@@ -30,38 +32,40 @@
     right: 16px;
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 7px;
     z-index: 2;
-    background: rgba(242, 101, 42, 0.12);
-    padding: 4px 12px;
-    border-radius: 20px;
+    background: rgba(13, 11, 20, 0.65);
+    backdrop-filter: blur(6px);
+    padding: 5px 13px;
+    border-radius: var(--radius-full);
+    border: 1px solid rgba(34, 211, 238, 0.35);
 }
 
 .pulse-dot {
     width: 8px;
     height: 8px;
-    background: var(--color-primary);
+    background: var(--color-accent);
     border-radius: 50%;
     animation: activityPulse 2s infinite;
 }
 
 @keyframes activityPulse {
-    0% { box-shadow: 0 0 0 0 rgba(242, 101, 42, 0.5); }
-    70% { box-shadow: 0 0 0 8px rgba(242, 101, 42, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(242, 101, 42, 0); }
+    0% { box-shadow: 0 0 0 0 rgba(34, 211, 238, 0.55); }
+    70% { box-shadow: 0 0 0 9px rgba(34, 211, 238, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(34, 211, 238, 0); }
 }
 
 .pulse-label {
     font-size: 11px;
     font-weight: 700;
-    color: var(--color-primary);
+    color: var(--color-accent-hover);
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
 
 .activity-image {
     width: 100%;
-    height: 180px;
+    height: 185px;
     overflow: hidden;
 }
 
@@ -69,28 +73,28 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.4s ease;
+    transition: transform 0.6s var(--transition-base);
 }
 
 .activity-card:hover .activity-image img {
-    transform: scale(1.05);
+    transform: scale(1.07);
 }
 
 .activity-content {
-    padding: 20px;
+    padding: 22px;
 }
 
 .activity-title {
-    font-size: 1.15rem;
+    font-size: 1.18rem;
     font-weight: 700;
     margin-bottom: 6px;
-    color: var(--color-text);
+    color: var(--color-text-main);
 }
 
 .activity-role {
     font-size: 14px;
     font-weight: 600;
-    color: var(--color-primary);
+    color: var(--color-primary-hover);
     margin-bottom: 8px;
 }
 
@@ -103,10 +107,12 @@
     margin-bottom: 10px;
 }
 
+.activity-date i { color: var(--color-accent); }
+
 .activity-description {
     font-size: 14px;
     color: var(--color-text-secondary);
-    line-height: 1.6;
+    line-height: 1.7;
     margin-bottom: 12px;
 }
 
@@ -114,18 +120,19 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    color: var(--color-primary);
+    color: var(--color-accent-hover);
     font-size: 13px;
-    font-weight: 500;
+    font-weight: 600;
     text-decoration: none;
-    transition: color 0.2s;
+    transition: color var(--transition-fast), gap var(--transition-fast);
 }
 
 .activity-attachment:hover {
     color: var(--color-primary-hover);
+    gap: 10px;
 }
 
 @media (max-width: 768px) {
     .activities-grid { grid-template-columns: 1fr; }
-    .activity-image { height: 160px; }
+    .activity-image { height: 165px; }
 }

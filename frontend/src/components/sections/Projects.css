@@ -2,107 +2,165 @@
     background: transparent;
 }
 
+.projects-grid {
+    gap: var(--spacing-lg);
+}
+
 .project-card {
     overflow: hidden;
     position: relative;
+    padding: 0;
+}
+
+.project-card.card {
+    padding: 0;
 }
 
 .project-card.featured {
     border-color: var(--color-primary);
-    box-shadow: 0 0 20px rgba(242, 101, 42, 0.1);
+    box-shadow: 0 0 28px var(--color-primary-glow);
 }
 
 .featured-badge {
     position: absolute;
     top: var(--spacing-md);
     right: var(--spacing-md);
-    background: var(--color-primary);
-    color: white;
-    padding: 4px 12px;
+    background: var(--gradient-primary);
+    color: #fff;
+    padding: 5px 14px;
     border-radius: var(--radius-full);
     font-size: var(--font-size-xs);
-    font-weight: 600;
-    z-index: 2;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    z-index: 3;
+    box-shadow: 0 6px 16px -4px var(--color-primary-glow);
+}
+
+.tilt-container {
+    perspective: 1200px;
+    height: 100%;
+}
+
+.tilt-container .tilt-inner {
+    display: block;
+    height: 100%;
+    transition: transform 350ms var(--transition-base);
+    transform-style: preserve-3d;
+}
+
+.tilt-wrapper {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.tilt-container:hover .tilt-inner {
+    transform: rotateX(4deg) rotateY(-5deg);
 }
 
 .project-image {
     width: 100%;
-    height: 220px;
+    height: 210px;
     overflow: hidden;
-    border-radius: var(--radius-md);
-    margin-bottom: var(--spacing-md);
+    position: relative;
+}
+
+.project-image::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 55%, rgba(13, 11, 20, 0.65));
+    opacity: 0;
+    transition: opacity var(--transition-base);
+    pointer-events: none;
+}
+
+.project-card:hover .project-image::after {
+    opacity: 1;
 }
 
 .project-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.3s ease;
+    transition: transform 0.6s var(--transition-base);
 }
 
 .project-card:hover .project-image img {
-    transform: scale(1.06);
+    transform: scale(1.08);
 }
-
-.project-card.card { padding: 0; }
-.project-card .tilt-inner { display: block; }
-.tilt-wrapper { border-radius: 12px; overflow: hidden; }
-.tilt-container { perspective: 1200px; }
-.tilt-container .tilt-inner { transition: transform 350ms ease; transform-style: preserve-3d; }
-.tilt-container:hover .tilt-inner { transform: rotateX(4deg) rotateY(-4deg); }
 
 .project-content {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-sm);
-    padding: var(--spacing-md);
+    padding: var(--spacing-lg);
+    flex: 1;
 }
 
 .project-title {
     font-size: var(--font-size-xl);
-    color: var(--color-text);
+    color: var(--color-text-main);
+    transition: color var(--transition-fast);
+}
+
+.project-card:hover .project-title {
+    color: var(--color-primary-hover);
 }
 
 .project-description {
     color: var(--color-text-secondary);
-    line-height: 1.6;
+    line-height: 1.7;
+    font-size: var(--font-size-sm);
 }
 
 .project-tech {
     display: flex;
     flex-wrap: wrap;
     gap: var(--spacing-xs);
-    margin: var(--spacing-sm) 0;
+    margin: var(--spacing-xs) 0;
 }
 
 .tech-tag {
     background: var(--color-surface-soft);
     color: var(--color-text-secondary);
-    padding: 6px 12px;
-    border-radius: 999px;
+    padding: 5px 12px;
+    border-radius: var(--radius-full);
     font-size: var(--font-size-xs);
     font-weight: 600;
     border: 1px solid var(--color-border);
+    transition: color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.tech-tag:hover {
+    color: var(--color-accent-hover);
+    border-color: var(--color-accent);
+    transform: translateY(-2px);
 }
 
 .project-links {
     display: flex;
     gap: var(--spacing-md);
     margin-top: auto;
-    padding-top: var(--spacing-md);
+    padding-top: var(--spacing-sm);
+    border-top: 1px solid var(--color-border);
 }
 
 .project-link {
     display: flex;
     align-items: center;
     gap: var(--spacing-xs);
-    color: var(--color-primary);
+    color: var(--color-text-secondary);
     font-weight: 600;
-    transition: color var(--transition-fast);
+    font-size: var(--font-size-sm);
+    transition: color var(--transition-fast), transform var(--transition-fast);
 }
 
 .project-link:hover {
-    color: var(--color-primary-hover);
+    color: var(--color-accent-hover);
+    transform: translateX(3px);
 }
 
 @media (max-width: 768px) {

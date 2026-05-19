@@ -34,11 +34,16 @@
 }
 
 .article-title {
+    font-family: var(--font-display);
     font-size: 3rem;
-    font-weight: 800;
+    font-weight: 700;
     margin-bottom: 1.5rem;
     line-height: 1.2;
-    color: var(--color-text);
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
 }
 
 .article-meta {
@@ -61,7 +66,7 @@
 .article-date i { color: var(--color-primary); }
 
 .article-tag {
-    background: rgba(242, 101, 42, 0.1);
+    background: var(--gradient-primary-soft);
     color: var(--color-primary);
     padding: 4px 12px;
     border-radius: 20px;
@@ -109,7 +114,7 @@
     display: inline-flex;
     align-items: center;
     gap: 12px;
-    background: rgba(242, 101, 42, 0.1);
+    background: var(--gradient-primary-soft);
     padding: 12px 25px;
     border-radius: 8px;
     color: var(--color-primary);

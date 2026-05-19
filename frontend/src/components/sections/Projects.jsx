@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import ZoomableImage from '../common/ZoomableImage';
 import './Projects.css';
 
 const Projects = ({ projects }) => {
@@ -26,7 +27,7 @@ const Projects = ({ projects }) => {
                                 <div className="tilt-inner tilt-wrapper">
                                     {project.images && project.images.length > 0 && (
                                         <div className="project-image">
-                                            <img src={project.images[0].url} alt={project.title} />
+                                            <ZoomableImage src={project.images[0].url} alt={project.title} />
                                         </div>
                                     )}
 

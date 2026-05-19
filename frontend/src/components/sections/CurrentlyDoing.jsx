@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import ZoomableImage from '../common/ZoomableImage';
 import './CurrentlyDoing.css';
 
 const CurrentlyDoing = ({ activities }) => {
@@ -33,7 +34,7 @@ const CurrentlyDoing = ({ activities }) => {
 
                             {activity.image?.url && (
                                 <div className="activity-image">
-                                    <img src={activity.image.url} alt={activity.title} />
+                                    <ZoomableImage src={activity.image.url} alt={activity.title} />
                                 </div>
                             )}
 

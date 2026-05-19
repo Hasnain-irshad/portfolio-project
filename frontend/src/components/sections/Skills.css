@@ -4,30 +4,62 @@
 
 .skills-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: var(--spacing-2xl);
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: var(--spacing-lg);
 }
 
 .skill-category {
     padding: var(--spacing-lg);
-    border-radius: 12px;
-    transition: all 0.3s ease;
+    border-radius: var(--radius-lg);
     border: 1px solid var(--color-border);
     background: var(--color-surface);
+    transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
+    position: relative;
+    overflow: hidden;
+}
+
+.skill-category::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--gradient-primary);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--transition-base);
 }
 
 .skill-category:hover {
     border-color: var(--color-primary);
-    transform: translateY(-6px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg), 0 0 32px var(--color-primary-glow);
+}
+
+.skill-category:hover::before {
+    transform: scaleX(1);
 }
 
 .category-title {
+    font-family: var(--font-display);
     font-size: var(--font-size-xl);
     margin-bottom: var(--spacing-lg);
-    color: var(--color-primary);
+    color: var(--color-text-main);
     padding-bottom: var(--spacing-sm);
-    border-bottom: 2px solid var(--color-primary);
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.category-title::before {
+    content: '';
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+    background: var(--gradient-primary);
+    box-shadow: 0 0 12px var(--color-primary-glow);
 }
 
 .skills-list {
@@ -37,55 +69,63 @@
 }
 
 .skill-item {
-    background: var(--color-surface-soft);
-    border-radius: var(--radius-md);
-    padding: var(--spacing-sm);
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 0.55rem;
 }
 
 .skill-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: var(--spacing-xs);
 }
 
 .skill-name {
     font-weight: 600;
-    color: var(--color-text);
-}
-
-.skill-level {
-    font-size: var(--font-size-sm);
-    color: var(--color-text-muted);
-}
-
-.skill-bar {
-    height: 8px;
-    background: var(--color-surface-soft);
-    border-radius: var(--radius-full);
-    overflow: hidden;
-}
-
-.skill-progress {
-    height: 100%;
-    background: linear-gradient(90deg, var(--color-primary), var(--color-primary-hover));
-    border-radius: var(--radius-full);
-    transition: width 1s ease-out;
+    color: var(--color-text-main);
 }
 
 .skill-badge {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 6px 12px;
-    border-radius: 999px;
+    padding: 5px 14px;
+    border-radius: var(--radius-full);
+    background: var(--gradient-primary-soft);
+    border: 1px solid var(--color-border-strong);
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+    color: var(--color-text-main);
+    transition: transform var(--transition-fast);
+}
+
+.skill-item:hover .skill-badge {
+    transform: translateY(-2px);
+}
+
+.skill-level {
+    font-size: var(--font-size-sm);
+    color: var(--color-accent-hover);
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.skill-bar {
+    height: 9px;
     background: var(--color-surface-soft);
+    border-radius: var(--radius-full);
+    overflow: hidden;
     border: 1px solid var(--color-border);
-    font-weight: 700;
-    color: var(--color-text);
+}
+
+.skill-progress {
+    height: 100%;
+    background: var(--gradient-primary);
+    background-size: 200% 100%;
+    border-radius: var(--radius-full);
+    box-shadow: 0 0 12px var(--color-primary-glow);
+    animation: shimmer 3s linear infinite;
+    transition: width 1.1s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @media (max-width: 768px) {

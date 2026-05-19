@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import ZoomableImage from '../common/ZoomableImage';
 import './Blogs.css';
 
 const Blogs = ({ blogs }) => {
@@ -36,7 +37,7 @@ const Blogs = ({ blogs }) => {
                         >
                             {blog.image?.url && (
                                 <div className="blog-image">
-                                    <img src={blog.image.url} alt={blog.title} />
+                                    <ZoomableImage src={blog.image.url} alt={blog.title} />
                                 </div>
                             )}
 

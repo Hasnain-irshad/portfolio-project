@@ -284,11 +284,20 @@
 
     .page-header {
         flex-direction: column;
-        align-items: flex-start;
-        gap: 16px;
+        align-items: stretch;
+        gap: 14px;
     }
 
-    .btn-primary {
+    .page-header .btn-primary {
+        width: 100%;
+    }
+
+    .form-actions {
+        flex-direction: column-reverse;
+        gap: 10px;
+    }
+
+    .form-actions button {
         width: 100%;
     }
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import ZoomableImage from '../common/ZoomableImage';
 import './Certificates.css';
 
 const Certificates = ({ certificates }) => {
@@ -26,7 +27,7 @@ const Certificates = ({ certificates }) => {
                         >
                             {cert.image?.url && (
                                 <div className="certificate-image">
-                                    <img src={cert.image.url} alt={cert.title} />
+                                    <ZoomableImage src={cert.image.url} alt={cert.title} />
                                 </div>
                             )}
 

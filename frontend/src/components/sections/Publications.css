@@ -1,10 +1,10 @@
 .publications {
-    padding: 80px 0;
+    background: transparent;
 }
 
 /* Filter Controls */
 .pub-filter-controls {
-    margin-bottom: 32px;
+    margin-bottom: var(--spacing-xl);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -14,29 +14,29 @@
 .pub-filter-toggle {
     display: flex;
     background: var(--color-surface);
-    border-radius: 12px;
-    padding: 4px;
+    border-radius: var(--radius-full);
+    padding: 5px;
     gap: 4px;
     border: 1px solid var(--color-border);
 }
 
 .pub-toggle-btn {
-    padding: 8px 20px;
+    padding: 9px 22px;
     border: none;
-    border-radius: 10px;
+    border-radius: var(--radius-full);
     background: transparent;
     color: var(--color-text-secondary);
     font-size: 13px;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: color var(--transition-base), background var(--transition-base);
     font-family: var(--font-sans);
 }
 
 .pub-toggle-btn.active {
-    background: var(--color-primary);
+    background: var(--gradient-primary);
     color: #fff;
-    box-shadow: 0 4px 12px rgba(242, 101, 42, 0.3);
+    box-shadow: 0 4px 14px -4px var(--color-primary-glow);
 }
 
 .pub-filters {
@@ -47,51 +47,52 @@
 }
 
 .pub-filter-btn {
-    padding: 6px 18px;
-    border: 2px solid var(--color-border);
-    border-radius: 24px;
-    background: transparent;
+    padding: 7px 18px;
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-full);
+    background: var(--color-surface);
     color: var(--color-text-secondary);
     font-size: 13px;
     font-weight: 500;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: color var(--transition-base), border-color var(--transition-base), background var(--transition-base);
     font-family: var(--font-sans);
 }
 
 .pub-filter-btn:hover {
     border-color: var(--color-primary);
-    color: var(--color-primary);
+    color: var(--color-primary-hover);
 }
 
 .pub-filter-btn.active {
-    background: var(--color-primary);
+    background: var(--gradient-primary);
     color: #fff;
     border-color: transparent;
-    box-shadow: 0 4px 12px rgba(242, 101, 42, 0.25);
+    box-shadow: 0 4px 14px -4px var(--color-primary-glow);
 }
 
 /* Grid */
 .publications-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-    gap: 24px;
+    gap: var(--spacing-lg);
 }
 
-.publication-card {
+.publication-card,
+.publication-card.card {
     background: var(--color-surface);
-    border-radius: 12px;
+    border-radius: var(--radius-lg);
     padding: 24px;
-    transition: all 0.3s ease;
+    transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
     display: flex;
     flex-direction: column;
-    color: var(--color-text);
+    color: var(--color-text-secondary);
     border: 1px solid var(--color-border);
 }
 
 .publication-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg), 0 0 30px var(--color-primary-glow);
     border-color: var(--color-primary);
 }
 
@@ -104,25 +105,26 @@
 
 .pub-type-badge {
     color: #fff;
-    padding: 3px 14px;
-    border-radius: 20px;
+    padding: 4px 14px;
+    border-radius: var(--radius-full);
     font-size: 11px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    box-shadow: var(--shadow-sm);
 }
 
 .pub-year {
     font-size: 14px;
     font-weight: 700;
-    color: var(--color-text-secondary);
+    color: var(--color-accent-hover);
 }
 
 .pub-image {
     width: 100%;
-    height: 160px;
+    height: 165px;
     overflow: hidden;
-    border-radius: 10px;
+    border-radius: var(--radius-md);
     margin-bottom: 14px;
 }
 
@@ -130,13 +132,18 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.6s var(--transition-base);
+}
+
+.publication-card:hover .pub-image img {
+    transform: scale(1.07);
 }
 
 .pub-title {
     font-size: 1.1rem;
     font-weight: 700;
     margin-bottom: 10px;
-    color: var(--color-text);
+    color: var(--color-text-main);
     line-height: 1.4;
 }
 
@@ -150,7 +157,7 @@
     gap: 6px;
 }
 
-.pub-authors i { margin-top: 3px; font-size: 11px; }
+.pub-authors i { margin-top: 3px; font-size: 11px; color: var(--color-accent); }
 
 .pub-publisher {
     font-size: 12px;
@@ -161,7 +168,7 @@
 .pub-abstract {
     font-size: 13px;
     color: var(--color-text-secondary);
-    line-height: 1.6;
+    line-height: 1.7;
     margin-bottom: 14px;
     flex: 1;
 }
@@ -177,34 +184,34 @@
     display: inline-flex;
     align-items: center;
     gap: 5px;
-    padding: 5px 14px;
-    border-radius: 8px;
+    padding: 6px 15px;
+    border-radius: var(--radius-full);
     font-size: 12px;
     font-weight: 600;
     text-decoration: none;
-    transition: all 0.2s ease;
+    border: 1px solid transparent;
+    transition: transform var(--transition-fast), background var(--transition-fast);
 }
+
+.pub-link:hover { transform: translateY(-2px); }
 
 .pub-link-doi {
-    background: rgba(242, 101, 42, 0.1);
-    color: var(--color-primary);
+    background: var(--gradient-primary-soft);
+    color: var(--color-primary-hover);
+    border-color: rgba(139, 92, 246, 0.3);
 }
-
-.pub-link-doi:hover { background: rgba(242, 101, 42, 0.2); }
 
 .pub-link-external {
-    background: rgba(59, 130, 246, 0.1);
-    color: #3b82f6;
+    background: rgba(34, 211, 238, 0.12);
+    color: var(--color-accent-hover);
+    border-color: rgba(34, 211, 238, 0.3);
 }
-
-.pub-link-external:hover { background: rgba(59, 130, 246, 0.2); }
 
 .pub-link-paper {
-    background: rgba(239, 68, 68, 0.1);
-    color: #ef4444;
+    background: rgba(248, 113, 113, 0.12);
+    color: #fca5a5;
+    border-color: rgba(248, 113, 113, 0.3);
 }
-
-.pub-link-paper:hover { background: rgba(239, 68, 68, 0.2); }
 
 .pub-empty {
     text-align: center;
@@ -215,7 +222,8 @@
 
 @media (max-width: 768px) {
     .publications-grid { grid-template-columns: 1fr; }
-    .pub-filter-controls { align-items: stretch; }
     .pub-filters { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; }
     .pub-filter-btn { white-space: nowrap; }
 }
+
+[data-theme='light'] .pub-link-paper { color: #dc2626; }

@@ -31,6 +31,20 @@ services:
         sync: false
       - key: EMAIL_PORT
         sync: false
+      # Where contact-form notifications are delivered (your inbox).
+      - key: ADMIN_EMAIL
+        sync: false
+      # ── Brevo (primary email provider — free, no domain needed) ──
+      - key: BREVO_API_KEY
+        sync: false
+      # Must be an email address verified in your Brevo account (Senders).
+      - key: BREVO_SENDER_EMAIL
+        sync: false
+      - key: BREVO_SENDER_NAME
+        sync: false
+      # ── Resend (fallback, only used if BREVO_API_KEY is not set) ──
+      - key: EMAIL_FROM
+        sync: false
       - key: RESEND_API_KEY
         sync: false
       - key: PORTFOLIO_OWNER_NAME

@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
+import ZoomableImage from '../common/ZoomableImage';
 import './Publications.css';
 
 const Publications = ({ publications }) => {
@@ -115,7 +116,7 @@ const Publications = ({ publications }) => {
 
                             {pub.image?.url && (
                                 <div className="pub-image">
-                                    <img src={pub.image.url} alt={pub.title} />
+                                    <ZoomableImage src={pub.image.url} alt={pub.title} />
                                 </div>
                             )}
 

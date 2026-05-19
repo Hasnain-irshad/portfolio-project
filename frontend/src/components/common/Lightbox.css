@@ -1,0 +1,90 @@
+/* ===== Image Lightbox ===== */
+.lightbox-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 5000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 6vh 5vw;
+    background: rgba(6, 5, 11, 0.92);
+    backdrop-filter: blur(10px) saturate(120%);
+    -webkit-backdrop-filter: blur(10px) saturate(120%);
+    cursor: zoom-out;
+}
+
+.lightbox-stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.9rem;
+    max-width: 100%;
+    max-height: 100%;
+    cursor: default;
+}
+
+.lightbox-image {
+    max-width: 92vw;
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.75), 0 0 60px var(--color-primary-glow);
+}
+
+.lightbox-caption {
+    margin: 0;
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+    text-align: center;
+    max-width: 80vw;
+}
+
+.lightbox-close {
+    position: fixed;
+    top: 22px;
+    right: 24px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.06);
+    color: #fff;
+    border-radius: 50%;
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: transform var(--transition-spring), background var(--transition-base), border-color var(--transition-base);
+}
+
+.lightbox-close:hover {
+    background: var(--gradient-primary);
+    border-color: transparent;
+    transform: rotate(90deg) scale(1.08);
+    box-shadow: var(--shadow-glow);
+}
+
+.lightbox-hint {
+    position: fixed;
+    bottom: 22px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+}
+
+/* Any image made clickable through ZoomableImage */
+.zoomable-image {
+    cursor: zoom-in;
+}
+
+@media (max-width: 600px) {
+    .lightbox-image { max-height: 72vh; }
+    .lightbox-close { top: 14px; right: 14px; width: 44px; height: 44px; }
+    .lightbox-hint { font-size: 0.68rem; }
+}

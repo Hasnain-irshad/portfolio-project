@@ -4,26 +4,28 @@
     left: 0;
     right: 0;
     z-index: 1000;
-    background: rgba(15, 15, 16, 0.85);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    padding: 0.8rem 10%;
-    transition: var(--transition);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(13, 11, 20, 0.55);
+    backdrop-filter: blur(18px) saturate(160%);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    padding: 1rem 10%;
+    transition: padding var(--transition-base), background var(--transition-base), box-shadow var(--transition-base);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 [data-theme='light'] .header {
-    background: rgba(255, 255, 255, 0.9);
-    border-bottom-color: rgba(0, 0, 0, 0.05);
+    background: rgba(243, 242, 251, 0.6);
+    border-bottom-color: rgba(24, 21, 42, 0.06);
 }
 
 .header.scrolled {
-    padding: 0.5rem 10%;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    padding: 0.55rem 10%;
+    background: rgba(13, 11, 20, 0.85);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
 }
 
 [data-theme='light'] .header.scrolled {
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    background: rgba(243, 242, 251, 0.92);
+    box-shadow: 0 8px 30px rgba(24, 21, 42, 0.1);
 }
 
 .nav {
@@ -32,15 +34,28 @@
     align-items: center;
 }
 
+.logo {
+    position: relative;
+}
+
 .logo-text {
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: var(--color-primary);
+    font-family: var(--font-display);
+    font-size: 1.55rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    background: var(--gradient-text);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: textShimmer 6s linear infinite;
+    cursor: pointer;
 }
 
 .nav-links {
     display: flex;
-    gap: 1.5rem;
+    gap: 0.35rem;
     list-style: none;
     align-items: center;
 }
@@ -50,28 +65,33 @@
     text-decoration: none;
     font-weight: 500;
     font-size: 0.9rem;
-    transition: var(--transition);
+    padding: 0.5rem 0.85rem;
+    border-radius: var(--radius-full);
+    transition: color var(--transition-fast), background var(--transition-fast);
     position: relative;
     cursor: pointer;
 }
 
 .nav-links li a:hover {
-    color: var(--color-primary);
+    color: var(--color-text-main);
+    background: var(--gradient-primary-soft);
 }
 
 .nav-links li a::after {
     content: '';
     position: absolute;
-    bottom: -5px;
-    left: 0;
+    bottom: 4px;
+    left: 50%;
+    transform: translateX(-50%);
     width: 0;
     height: 2px;
-    background: var(--color-primary);
-    transition: var(--transition);
+    background: var(--gradient-primary);
+    border-radius: var(--radius-full);
+    transition: width var(--transition-base);
 }
 
 .nav-links li a:hover::after {
-    width: 100%;
+    width: 45%;
 }
 
 .header-actions {
@@ -84,21 +104,33 @@
     display: none;
     flex-direction: column;
     gap: 5px;
-    background: none;
-    border: none;
+    background: var(--color-surface-soft);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
     cursor: pointer;
-    padding: 5px;
+    padding: 9px;
+    transition: border-color var(--transition-fast);
 }
+
+.menu-toggle:hover { border-color: var(--color-primary); }
 
 .menu-toggle span {
     display: block;
-    width: 25px;
+    width: 24px;
     height: 2px;
+    border-radius: 2px;
     background: var(--color-primary);
-    transition: var(--transition);
+    transition: var(--transition-base);
 }
 
+.menu-toggle.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.menu-toggle.active span:nth-child(2) { opacity: 0; }
+.menu-toggle.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
 @media (max-width: 1024px) {
+    .header { padding: 1rem 6%; }
+    .header.scrolled { padding: 0.6rem 6%; }
+
     .nav-links {
         display: none;
     }
@@ -111,17 +143,21 @@
         display: flex;
         flex-direction: column;
         position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
+        top: calc(100% + 10px);
+        left: 5%;
+        right: 5%;
         background: var(--color-surface);
-        padding: 2rem;
-        border-radius: 0 0 12px 12px;
-        margin-top: 0;
-        box-shadow: var(--shadow-lg);
+        padding: 1.5rem;
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-xl);
         text-align: center;
-        gap: 1rem;
+        gap: 0.35rem;
         border: 1px solid var(--color-border);
-        border-top: none;
+        animation: fadeIn 0.3s ease-out;
+    }
+
+    .nav-links.active li a {
+        display: block;
+        padding: 0.7rem;
     }
 }
