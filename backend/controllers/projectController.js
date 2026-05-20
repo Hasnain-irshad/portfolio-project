@@ -56,9 +56,16 @@ export const createProject = async (req, res, next) => {
     try {
         const projectData = req.body;
 
-        // Parse technologies if it's a string
+        // Parse technologies if it's a string (FormData sends arrays as JSON)
         if (typeof projectData.technologies === 'string') {
-            projectData.technologies = JSON.parse(projectData.technologies);
+            try {
+                projectData.technologies = JSON.parse(projectData.technologies);
+            } catch (e) {
+                projectData.technologies = projectData.technologies
+                    .split(',')
+                    .map((t) => t.trim())
+                    .filter(Boolean);
+            }
         }
 
         // Handle image uploads
@@ -94,9 +101,16 @@ export const updateProject = async (req, res, next) => {
 
         const updateData = req.body;
 
-        // Parse technologies if it's a string
+        // Parse technologies if it's a string (FormData sends arrays as JSON)
         if (typeof updateData.technologies === 'string') {
-            updateData.technologies = JSON.parse(updateData.technologies);
+            try {
+                updateData.technologies = JSON.parse(updateData.technologies);
+            } catch (e) {
+                updateData.technologies = updateData.technologies
+                    .split(',')
+                    .map((t) => t.trim())
+                    .filter(Boolean);
+            }
         }
 
         // Handle new image uploads

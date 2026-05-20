@@ -100,20 +100,34 @@
     flex: 1;
 }
 
-.project-title {
+/* Scoped under .projects so admin CSS (which also defines .project-title /
+   .project-description globally) can't override these. */
+.projects .project-title {
     font-size: var(--font-size-xl);
-    color: var(--color-text-main);
+    color: #ffffff;
     transition: color var(--transition-fast);
 }
 
-.project-card:hover .project-title {
+[data-theme='light'] .projects .project-title {
+    color: #18152a;
+}
+
+.projects .project-card:hover .project-title {
     color: var(--color-primary-hover);
 }
 
-.project-description {
-    color: var(--color-text-secondary);
+.projects .project-description {
+    color: #e8e3f8;
     line-height: 1.7;
     font-size: var(--font-size-sm);
+    /* Reset the admin CSS line-clamp so descriptions aren't truncated here */
+    -webkit-line-clamp: unset;
+    display: block;
+    overflow: visible;
+}
+
+[data-theme='light'] .projects .project-description {
+    color: #3d3855;
 }
 
 .project-tech {

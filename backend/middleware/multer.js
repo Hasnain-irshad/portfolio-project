@@ -15,6 +15,14 @@ const fileFilter = (req, file, cb) => {
   }
 };
 
-export const upload = multer({ storage, fileFilter });
+// Limit file size to 10 MB — matches Cloudinary's free-tier per-asset cap and
+// keeps memory use bounded on Render's free dyno.
+const MAX_FILE_SIZE = 10 * 1024 * 1024;
+
+export const upload = multer({
+    storage,
+    fileFilter,
+    limits: { fileSize: MAX_FILE_SIZE }
+});
 
 export default upload;

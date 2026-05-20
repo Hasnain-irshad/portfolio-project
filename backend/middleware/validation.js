@@ -52,8 +52,7 @@ export const validators = {
     // Skill validations
     skill: [
         body('name').trim().notEmpty().withMessage('Skill name is required'),
-        body('category').isIn(['Frontend', 'Backend', 'Database', 'DevOps', 'Tools', 'Design', 'Other'])
-            .withMessage('Invalid category'),
+        body('category').trim().notEmpty().withMessage('Category is required'),
         body('proficiency').optional().isIn(['Beginner', 'Intermediate', 'Advanced', 'Expert'])
             .withMessage('Invalid proficiency level'),
     ],

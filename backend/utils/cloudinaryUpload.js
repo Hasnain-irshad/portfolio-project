@@ -59,7 +59,8 @@ export const uploadImage = async (input, folder = 'portfolio') => {
         };
     } catch (error) {
         console.error('Cloudinary upload error:', error);
-        throw new AppError('Failed to upload image', 500);
+        const detail = error?.message || error?.error?.message || 'Unknown error';
+        throw new AppError(`Failed to upload image: ${detail}`, 500);
     }
 };
 
@@ -107,7 +108,8 @@ export const uploadPDF = async (input, folder = 'portfolio/resumes') => {
         };
     } catch (error) {
         console.error('Cloudinary PDF upload error:', error);
-        throw new AppError('Failed to upload PDF', 500);
+        const detail = error?.message || error?.error?.message || 'Unknown error';
+        throw new AppError(`Failed to upload PDF: ${detail}`, 500);
     }
 };
 
@@ -150,6 +152,7 @@ export const uploadMultipleImages = async (files, folder = 'portfolio') => {
         return await Promise.all(uploadPromises);
     } catch (error) {
         console.error('Multiple upload error:', error);
-        throw new AppError('Failed to upload images', 500);
+        const detail = error?.message || error?.error?.message || 'Unknown error';
+        throw new AppError(`Failed to upload images: ${detail}`, 500);
     }
 };

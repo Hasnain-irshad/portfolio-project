@@ -14,9 +14,19 @@ const SkillsManagement = () => {
     const [toast, setToast] = useState(null);
     const [formData, setFormData] = useState({
         name: '',
-        category: 'Frontend',
+        category: 'Languages',
         proficiencyLevel: 80
     });
+
+    const categorySuggestions = [
+        'Languages',
+        'AI/ML',
+        'Data & Databases',
+        'Frameworks/Tools',
+        'Cloud & DevOps',
+        'Platforms',
+        'Soft Skills'
+    ];
 
     useEffect(() => {
         fetchSkills();
@@ -49,7 +59,7 @@ const SkillsManagement = () => {
         setEditingSkill(null);
         setFormData({
             name: '',
-            category: 'Frontend',
+            category: 'Languages',
             proficiencyLevel: 80
         });
         setIsModalOpen(true);
@@ -197,21 +207,23 @@ const SkillsManagement = () => {
 
                     <div className="form-group">
                         <label className="form-label">Category *</label>
-                        <select
+                        <input
+                            type="text"
                             name="category"
                             value={formData.category}
                             onChange={handleInputChange}
                             className="form-input"
+                            list="skill-categories"
+                            placeholder="e.g., Languages, AI/ML, Soft Skills…"
                             required
-                        >
-                            <option>Frontend</option>
-                            <option>Backend</option>
-                            <option>Database</option>
-                            <option>DevOps</option>
-                            <option>Tools</option>
-                            <option>Design</option>
-                            <option>Other</option>
-                        </select>
+                        />
+                        <datalist id="skill-categories">
+                            {categorySuggestions.map(c => <option key={c} value={c} />)}
+                        </datalist>
+                        <p className="form-hint" style={{ marginTop: 4 }}>
+                            Pick from suggestions or type your own. Use <strong>Soft Skills</strong>
+                            {' '}to show items under the Soft Skills section.
+                        </p>
                     </div>
 
                     <div className="form-group">

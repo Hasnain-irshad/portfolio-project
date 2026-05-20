@@ -1,3 +1,5 @@
+import multer from 'multer';
+
 // Custom Error Classes
 export class AppError extends Error {
     constructor(message, statusCode) {
@@ -34,37 +36,81 @@ export class ForbiddenError extends AppError {
     }
 }
 
+/**
+ * Normalize known framework/library errors into something useful for the
+ * client (and surface the real reason instead of a generic "Something went
+ * wrong!"). Returns a fresh AppError when we recognize the shape.
+ */
+const normalizeError = (err) => {
+    // Mongoose ValidationError — field-level rules failed
+    if (err?.name === 'ValidationError' && err?.errors) {
+        const messages = Object.values(err.errors)
+            .map((e) => e.message)
+            .filter(Boolean);
+        return new ValidationError(messages.join('; ') || 'Validation failed');
+    }
+
+    // Mongoose CastError — bad type (e.g. invalid ObjectId)
+    if (err?.name === 'CastError') {
+        return new ValidationError(`Invalid value for ${err.path}: ${err.value}`);
+    }
+
+    // Mongoose duplicate key
+    if (err?.code === 11000 && err?.keyValue) {
+        const field = Object.keys(err.keyValue)[0];
+        return new ValidationError(`Duplicate value for field "${field}"`);
+    }
+
+    // JSON parse error (bad payload from a FormData JSON string, etc.)
+    if (err instanceof SyntaxError && 'body' in err) {
+        return new ValidationError('Malformed JSON in request body');
+    }
+    if (err instanceof SyntaxError && /JSON/i.test(err.message || '')) {
+        return new ValidationError(`Malformed JSON: ${err.message}`);
+    }
+
+    // Multer errors (file uploads)
+    if (err instanceof multer.MulterError) {
+        const map = {
+            LIMIT_FILE_SIZE: 'File is too large (max 10 MB per file)',
+            LIMIT_FILE_COUNT: 'Too many files uploaded',
+            LIMIT_UNEXPECTED_FILE: `Unexpected file field "${err.field}"`,
+            LIMIT_PART_COUNT: 'Too many form parts'
+        };
+        return new ValidationError(map[err.code] || err.message || 'File upload failed');
+    }
+
+    return null;
+};
+
 // Global Error Handler Middleware
 export const errorHandler = (err, req, res, next) => {
-    err.statusCode = err.statusCode || 500;
-    err.status = err.status || 'error';
+    const normalized = normalizeError(err) || err;
+    normalized.statusCode = normalized.statusCode || 500;
+    normalized.status = normalized.status || 'error';
+
+    // Always log the original error for the server operator
+    console.error('💥', req.method, req.originalUrl, '→', err?.name, err?.message);
+    if (process.env.NODE_ENV !== 'production') {
+        console.error(err?.stack);
+    }
 
     if (process.env.NODE_ENV === 'development') {
-        res.status(err.statusCode).json({
+        return res.status(normalized.statusCode).json({
             success: false,
-            status: err.status,
+            status: normalized.status,
             error: err,
-            message: err.message,
-            stack: err.stack
+            message: normalized.message,
+            stack: err?.stack
         });
-    } else {
-        // Production - don't leak error details
-        if (err.isOperational) {
-            res.status(err.statusCode).json({
-                success: false,
-                status: err.status,
-                message: err.message
-            });
-        } else {
-            // Programming or unknown error - don't leak details
-            console.error('ERROR 💥', err);
-            res.status(500).json({
-                success: false,
-                status: 'error',
-                message: 'Something went wrong!'
-            });
-        }
     }
+
+    // Production — return a useful message, but never the stack.
+    res.status(normalized.statusCode).json({
+        success: false,
+        status: normalized.status,
+        message: normalized.message || 'Request failed'
+    });
 };
 
 // Async error wrapper
