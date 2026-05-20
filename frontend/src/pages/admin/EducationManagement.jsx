@@ -25,6 +25,11 @@ const EducationManagement = () => {
                 <p style={{ fontSize: '13px', color: '#6b7280', marginTop: '8px' }}>
                     {new Date(item.startDate).getFullYear()} - {item.current ? 'Present' : new Date(item.endDate).getFullYear()}
                 </p>
+                {item.transcript?.url && (
+                    <p style={{ fontSize: '12px', color: '#10b981', marginTop: '6px', fontWeight: 600 }}>
+                        📎 Transcript attached ({item.transcript.fileType === 'pdf' ? 'PDF' : 'Image'})
+                    </p>
+                )}
                 {!item.isVisible && <div className="hidden-badge" style={{ position: 'relative', top: 0, right: 0, marginTop: '8px' }}>Hidden</div>}
                 <div className="project-actions">
                     <button onClick={() => onEdit(item)} className="btn-edit">Edit</button>
@@ -37,7 +42,7 @@ const EducationManagement = () => {
         </div>
     );
 
-    const formRender = (formData, onChange) => (
+    const formRender = (formData, onChange, onFileChange, files) => (
         <>
             <div className="form-row">
                 <div className="form-group">
@@ -75,6 +80,33 @@ const EducationManagement = () => {
             <div className="form-group">
                 <label className="form-label">Description</label>
                 <textarea name="description" value={formData.description || ''} onChange={onChange} className="form-textarea" rows="3" />
+            </div>
+
+            <div className="form-group">
+                <label className="form-label">Transcript / Result Proof</label>
+                <input
+                    type="file"
+                    name="transcript"
+                    accept="image/*,application/pdf"
+                    onChange={(e) => onFileChange('transcript', e.target.files[0])}
+                    className="form-input"
+                />
+                <p className="form-hint" style={{ marginTop: 4 }}>
+                    Upload an image (JPG/PNG/WEBP) or a PDF. Leave blank to keep the existing file.
+                </p>
+                {files?.transcript && (
+                    <p style={{ fontSize: 13, color: '#0891b2', marginTop: 6 }}>
+                        New file selected: <strong>{files.transcript.name}</strong>
+                    </p>
+                )}
+                {!files?.transcript && formData.transcript?.url && (
+                    <p style={{ fontSize: 13, color: '#10b981', marginTop: 6 }}>
+                        Current: <a href={formData.transcript.url} target="_blank" rel="noopener noreferrer" style={{ color: '#0891b2', textDecoration: 'underline' }}>
+                            {formData.transcript.originalName || 'View attached transcript'}
+                        </a>{' '}
+                        ({formData.transcript.fileType === 'pdf' ? 'PDF' : 'Image'})
+                    </p>
+                )}
             </div>
 
             <div className="form-group">

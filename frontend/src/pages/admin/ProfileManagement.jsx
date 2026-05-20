@@ -30,8 +30,18 @@ const ProfileManagement = () => {
     const fetchProfile = async () => {
         try {
             const response = await adminProfileAPI.get(token);
-            if (response.data.data) {
-                setFormData(response.data.data);
+            const data = response.data.data;
+            if (data) {
+                // Flatten nested socialLinks so the form inputs (github/linkedin/twitter/website)
+                // pick up the saved values.
+                setFormData({
+                    ...data,
+                    github: data.socialLinks?.github || '',
+                    linkedin: data.socialLinks?.linkedin || '',
+                    twitter: data.socialLinks?.twitter || '',
+                    instagram: data.socialLinks?.instagram || '',
+                    website: data.socialLinks?.website || data.website || ''
+                });
             }
         } catch (error) {
             console.log('No existing profile');
@@ -62,12 +72,25 @@ const ProfileManagement = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        // Re-nest the flat social link fields into the socialLinks shape that
+        // the backend schema (and the public Hero/Footer components) expect.
+        const payload = {
+            ...formData,
+            socialLinks: {
+                github: formData.github || '',
+                linkedin: formData.linkedin || '',
+                twitter: formData.twitter || '',
+                instagram: formData.instagram || '',
+                website: formData.website || ''
+            }
+        };
+
         try {
-            if (formData._id) {
-                await adminProfileAPI.update(token, formData);
+            if (payload._id) {
+                await adminProfileAPI.update(token, payload);
                 showToast('Profile updated successfully!');
             } else {
-                await adminProfileAPI.create(token, formData);
+                await adminProfileAPI.create(token, payload);
                 showToast('Profile created successfully!');
             }
             fetchProfile();

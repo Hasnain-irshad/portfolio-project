@@ -83,11 +83,17 @@ const ListManagement = ({
                 const submitData = new FormData();
 
                 Object.keys(formData).forEach(key => {
-                    if (formData[key] !== undefined && formData[key] !== null) {
-                        // Convert boolean to string for FormData
-                        const value = typeof formData[key] === 'boolean' ? String(formData[key]) : formData[key];
-                        submitData.append(key, value);
+                    const v = formData[key];
+                    if (v === undefined || v === null || v === '') return;
+                    // Skip server-managed nested objects like image, document, transcript.
+                    // (Sending them would stringify to "[object Object]" and corrupt the record.)
+                    if (typeof v === 'object' && !(v instanceof File) && !Array.isArray(v)) return;
+                    // Arrays — send as JSON so the controller can parse them.
+                    if (Array.isArray(v)) {
+                        submitData.append(key, JSON.stringify(v));
+                        return;
                     }
+                    submitData.append(key, typeof v === 'boolean' ? String(v) : v);
                 });
 
                 Object.keys(files).forEach(key => {

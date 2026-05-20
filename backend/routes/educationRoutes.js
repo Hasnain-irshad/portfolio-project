@@ -9,6 +9,7 @@ import {
     toggleEducationVisibility
 } from '../controllers/educationController.js';
 import { authMiddleware } from '../middleware/authMiddleware.js';
+import { upload } from '../middleware/multer.js';
 import { validators, validate } from '../middleware/validation.js';
 
 const router = express.Router();
@@ -21,8 +22,8 @@ router.get('/admin/all', authMiddleware, getAllEducationAdmin);
 
 // Public routes continued
 router.get('/:id', getEducationById);
-router.post('/', authMiddleware, validators.education, validate, createEducation);
-router.put('/:id', authMiddleware, validators.education, validate, updateEducation);
+router.post('/', authMiddleware, upload.single('transcript'), validators.education, validate, createEducation);
+router.put('/:id', authMiddleware, upload.single('transcript'), validators.education, validate, updateEducation);
 router.delete('/:id', authMiddleware, deleteEducation);
 router.patch('/:id/visibility', authMiddleware, toggleEducationVisibility);
 

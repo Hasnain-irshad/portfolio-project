@@ -44,6 +44,15 @@ const educationSchema = new mongoose.Schema({
         type: String,
         trim: true
     }],
+    transcript: {
+        url: String,
+        publicId: String,
+        originalName: String,
+        fileType: {
+            type: String,
+            enum: ['image', 'pdf'],
+        }
+    },
     order: {
         type: Number,
         default: 0

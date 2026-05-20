@@ -112,21 +112,24 @@ export const uploadPDF = async (input, folder = 'portfolio/resumes') => {
 };
 
 /**
- * Delete file from Cloudinary
+ * Delete file from Cloudinary. Non-fatal: logs and returns false on failure
+ * so the caller (e.g. DELETE controllers) can still succeed in removing the
+ * DB record even if the cloud file is missing or unreachable.
+ *
  * @param {String} publicId - Cloudinary public ID
  * @param {String} resourceType - 'image' or 'raw'
- * @returns {Boolean} - Success status
+ * @returns {Boolean} - true on success, false on missing publicId or failure
  */
 export const deleteFile = async (publicId, resourceType = 'image') => {
+    if (!publicId) return false;
     try {
         const result = await cloudinary.uploader.destroy(publicId, {
             resource_type: resourceType
         });
-
         return result.result === 'ok';
     } catch (error) {
-        console.error('Cloudinary delete error:', error);
-        throw new AppError('Failed to delete file', 500);
+        console.warn(`Cloudinary delete skipped (non-fatal) for ${publicId}:`, error?.message || error);
+        return false;
     }
 };
 

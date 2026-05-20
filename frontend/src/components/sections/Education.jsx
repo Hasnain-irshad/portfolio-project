@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import ZoomableImage from '../common/ZoomableImage';
 import './Education.css';
 
 const Education = ({ education }) => {
@@ -65,6 +66,36 @@ const Education = ({ education }) => {
                                                 </li>
                                             ))}
                                         </ul>
+                                    </div>
+                                )}
+
+                                {edu.transcript?.url && (
+                                    <div className="education-transcript">
+                                        {edu.transcript.fileType === 'image' ? (
+                                            <>
+                                                <p className="education-transcript-label">
+                                                    <i className="fas fa-file-image"></i> Transcript / Result
+                                                </p>
+                                                <ZoomableImage
+                                                    src={edu.transcript.url}
+                                                    alt={`${edu.degree} transcript`}
+                                                    className="education-transcript-image"
+                                                />
+                                            </>
+                                        ) : (
+                                            <a
+                                                href={edu.transcript.url}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="education-transcript-link"
+                                            >
+                                                <i className="fas fa-file-pdf"></i>
+                                                <span>View Transcript</span>
+                                                <span className="education-transcript-file">
+                                                    {edu.transcript.originalName || 'transcript.pdf'}
+                                                </span>
+                                            </a>
+                                        )}
                                     </div>
                                 )}
                             </div>

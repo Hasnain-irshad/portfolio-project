@@ -1,6 +1,30 @@
 import Education from '../models/Education.js';
 import { successResponse } from '../utils/apiResponse.js';
-import { NotFoundError } from '../middleware/errorHandler.js';
+import { NotFoundError, ValidationError } from '../middleware/errorHandler.js';
+import { uploadImage, uploadPDF, deleteFile } from '../utils/cloudinaryUpload.js';
+
+const ALLOWED_IMAGE_MIMES = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif'];
+const ALLOWED_PDF_MIMES = ['application/pdf'];
+
+const uploadTranscriptFile = async (file) => {
+    const isImage = ALLOWED_IMAGE_MIMES.includes(file.mimetype);
+    const isPdf = ALLOWED_PDF_MIMES.includes(file.mimetype);
+
+    if (!isImage && !isPdf) {
+        throw new ValidationError('Transcript must be an image (JPG/PNG/WEBP/GIF) or a PDF.');
+    }
+
+    const result = isImage
+        ? await uploadImage(file, 'portfolio/education')
+        : await uploadPDF(file, 'portfolio/education');
+
+    return {
+        url: result.url,
+        publicId: result.publicId,
+        originalName: file.originalname,
+        fileType: isImage ? 'image' : 'pdf'
+    };
+};
 
 // @desc    Get all visible education records
 // @route   GET /api/education
@@ -60,7 +84,6 @@ export const createEducation = async (req, res, next) => {
                 try {
                     educationData.activities = JSON.parse(educationData.activities);
                 } catch (e) {
-                    // If it's a single string, convert to array
                     educationData.activities = educationData.activities ? [educationData.activities] : [];
                 }
             }
@@ -69,6 +92,11 @@ export const createEducation = async (req, res, next) => {
         // Convert current (string from FormData) to boolean if needed
         if (typeof educationData.current === 'string') {
             educationData.current = educationData.current === 'true';
+        }
+
+        // Handle transcript upload (image or PDF)
+        if (req.file) {
+            educationData.transcript = await uploadTranscriptFile(req.file);
         }
 
         const education = await Education.create(educationData);
@@ -98,7 +126,6 @@ export const updateEducation = async (req, res, next) => {
                 try {
                     updateData.activities = JSON.parse(updateData.activities);
                 } catch (e) {
-                    // If it's a single string, convert to array
                     updateData.activities = updateData.activities ? [updateData.activities] : [];
                 }
             }
@@ -107,6 +134,15 @@ export const updateEducation = async (req, res, next) => {
         // Convert current (string from FormData) to boolean if needed
         if (typeof updateData.current === 'string') {
             updateData.current = updateData.current === 'true';
+        }
+
+        // Handle new transcript upload — delete the old one first (non-fatal)
+        if (req.file) {
+            if (education.transcript?.publicId) {
+                const resourceType = education.transcript.fileType === 'pdf' ? 'raw' : 'image';
+                await deleteFile(education.transcript.publicId, resourceType);
+            }
+            updateData.transcript = await uploadTranscriptFile(req.file);
         }
 
         Object.assign(education, updateData);
@@ -127,6 +163,12 @@ export const deleteEducation = async (req, res, next) => {
 
         if (!education) {
             throw new NotFoundError('Education record not found');
+        }
+
+        // Remove transcript from Cloudinary if present (non-fatal — won't block DB delete)
+        if (education.transcript?.publicId) {
+            const resourceType = education.transcript.fileType === 'pdf' ? 'raw' : 'image';
+            await deleteFile(education.transcript.publicId, resourceType);
         }
 
         await education.deleteOne();

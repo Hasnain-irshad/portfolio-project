@@ -163,6 +163,78 @@
     color: var(--color-accent);
 }
 
+/* ───── Transcript / Proof attachment ───── */
+.education-transcript {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px dashed var(--color-border);
+}
+
+.education-transcript-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    color: var(--color-text-main);
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+}
+
+.education-transcript-label i {
+    color: var(--color-accent);
+}
+
+.education-transcript-image {
+    width: 100%;
+    max-height: 220px;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+    cursor: zoom-in;
+    transition: transform var(--transition-base);
+}
+
+.education-transcript-image:hover {
+    transform: scale(1.01);
+    border-color: var(--color-primary);
+}
+
+.education-transcript-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 18px;
+    background: var(--gradient-primary-soft);
+    color: var(--color-primary-hover);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: transform var(--transition-base), background var(--transition-base), color var(--transition-base);
+}
+
+.education-transcript-link:hover {
+    transform: translateY(-2px);
+    background: var(--gradient-primary);
+    color: #fff;
+    border-color: transparent;
+}
+
+.education-transcript-link i {
+    font-size: 1.05rem;
+}
+
+.education-transcript-file {
+    font-weight: 400;
+    opacity: 0.8;
+    font-size: 0.8rem;
+    max-width: 180px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 @media (max-width: 768px) {
     .education-timeline::before { left: 24px; }
     .education-item,
