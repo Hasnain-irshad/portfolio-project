@@ -68,6 +68,12 @@ export const createProject = async (req, res, next) => {
             }
         }
 
+        // Older admin form sent `projectUrl`; the schema uses `liveUrl`.
+        if (projectData.projectUrl && !projectData.liveUrl) {
+            projectData.liveUrl = projectData.projectUrl;
+        }
+        delete projectData.projectUrl;
+
         // Handle image uploads
         if (req.files && req.files.length > 0) {
             console.log('Upload request - project images count:', req.files.length);
@@ -113,7 +119,15 @@ export const updateProject = async (req, res, next) => {
             }
         }
 
-        // Handle new image uploads
+        // Older admin form sent `projectUrl`; the schema uses `liveUrl`.
+        if (updateData.projectUrl && !updateData.liveUrl) {
+            updateData.liveUrl = updateData.projectUrl;
+        }
+        delete updateData.projectUrl;
+
+        // Handle new image uploads — REPLACE existing images, don't append.
+        // (Append-on-edit kept the old image at index 0, so the public site
+        // never showed the new picture.)
         if (req.files && req.files.length > 0) {
             console.log('Upload request - project images (update) count:', req.files.length);
             req.files.forEach((f, idx) => {
@@ -121,7 +135,17 @@ export const updateProject = async (req, res, next) => {
             });
 
             const uploadedImages = await uploadMultipleImages(req.files, 'portfolio/projects');
-            updateData.images = [...(project.images || []), ...uploadedImages];
+
+            // Clean up old Cloudinary files (non-fatal — won't block save)
+            if (project.images && project.images.length > 0) {
+                for (const oldImg of project.images) {
+                    if (oldImg?.publicId) {
+                        await deleteFile(oldImg.publicId);
+                    }
+                }
+            }
+
+            updateData.images = uploadedImages;
         }
 
         Object.assign(project, updateData);

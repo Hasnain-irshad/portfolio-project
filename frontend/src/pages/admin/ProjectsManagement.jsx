@@ -17,7 +17,7 @@ const ProjectsManagement = () => {
         description: '',
         technologies: '',
         category: 'Web Development',
-        projectUrl: '',
+        liveUrl: '',
         githubUrl: '',
         isVisible: true,
         order: 0
@@ -78,7 +78,7 @@ const ProjectsManagement = () => {
             description: project.description,
             technologies: project.technologies.join(', '),
             category: project.category || 'Web Development',
-            projectUrl: project.projectUrl || '',
+            liveUrl: project.liveUrl || project.projectUrl || '',
             githubUrl: project.githubUrl || '',
             isVisible: project.isVisible !== false,
             order: project.order || 0
@@ -96,7 +96,7 @@ const ProjectsManagement = () => {
             submitData.append('description', formData.description);
             submitData.append('technologies', JSON.stringify(formData.technologies.split(',').map(t => t.trim())));
             submitData.append('category', formData.category);
-            submitData.append('projectUrl', formData.projectUrl);
+            submitData.append('liveUrl', formData.liveUrl);
             submitData.append('githubUrl', formData.githubUrl);
             submitData.append('isVisible', formData.isVisible);
             submitData.append('order', formData.order);
@@ -262,15 +262,18 @@ const ProjectsManagement = () => {
 
                     <div className="form-row">
                         <div className="form-group">
-                            <label className="form-label">Project URL</label>
+                            <label className="form-label">Live Project URL</label>
                             <input
                                 type="url"
-                                name="projectUrl"
-                                value={formData.projectUrl}
+                                name="liveUrl"
+                                value={formData.liveUrl}
                                 onChange={handleInputChange}
                                 className="form-input"
-                                placeholder="https://project-demo.com"
+                                placeholder="https://your-project.com"
                             />
+                            <p className="form-hint" style={{ marginTop: 4 }}>
+                                Leave blank if the project isn't deployed — the "Live Demo" button on your portfolio only appears when this is set.
+                            </p>
                         </div>
 
                         <div className="form-group">
@@ -323,6 +326,11 @@ const ProjectsManagement = () => {
                         />
                         {imageFiles.length > 0 && (
                             <p className="form-hint">{imageFiles.length} file(s) selected</p>
+                        )}
+                        {editingProject && (
+                            <p className="form-hint" style={{ marginTop: 4, color: '#92400e' }}>
+                                Note: uploading new images will <strong>replace</strong> the current ones. Leave empty to keep them.
+                            </p>
                         )}
                     </div>
 
