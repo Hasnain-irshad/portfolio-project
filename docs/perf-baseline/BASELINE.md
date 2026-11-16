@@ -114,3 +114,27 @@ To re-check the cold start, leave the backend idle for at least 16 minutes, then
 - `runs/{mobile,desktop}-{0..3}.json`: raw Lighthouse results. Run 0 of mobile is the outlier (perf 27, TBT 12.8 s, cold edge cache).
 - `lighthouse-mobile-median.html`, `lighthouse-desktop-median.html`: full reports for representative runs; open in a browser
 - `raw-network.txt`: curl timings, headers and per-asset sizes
+
+---
+
+## After the redesign (production, 2026-11-16)
+
+Measured on https://portfolio-frontend-osom.onrender.com/ (commit `0561545` + header fix `d2f6395`), same machine and Lighthouse 12.6.0. Medians of 3 runs, produced with `compare.js`.
+
+| | Mobile before → after | Desktop before → after |
+|---|---|---|
+| **Performance** | **41 → 71** | **76.5 → 97** |
+| Accessibility / Best Practices | 100 / 100 → 100 / 100 | 100 / 100 → 100 / 100 |
+| SEO | 82 → 100 | 82 → 100 |
+| First Contentful Paint | 3.37 s → 1.82 s | 0.98 s → 0.41 s |
+| Largest Contentful Paint | 7.05 s → 2.87 s | 2.11 s → 1.13 s |
+| Speed Index | 6.35 s → 3.60 s | 2.09 s → 0.86 s |
+| Total Blocking Time | 1,360 ms → 1,157 ms | 226 ms → 60 ms |
+| Time to Interactive | 7.15 s → 3.44 s | 2.11 s → 1.13 s |
+| CLS | 0.014 → 0.005 | 0.004 → 0.016 |
+| Page weight | 2,435 KB → 273 KB | 2,435 KB → 275 KB |
+| Requests | 39 → 22 | 39 → 24 |
+
+**Cold start:** the backend had to wake up before these runs (22 s for the first API response). Because the page now renders from the build-time snapshot, that wait no longer affects what visitors see. The live data refreshes in the background.
+
+**Caching:** hashed `/assets/*` now return `public, max-age=31536000, immutable`; HTML routes return `no-cache`.
