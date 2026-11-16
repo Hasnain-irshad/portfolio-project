@@ -1,81 +1,29 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import ZoomableImage from '../common/ZoomableImage';
-import './Blogs.css';
+import SectionHeader from '../common/SectionHeader';
+import PostList from '../common/PostList';
+import Icon from '../common/Icon';
 
-const Blogs = ({ blogs }) => {
-    if (!blogs || blogs.length === 0) return null;
-
-    const formatDate = (date) => {
-        return new Date(date).toLocaleDateString('en-US', {
-            month: 'long',
-            day: 'numeric',
-            year: 'numeric'
-        });
-    };
-
-    const displayBlogs = blogs.slice(0, 3);
+const Blogs = ({ index, blogs }) => {
+    if (!blogs?.length) return null;
 
     return (
-        <section id="blogs" className="section blogs">
+        <section id="blogs" className="sec blogs" aria-labelledby="blogs-title">
             <div className="container">
-                <div className="section-header">
-                    <h2 className="section-title">Blog</h2>
-                    <p className="section-subtitle">Thoughts, tutorials, and insights</p>
-                </div>
-
-                <div className="blogs-grid grid-3">
-                    {displayBlogs.map((blog, index) => (
-                        <motion.article
-                            key={blog._id}
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.5, delay: index * 0.1 }}
-                            className="blog-card card"
-                        >
-                            {blog.image?.url && (
-                                <div className="blog-image">
-                                    <ZoomableImage src={blog.image.url} alt={blog.title} />
-                                </div>
-                            )}
-
-                            <div className="blog-content">
-                                <div className="blog-meta">
-                                    <span className="blog-date">
-                                        <i className="fas fa-calendar"></i>
-                                        {formatDate(blog.publishDate || blog.createdAt)}
-                                    </span>
-                                </div>
-
-                                <h3 className="blog-title">{blog.title}</h3>
-
-                                <p className="blog-excerpt">
-                                    {blog.excerpt || (blog.content ? (blog.content.length > 180 ? blog.content.slice(0, 180) + '...' : blog.content) : '')}
-                                </p>
-
-                                {blog.tags && blog.tags.length > 0 && (
-                                    <div className="blog-tags">
-                                        {blog.tags.slice(0, 3).map((tag, i) => (
-                                            <span key={i} className="blog-tag">{tag}</span>
-                                        ))}
-                                    </div>
-                                )}
-
-                                <div className="blog-footer">
-                                    <Link to={`/blog/${blog._id}`} className="read-more">
-                                        Read More <i className="fas fa-arrow-right"></i>
-                                    </Link>
-                                </div>
-                            </div>
-                        </motion.article>
-                    ))}
-                </div>
-
-                <div className="view-all-container">
-                    <Link to="/blogs" className="btn btn-outline view-all-btn">
-                        View All Blogs <i className="fas fa-external-link-alt"></i>
+                <SectionHeader
+                    id="blogs-title"
+                    index={index}
+                    eyebrow="Writing"
+                    title={
+                        <>
+                            Notes on <em>building</em> with AI.
+                        </>
+                    }
+                />
+                <PostList posts={blogs.slice(0, 3)} />
+                <div className="blogs__more reveal" style={{ marginTop: 32 }}>
+                    <Link to="/blogs" className="btn btn--ghost">
+                        All writing <Icon name="arrow-right" />
                     </Link>
                 </div>
             </div>

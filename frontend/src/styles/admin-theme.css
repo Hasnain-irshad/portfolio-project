@@ -1,0 +1,202 @@
+/* ==========================================================================
+   Admin theme layer — puts the admin panel on the shared design tokens so it
+   follows the dark/light theme. Loaded only in the admin chunk.
+   ========================================================================== */
+
+.admin-root {
+    min-height: 100vh;
+    background: var(--bg);
+    color: var(--text-2);
+    font-family: var(--font-sans);
+}
+
+.admin-root .admin-layout {
+    background: var(--bg);
+}
+
+.admin-root h1,
+.admin-root h2,
+.admin-root h3,
+.admin-root h4 {
+    color: var(--text);
+}
+
+/* Header: subtle glass, consistent with the public site */
+.admin-root .admin-header {
+    background: var(--glass);
+    border-bottom-color: var(--border);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+}
+
+.admin-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Sidebar brand block */
+.sidebar-logo .brand__mark {
+    width: 32px;
+    height: 32px;
+    font-size: 0.75rem;
+}
+
+.sidebar-icon svg {
+    width: 19px;
+    height: 19px;
+}
+
+.sidebar-site-link {
+    border-top: 1px solid var(--border);
+}
+
+.sidebar-item.active .sidebar-icon {
+    color: var(--accent);
+}
+
+/* Cards & surfaces on dark should sit above the page, never below it */
+.admin-root .project-card,
+.admin-root .info-card,
+.admin-root .quick-action-card,
+.admin-root .form-container,
+.admin-root .avatar-section,
+.admin-root .modal-content,
+.admin-root .login-container,
+.admin-root .empty-state,
+.admin-root table {
+    background: var(--surface);
+    border-color: var(--border);
+}
+
+/* Form controls */
+.admin-root input:not([type='checkbox']):not([type='radio']):not([type='file']),
+.admin-root textarea,
+.admin-root select {
+    background: var(--bg-2);
+    color: var(--text);
+    border-color: var(--border-strong);
+}
+
+.admin-root input::placeholder,
+.admin-root textarea::placeholder {
+    color: var(--text-3);
+}
+
+.admin-root input:focus,
+.admin-root textarea:focus,
+.admin-root select:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.admin-root input[type='checkbox'],
+.admin-root input[type='radio'] {
+    accent-color: var(--accent);
+}
+
+.admin-root input[type='file'] {
+    color: var(--text-2);
+}
+
+/* Primary actions use the accessible accent + ink pairing */
+.admin-root .btn-primary,
+.admin-root .login-button,
+.admin-root button[type='submit']:not(.btn) {
+    background: var(--accent);
+    color: var(--accent-ink);
+    border: none;
+}
+
+.admin-root .btn-primary:hover,
+.admin-root .login-button:hover {
+    background: var(--accent-hover);
+}
+
+.admin-root .btn-secondary {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border-strong);
+}
+
+.admin-root .btn-logout {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border-strong);
+}
+
+.admin-root .btn-logout:hover {
+    border-color: var(--danger);
+    color: var(--danger);
+    background: var(--danger-soft);
+}
+
+.admin-root a {
+    color: var(--accent-text);
+}
+
+.admin-root .sidebar-item,
+.admin-root .quick-action-card {
+    color: inherit;
+}
+
+.admin-root .modal-backdrop {
+    background: var(--scrim);
+}
+
+/* Dashboard welcome: a quiet surface, not a large green block */
+.admin-root .dashboard-welcome {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text-2);
+}
+
+.admin-root .dashboard-welcome .dashboard-title {
+    color: var(--text);
+}
+
+.admin-root .dashboard-welcome .dashboard-subtitle {
+    color: var(--text-2);
+}
+
+/* Quick actions: brand-consistent accent instead of per-card rainbow colours */
+.admin-root .quick-action-card {
+    border-left-color: var(--border-strong) !important;
+}
+
+.admin-root .quick-action-card:hover {
+    border-left-color: var(--accent) !important;
+}
+
+/* Dashboard inbox card text shouldn't inherit the link colour */
+.admin-root .dashboard-inbox {
+    color: var(--text-2);
+}
+
+.admin-root .dashboard-inbox > .icon {
+    color: var(--icon);
+}
+
+/* Destructive buttons: readable on hover in both themes */
+.admin-root .btn-delete:hover {
+    background: var(--danger);
+    color: var(--surface);
+}
+
+.admin-root .inbox-detail__actions .btn-delete {
+    flex: 0 0 auto;
+    padding: 10px 18px;
+    font-size: 0.875rem;
+}
+
+/* Tables */
+.admin-root th {
+    background: var(--surface-2);
+    color: var(--text-2);
+}
+
+.admin-root td {
+    border-color: var(--border);
+    color: var(--text);
+}

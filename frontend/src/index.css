@@ -1,22 +1,7 @@
-/* Base bootstrap — full design system lives in styles/index.css */
-:root {
-  color-scheme: light dark;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-body {
-  margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
-}
+/* Global design system: tokens, base styles and primitives */
+@import './styles/index.css';
 
 #root {
   width: 100%;
-}
-
-button {
-  font-family: inherit;
+  min-height: 100vh;
 }

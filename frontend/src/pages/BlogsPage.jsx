@@ -1,122 +1,64 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
-import Loading from '../components/common/Loading';
-import ZoomableImage from '../components/common/ZoomableImage';
-import { blogsAPI, profileAPI } from '../services/api';
+import PostList from '../components/common/PostList';
+import Icon from '../components/common/Icon';
+import { usePortfolioData } from '../hooks/usePortfolioData';
+import { useReveal } from '../hooks/useReveal';
 import './BlogsPage.css';
 
 const BlogsPage = () => {
-    const [blogs, setBlogs] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [profile, setProfile] = useState(null);
+    const { data, isLive } = usePortfolioData({ trackLive: true });
+    const { blogs, profile, resume } = data;
 
     useEffect(() => {
-        const fetchBlogs = async () => {
-            try {
-                const [blogsRes, profileRes] = await Promise.all([
-                    blogsAPI.getAll(),
-                    profileAPI.get()
-                ]);
-                setBlogs(blogsRes.data.data);
-                setProfile(profileRes.data.data);
-            } catch (error) {
-                console.error('Error fetching blogs:', error);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchBlogs();
         window.scrollTo(0, 0);
-    }, []);
+        document.title = `Writing — ${profile?.name || 'Portfolio'}`;
+    }, [profile?.name]);
 
-    const formatDate = (date) => {
-        return new Date(date).toLocaleDateString('en-US', {
-            month: 'long',
-            day: 'numeric',
-            year: 'numeric'
-        });
-    };
+    useReveal([blogs]);
 
-    if (loading) return <Loading />;
+    const tags = [...new Set(blogs.flatMap((b) => b.tags || []))];
 
     return (
-        <div className="blogs-page">
-            <Header />
-            <main className="blogs-main">
-                <section className="blogs-hero">
+        <div className="app">
+            <Header profile={profile} resume={resume} />
+            <main id="main" className="page">
+                <section className="page-hero">
                     <div className="container">
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.6 }}
-                            className="hero-content"
-                        >
-                            <h1 className="page-title">Blog Articles</h1>
-                            <p className="page-subtitle">Exploring technology, design, and software development.</p>
-                        </motion.div>
+                        <Link to="/" className="link-arrow page-hero__back">
+                            <Icon name="arrow-left" /> Home
+                        </Link>
+                        <p className="eyebrow">
+                            <span className="eyebrow__index">{String(blogs.length).padStart(2, '0')}</span>
+                            <span className="eyebrow__rule" aria-hidden="true" />
+                            Articles
+                        </p>
+                        <h1 className="page-hero__title">
+                            Writing on <em>AI systems</em>, data &amp; engineering.
+                        </h1>
+                        {tags.length > 0 && (
+                            <ul role="list" className="chip-list page-hero__tags" aria-label="Topics">
+                                {tags.slice(0, 10).map((t) => (
+                                    <li key={t} className="chip">{t}</li>
+                                ))}
+                            </ul>
+                        )}
                     </div>
                 </section>
 
-                <section className="blogs-list-section">
-                    <div className="container">
-                        {blogs.length === 0 ? (
-                            <div className="no-blogs">
-                                <h3>No blog posts found.</h3>
-                                <Link to="/" className="btn btn-primary">Back to Home</Link>
-                            </div>
-                        ) : (
-                            <div className="blogs-grid">
-                                {blogs.map((blog, index) => (
-                                    <motion.article
-                                        key={blog._id}
-                                        initial={{ opacity: 0, y: 20 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        transition={{ duration: 0.5, delay: index * 0.1 }}
-                                        className="blog-card card"
-                                    >
-                                        {blog.image?.url && (
-                                            <div className="blog-image">
-                                                <ZoomableImage src={blog.image.url} alt={blog.title} />
-                                            </div>
-                                        )}
-
-                                        <div className="blog-content">
-                                            <div className="blog-meta">
-                                                <span className="blog-date">
-                                                    <i className="fas fa-calendar"></i>
-                                                    {formatDate(blog.publishDate || blog.createdAt)}
-                                                </span>
-                                            </div>
-
-                                            <h3 className="blog-title">{blog.title}</h3>
-
-                                            <p className="blog-excerpt">
-                                                {blog.excerpt || (blog.content ? (blog.content.length > 180 ? blog.content.slice(0, 180) + '...' : blog.content) : '')}
-                                            </p>
-
-                                            {blog.tags && blog.tags.length > 0 && (
-                                                <div className="blog-tags">
-                                                    {blog.tags.map((tag, i) => (
-                                                        <span key={i} className="blog-tag">{tag}</span>
-                                                    ))}
-                                                </div>
-                                            )}
-
-                                            <div className="blog-footer">
-                                                <Link to={`/blog/${blog._id}`} className="read-more">
-                                                    Read More <i className="fas fa-arrow-right"></i>
-                                                </Link>
-                                            </div>
-                                        </div>
-                                    </motion.article>
-                                ))}
-                            </div>
-                        )}
-                    </div>
+                <section className="container page-body" aria-label="All articles">
+                    {blogs.length > 0 ? (
+                        <PostList posts={blogs} headingLevel={2} />
+                    ) : (
+                        <div className="page-empty">
+                            <p>{isLive ? 'No articles published yet.' : 'Loading articles…'}</p>
+                            <Link to="/" className="btn btn--ghost">
+                                Back home
+                            </Link>
+                        </div>
+                    )}
                 </section>
             </main>
             <Footer profile={profile} />

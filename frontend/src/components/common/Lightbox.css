@@ -1,90 +1,125 @@
-/* ===== Image Lightbox ===== */
-.lightbox-overlay {
+.lb {
     position: fixed;
     inset: 0;
     z-index: 5000;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    padding: 6vh 5vw;
-    background: rgba(6, 5, 11, 0.92);
-    backdrop-filter: blur(10px) saturate(120%);
-    -webkit-backdrop-filter: blur(10px) saturate(120%);
+    display: grid;
+    place-items: center;
+    padding: 72px 72px 48px;
+    background: var(--scrim);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
     cursor: zoom-out;
+    animation: lbFade 200ms var(--ease);
 }
 
-.lightbox-stage {
+.lb__stage {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.9rem;
+    gap: 12px;
     max-width: 100%;
     max-height: 100%;
     cursor: default;
+    animation: lbZoom 260ms var(--ease);
 }
 
-.lightbox-image {
-    max-width: 92vw;
+.lb__img {
+    max-width: min(92vw, 1400px);
     max-height: 80vh;
+    width: auto;
     object-fit: contain;
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-md);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.75), 0 0 60px var(--color-primary-glow);
+    background: #0B132B;
 }
 
-.lightbox-caption {
-    margin: 0;
-    color: var(--color-text-secondary);
-    font-size: 0.9rem;
+.lb__caption {
+    color: #D5DCE8;
+    font-size: 0.875rem;
     text-align: center;
     max-width: 80vw;
 }
 
-.lightbox-close {
+.lb__caption .meta {
+    color: #AAB5C8;
+}
+
+.lb__btn {
     position: fixed;
-    top: 22px;
-    right: 24px;
-    width: 50px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    background: rgba(255, 255, 255, 0.06);
-    color: #fff;
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
     border-radius: 50%;
-    font-size: 1.25rem;
-    cursor: pointer;
-    transition: transform var(--transition-spring), background var(--transition-base), border-color var(--transition-base);
+    color: #F5F7FA;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    transition: background-color var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
 }
 
-.lightbox-close:hover {
-    background: var(--gradient-primary);
+.lb__btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+.lb__btn:hover {
+    background: #39FF88;
+    color: #0B132B;
     border-color: transparent;
-    transform: rotate(90deg) scale(1.08);
-    box-shadow: var(--shadow-glow);
 }
 
-.lightbox-hint {
-    position: fixed;
-    bottom: 22px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 0.78rem;
-    letter-spacing: 0.06em;
-    color: var(--color-text-muted);
-    text-transform: uppercase;
+.lb__close {
+    top: 18px;
+    right: 18px;
 }
 
-/* Any image made clickable through ZoomableImage */
-.zoomable-image {
+.lb__nav {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.lb__nav--prev { left: 18px; }
+.lb__nav--next { right: 18px; }
+
+/* Any element that opens the lightbox */
+.zoomable {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    background: none;
     cursor: zoom-in;
+    overflow: hidden;
 }
 
-@media (max-width: 600px) {
-    .lightbox-image { max-height: 72vh; }
-    .lightbox-close { top: 14px; right: 14px; width: 44px; height: 44px; }
-    .lightbox-hint { font-size: 0.68rem; }
+.zoomable img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 600ms var(--ease);
+}
+
+.zoomable:hover img {
+    transform: scale(1.025);
+}
+
+.zoomable:focus-visible {
+    outline-offset: -3px;
+}
+
+@keyframes lbFade {
+    from { opacity: 0; }
+}
+
+@keyframes lbZoom {
+    from { opacity: 0; transform: scale(0.97); }
+}
+
+@media (max-width: 640px) {
+    .lb { padding: 64px 12px 32px; }
+    .lb__nav { top: auto; bottom: 16px; transform: none; }
+    .lb__nav--prev { left: calc(50% - 56px); }
+    .lb__nav--next { right: calc(50% - 56px); }
+    .lb__close { top: 12px; right: 12px; }
 }

@@ -1,0 +1,18 @@
+{
+  "takenAt": "2026-11-16T08:29Z..09:15Z",
+  "url": "https://portfolio-frontend-osom.onrender.com/",
+  "build": "index-BqKv_EPz.js / index-Dg6BCnEa.css (commit 41342ef)",
+  "tool": "Lighthouse 12.6.0, headless Edge, default simulated throttling",
+  "note": "Medians of 4 runs per form factor (runs/*.json). Run 0 of mobile was an outlier (perf 27, TBT 12.8 s). All Lighthouse runs had a WARM backend; cold-start is measured separately.",
+  "backendColdStart": { "endpoint": "/api/profile", "idleMinutes": 16.5, "ttfbSeconds": 31.87, "warmTtfbSeconds": 0.57 },
+  "mobile":  { "perf": 41,   "accessibility": 100, "bestPractices": 100, "seo": 82, "ttfbMs": 201, "fcpS": 3.37, "lcpS": 7.05, "speedIndexS": 6.35, "tbtMs": 1360, "cls": 0.014, "ttiS": 7.15, "totalKB": 2435, "requests": 39 },
+  "desktop": { "perf": 76.5, "accessibility": 100, "bestPractices": 100, "seo": 82, "ttfbMs": 12,  "fcpS": 0.98, "lcpS": 2.11, "speedIndexS": 2.09, "tbtMs": 226,  "cls": 0.004, "ttiS": 2.11, "totalKB": 2435, "requests": 39 },
+  "assets": {
+    "jsRawKB": 592, "jsBrotliKB": 184, "jsChunks": 1,
+    "cssRawKB": 81, "cssBrotliKB": 16,
+    "fontsKB": 306, "fontAwesomeKB": 272,
+    "imagesKB": 1895, "imageRequests": 15,
+    "apiRequests": 11, "apiJsonKB": 10.8,
+    "largestImage": "projects/oy8nenefuhbuxxo1cw3x.png 349 KB"
+  }
+}

@@ -1,7 +1,7 @@
 /* Additional Admin Styles */
 
 .form-container {
-    background: white;
+    background: var(--surface);
     border-radius: 12px;
     padding: 32px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -19,7 +19,7 @@
     flex-direction: column;
     gap: 20px;
     padding-bottom: 24px;
-    border-bottom: 1px solid #e5e7eb;
+    border-bottom: 1px solid var(--border);
 }
 
 .form-section:last-child {
@@ -30,12 +30,12 @@
 .form-section-title {
     font-size: 18px;
     font-weight: 600;
-    color: #111827;
+    color: var(--text);
     margin: 0 0 16px 0;
 }
 
 .avatar-section {
-    background: white;
+    background: var(--surface);
     border-radius: 12px;
     padding: 32px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -47,7 +47,7 @@
     border-radius: 50%;
     overflow: hidden;
     margin: 16px 0;
-    border: 4px solid #e5e7eb;
+    border: 4px solid var(--border);
 }
 
 .current-avatar img {
@@ -58,7 +58,7 @@
 
 .resume-current,
 .resume-upload {
-    background: white;
+    background: var(--surface);
     border-radius: 12px;
     padding: 32px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -71,7 +71,7 @@
 
 .resume-details p {
     font-size: 14px;
-    color: #4b5563;
+    color: var(--text-2);
     margin: 8px 0;
 }
 

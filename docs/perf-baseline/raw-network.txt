@@ -1,0 +1,56 @@
+Raw network measurements — baseline before redesign
+Taken 2026-11-16 ~08:29 UTC from the developer's machine (Pakistan, Cloudflare ISB edge), curl 8.x
+Frontend: https://portfolio-frontend-osom.onrender.com  (Render static site, build index-BqKv_EPz.js = commit 41342ef)
+Backend:  https://portfolio-backend-osom.onrender.com   (Render free web service)
+
+--- Document / backend root (backend already warm at test time) ---
+BACKEND /       first:  tls=0.67s TTFB=0.961s  total=0.961s  200  79 B
+BACKEND /       second: tls=0.05s TTFB=0.346s  total=0.346s  200
+FRONTEND /      first:  dns=0.12s tls=0.15s TTFB=0.587s total=0.588s 200 1044 B (cf-cache-status: HIT)
+FRONTEND /      second: TTFB=0.101s total=0.101s
+Frontend headers: Cache-Control: no-cache on HTML *and* on hashed /assets/* files
+
+--- The 11 API calls made by the homepage (warm backend, brotli) ---
+profile       TTFB 0.565s   659 B
+resume        TTFB 0.556s   281 B
+projects      TTFB 0.583s  1912 B
+skills        TTFB 0.562s  1471 B
+experience    TTFB 0.580s   927 B
+achievements  TTFB 0.563s   706 B
+education     TTFB 0.534s   868 B
+certificates  TTFB 0.579s   445 B
+blogs         TTFB 0.537s  1742 B
+publications  TTFB 0.538s    58 B  (empty — no publications)
+activities    TTFB 0.540s   658 B
+Total JSON: ~10.2 KB compressed
+
+--- Static bundles ---
+/assets/index-BqKv_EPz.js   605,814 B raw / 188,349 B brotli  (single chunk: public site + all 12 admin pages)
+/assets/index-Dg6BCnEa.css   83,230 B raw /  16,265 B brotli
+Font Awesome all.min.css     18.7 KB compressed + fa-solid-900.woff2 147 KB + fa-brands-400.woff2 106 KB
+Google Fonts                 Poppins 6 weights + Space Grotesk 4 weights requested (5 woff2 files actually used, ~53 KB)
+
+--- Cloudinary assets referenced by the API (original uploads, no f_auto/q_auto/w_ transforms) ---
+ 349.1 KB  png   projects/oy8nenefuhbuxxo1cw3x.png
+ 238.3 KB  png   projects/brwsmtm0kyiufey01bao.png
+ 224.7 KB  png   certificates/ll3z8aht63jrtkp2wkyz.png
+ 171.2 KB  jpg   education/rfta7vxyicceg6yrcbkk.jpg
+ 165.5 KB  png   projects/gek5qb0msaz75h3pmnfz.png
+ 160.3 KB  jpg   education/mp9upoy56kaevjd3zcsy.jpg
+ 152.3 KB  raw   resumes/file   (resume PDF — only fetched on click)
+ 122.4 KB  jpg   education/zvmekctyzkydmxld2bf6.jpg
+ 115.7 KB  jpg   projects/nmk2djres583u95vqrqx.jpg
+  94.2 KB  jpg   profile/yygwip5bmvndbzujwt60.jpg
+  90.1 KB  jpg   projects/sp37irr0j1ysxliuwk81.jpg
+  63.0 KB  jpg   projects/vphaw3bwd60ncgzi035n.jpg
+  58.4 KB  jpg   certificates/d6rh109aad3q2dkzl9jh.jpg
+  53.7 KB  jpg   projects/fiq9bufatyelrmopzhun.jpg
+  53.7 KB  jpg   projects/lk6ceseodrtol1wdlagb.jpg
+  48.4 KB  jpg   projects/fgolncg3ugtiu4ledwfc.jpg
+  41.3 KB  jpg   blogs/ygd5andruoxk2p6nhxnk.jpg
+  39.3 KB  jpg   blogs/kcek5ph5kcfuupobiwj7.jpg
+  34.6 KB  jpg   projects/n93fhozjbf9u6xtklkay.jpg
+  25.1 KB  jpg   experience/zan2wf58xeqyqispu4jt.jpg   (experience logos are not rendered)
+  20.7 KB  jpg   background/tscdovwysk10cdqzouup.jpg
+   2.1 KB  png   experience/yehne6ftsxowcd13jmg0.png
+TOTAL 2324 KB across 22 files

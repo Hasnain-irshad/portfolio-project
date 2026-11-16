@@ -1,186 +1,110 @@
-import React, { useState, useMemo } from 'react';
-import { motion } from 'framer-motion';
-import ZoomableImage from '../common/ZoomableImage';
+import React, { useMemo, useState } from 'react';
+import SectionHeader from '../common/SectionHeader';
+import Icon from '../common/Icon';
 import './Publications.css';
 
-const Publications = ({ publications }) => {
-    const [activeFilter, setActiveFilter] = useState('all');
-    const [filterType, setFilterType] = useState('year'); // 'year' or 'type'
+const Publications = ({ index, publications = [] }) => {
+    // Hooks run unconditionally (previously they ran after an early return,
+    // which crashes React when the list goes from empty to populated).
+    const [mode, setMode] = useState('year'); // 'year' | 'type'
+    const [filter, setFilter] = useState('all');
 
-    if (!publications || publications.length === 0) return null;
+    const years = useMemo(() => [...new Set(publications.map((p) => p.year).filter(Boolean))].sort((a, b) => b - a), [publications]);
+    const types = useMemo(() => [...new Set(publications.map((p) => p.type).filter(Boolean))], [publications]);
 
-    // Collect unique years and types
-    const years = useMemo(() => {
-        const uniqueYears = [...new Set(publications.map(p => p.year))].sort((a, b) => b - a);
-        return uniqueYears;
-    }, [publications]);
+    const shown = useMemo(() => {
+        if (filter === 'all') return publications;
+        return mode === 'year'
+            ? publications.filter((p) => String(p.year) === filter)
+            : publications.filter((p) => p.type === filter);
+    }, [publications, filter, mode]);
 
-    const types = useMemo(() => {
-        const uniqueTypes = [...new Set(publications.map(p => p.type).filter(Boolean))];
-        return uniqueTypes;
-    }, [publications]);
+    if (!publications.length) return null;
 
-    const filteredPublications = useMemo(() => {
-        if (activeFilter === 'all') return publications;
-        if (filterType === 'year') {
-            return publications.filter(p => p.year === parseInt(activeFilter));
-        }
-        return publications.filter(p => p.type === activeFilter);
-    }, [publications, activeFilter, filterType]);
-
-    const handleFilterTypeSwitch = (type) => {
-        setFilterType(type);
-        setActiveFilter('all');
-    };
-
-    const typeBadgeColor = {
-        Journal: '#10b981',
-        Conference: '#3b82f6',
-        Thesis: '#8b5cf6',
-        Book: '#f59e0b',
-        Preprint: '#ef4444',
-        Other: '#6b7280'
-    };
+    const options = mode === 'year' ? years.map(String) : types;
 
     return (
-        <section id="publications" className="section publications">
+        <section id="publications" className="sec publications" aria-labelledby="publications-title">
             <div className="container">
-                <h2 className="section-title">Research & Publications</h2>
+                <SectionHeader
+                    id="publications-title"
+                    index={index}
+                    eyebrow="Research"
+                    title={
+                        <>
+                            Papers &amp; <em>publications</em>.
+                        </>
+                    }
+                />
 
-                {/* Filter Controls */}
-                <div className="pub-filter-controls">
-                    <div className="pub-filter-toggle">
-                        <button
-                            className={`pub-toggle-btn ${filterType === 'year' ? 'active' : ''}`}
-                            onClick={() => handleFilterTypeSwitch('year')}
-                        >
-                            By Year
-                        </button>
-                        <button
-                            className={`pub-toggle-btn ${filterType === 'type' ? 'active' : ''}`}
-                            onClick={() => handleFilterTypeSwitch('type')}
-                        >
-                            By Type
-                        </button>
+                <div className="pub-filters reveal">
+                    <div className="segmented" role="group" aria-label="Group publications by">
+                        {['year', 'type'].map((m) => (
+                            <button
+                                key={m}
+                                type="button"
+                                className={`segmented__btn ${mode === m ? 'is-active' : ''}`}
+                                aria-pressed={mode === m}
+                                onClick={() => {
+                                    setMode(m);
+                                    setFilter('all');
+                                }}
+                            >
+                                By {m}
+                            </button>
+                        ))}
                     </div>
-
-                    <div className="pub-filters">
-                        <button
-                            className={`pub-filter-btn ${activeFilter === 'all' ? 'active' : ''}`}
-                            onClick={() => setActiveFilter('all')}
-                        >
-                            All
-                        </button>
-                        {filterType === 'year'
-                            ? years.map(year => (
-                                <button
-                                    key={year}
-                                    className={`pub-filter-btn ${activeFilter === String(year) ? 'active' : ''}`}
-                                    onClick={() => setActiveFilter(String(year))}
-                                >
-                                    {year}
-                                </button>
-                            ))
-                            : types.map(type => (
-                                <button
-                                    key={type}
-                                    className={`pub-filter-btn ${activeFilter === type ? 'active' : ''}`}
-                                    onClick={() => setActiveFilter(type)}
-                                >
-                                    {type}
-                                </button>
-                            ))
-                        }
+                    <div className="chip-list" role="group" aria-label="Filter publications">
+                        {['all', ...options].map((o) => (
+                            <button
+                                key={o}
+                                type="button"
+                                className={`chip pub-filter ${filter === o ? 'chip--accent' : ''}`}
+                                aria-pressed={filter === o}
+                                onClick={() => setFilter(o)}
+                            >
+                                {o === 'all' ? 'All' : o}
+                            </button>
+                        ))}
                     </div>
                 </div>
 
-                <div className="publications-grid">
-                    {filteredPublications.map((pub, index) => (
-                        <motion.div
-                            key={pub._id}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.4, delay: index * 0.08 }}
-                            className="publication-card card"
-                        >
-                            <div className="pub-card-header">
-                                <span
-                                    className="pub-type-badge"
-                                    style={{ background: typeBadgeColor[pub.type] || '#6b7280' }}
-                                >
-                                    {pub.type}
-                                </span>
-                                <span className="pub-year">{pub.year}</span>
+                <ol role="list" className="pubs">
+                    {shown.map((p) => (
+                        <li key={p._id} className="pub reveal">
+                            <div className="pub__meta">
+                                <span className="meta">{p.year}</span>
+                                {p.type && <span className="chip chip--mono">{p.type}</span>}
                             </div>
-
-                            {pub.image?.url && (
-                                <div className="pub-image">
-                                    <ZoomableImage src={pub.image.url} alt={pub.title} />
+                            <div>
+                                <h3 className="pub__title">{p.title}</h3>
+                                {p.authors?.length > 0 && <p className="pub__authors">{p.authors.join(', ')}</p>}
+                                {p.publisher && <p className="meta pub__venue">{p.publisher}</p>}
+                                {p.abstract && (
+                                    <p className="pub__abstract">{p.abstract.length > 260 ? `${p.abstract.slice(0, 260).trim()}…` : p.abstract}</p>
+                                )}
+                                <div className="pub__links">
+                                    {p.doi && (
+                                        <a className="link-arrow" href={`https://doi.org/${p.doi}`} target="_blank" rel="noopener noreferrer">
+                                            <Icon name="link" /> DOI <span className="sr-only">for {p.title}</span>
+                                        </a>
+                                    )}
+                                    {p.externalUrl && (
+                                        <a className="link-arrow" href={p.externalUrl} target="_blank" rel="noopener noreferrer">
+                                            Read online <Icon name="arrow-up-right" /> <span className="sr-only">{p.title}</span>
+                                        </a>
+                                    )}
+                                    {p.document?.url && (
+                                        <a className="link-arrow" href={p.document.url} target="_blank" rel="noopener noreferrer">
+                                            <Icon name="file-text" /> {p.document.originalName || 'Paper (PDF)'}
+                                        </a>
+                                    )}
                                 </div>
-                            )}
-
-                            <h3 className="pub-title">{pub.title}</h3>
-
-                            {pub.authors && pub.authors.length > 0 && (
-                                <p className="pub-authors">
-                                    <i className="fas fa-users"></i>
-                                    {pub.authors.join(', ')}
-                                </p>
-                            )}
-
-                            {pub.publisher && (
-                                <p className="pub-publisher">{pub.publisher}</p>
-                            )}
-
-                            {pub.abstract && (
-                                <p className="pub-abstract">
-                                    {pub.abstract.length > 200
-                                        ? pub.abstract.slice(0, 200) + '...'
-                                        : pub.abstract}
-                                </p>
-                            )}
-
-                            <div className="pub-links">
-                                {pub.doi && (
-                                    <a
-                                        href={`https://doi.org/${pub.doi}`}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="pub-link pub-link-doi"
-                                    >
-                                        <i className="fas fa-link"></i> DOI
-                                    </a>
-                                )}
-                                {pub.externalUrl && (
-                                    <a
-                                        href={pub.externalUrl}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="pub-link pub-link-external"
-                                    >
-                                        <i className="fas fa-external-link-alt"></i> View
-                                    </a>
-                                )}
-                                {pub.document?.url && (
-                                    <a
-                                        href={pub.document.url}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="pub-link pub-link-paper"
-                                    >
-                                        <i className="fas fa-file-pdf"></i>
-                                        {pub.document.originalName || 'Paper'}
-                                    </a>
-                                )}
                             </div>
-                        </motion.div>
+                        </li>
                     ))}
-                </div>
-
-                {filteredPublications.length === 0 && (
-                    <p className="pub-empty">No publications found for this filter.</p>
-                )}
+                </ol>
+                {shown.length === 0 && <p className="pub__empty">No publications match this filter.</p>}
             </div>
         </section>
     );

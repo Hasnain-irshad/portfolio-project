@@ -1,42 +1,69 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import Card from '../common/Card';
+import SectionHeader from '../common/SectionHeader';
+import Icon from '../common/Icon';
 import './About.css';
 
-const About = ({ profile }) => {
+const About = ({ index, profile, stats = [] }) => {
     if (!profile) return null;
+    const shown = stats.filter((s) => s.value > 0);
 
     return (
-        <section id="about" className="section about">
+        <section id="about" className="sec about" aria-labelledby="about-title">
             <div className="container">
-                <h2 className="section-title">About Me</h2>
+                <SectionHeader
+                    id="about-title"
+                    index={index}
+                    eyebrow="About"
+                    title={
+                        <>
+                            Engineer, researcher, <em>builder</em>.
+                        </>
+                    }
+                />
 
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
-                >
-                    <Card glass={true} className="about-card">
-                        <div className="about-text">
-                            <p>{profile.bio}</p>
+                <div className="bento">
+                    <article className="tile span-2 about__bio reveal">
+                        <p className="about__text">{profile.bio}</p>
+                    </article>
 
+                    <aside className="tile about__contact reveal" style={{ '--reveal-delay': '80ms' }} aria-label="Contact details">
+                        <p className="meta about__label">Reach me</p>
+                        <ul role="list" className="about__list">
                             {profile.location && (
-                                <p className="about-detail">
-                                    <i className="fas fa-map-marker-alt"></i>
-                                    <strong>Location:</strong> {profile.location}
-                                </p>
+                                <li>
+                                    <Icon name="map-pin" />
+                                    <span>{profile.location}</span>
+                                </li>
                             )}
-
                             {profile.email && (
-                                <p className="about-detail">
-                                    <i className="fas fa-envelope"></i>
-                                    <strong>Email:</strong> <a href={`mailto:${profile.email}`}>{profile.email}</a>
-                                </p>
+                                <li>
+                                    <Icon name="mail" />
+                                    <a href={`mailto:${profile.email}`}>{profile.email}</a>
+                                </li>
                             )}
-                        </div>
-                    </Card>
-                </motion.div>
+                            {profile.phone && (
+                                <li>
+                                    <Icon name="phone" />
+                                    <a href={`tel:${profile.phone.replace(/\s+/g, '')}`}>{profile.phone}</a>
+                                </li>
+                            )}
+                        </ul>
+                    </aside>
+
+                    {shown.length > 0 && (
+                        <dl className="tile span-3 about__stats reveal" style={{ '--reveal-delay': '120ms' }}>
+                            {shown.map((s) => (
+                                <div key={s.label} className="about__stat">
+                                    <dt className="meta">{s.label}</dt>
+                                    <dd>
+                                        {String(s.value).padStart(2, '0')}
+                                        {s.suffix && <span className="about__stat-suffix">{s.suffix}</span>}
+                                    </dd>
+                                </div>
+                            ))}
+                        </dl>
+                    )}
+                </div>
             </div>
         </section>
     );

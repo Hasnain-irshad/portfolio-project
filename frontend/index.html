@@ -1,19 +1,62 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Personal Portfolio - Showcasing my projects, skills, and experience" />
-    <title>Portfolio</title>
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>%SITE_TITLE%</title>
+    <meta name="description" content="%SITE_DESCRIPTION%" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="%SITE_TITLE%" />
+    <meta property="og:description" content="%SITE_DESCRIPTION%" />
+    <meta property="og:image" content="%SITE_IMAGE%" />
+    <meta name="twitter:card" content="summary" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#0B132B" />
+
+    <!--
+      Theme bootstrap — runs before first paint so there is never a flash of
+      the wrong theme. Explicit choice (localStorage) wins; otherwise follow the
+      OS, defaulting to dark unless the OS explicitly prefers light.
+    -->
+    <script>
+      (function () {
+        var d = document.documentElement, t = 'dark';
+        try {
+          var s = localStorage.getItem('theme-preference');
+          if (s === 'light' || s === 'dark') t = s;
+          else if (window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches) t = 'light';
+        } catch (e) {}
+        d.setAttribute('data-theme', t);
+        d.style.colorScheme = t;
+        d.classList.add('js');
+        var m = document.querySelector('meta[name="theme-color"]');
+        if (m) m.setAttribute('content', t === 'light' ? '#F7F9FC' : '#0B132B');
+        // Page colour before the main stylesheet arrives (no white flash).
+        // Injected from JS rather than an inline <style>, which trips a Vite
+        // build bug on Windows when the drive letter's case differs (e: vs E:).
+        var st = document.createElement('style');
+        st.textContent = "html{background:#0B132B;color:#F5F7FA}html[data-theme='light']{background:#F7F9FC;color:#0B132B}";
+        document.head.appendChild(st);
+      })();
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://res.cloudinary.com" crossorigin />
+    <!-- Non-render-blocking font load; system fallbacks render immediately -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap"
+      />
+    </noscript>
   </head>
   <body>
     <div id="root"></div>

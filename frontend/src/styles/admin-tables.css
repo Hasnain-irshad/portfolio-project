@@ -1,6 +1,6 @@
 /* Table Styles */
 .table-container {
-    background: white;
+    background: var(--surface);
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -12,7 +12,7 @@
 }
 
 .data-table thead {
-    background: #f9fafb;
+    background: var(--surface-2);
 }
 
 .data-table th {
@@ -20,21 +20,21 @@
     text-align: left;
     font-size: 12px;
     font-weight: 600;
-    color: #6b7280;
+    color: var(--text-3);
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    border-bottom: 1px solid #e5e7eb;
+    border-bottom: 1px solid var(--border);
 }
 
 .data-table td {
     padding: 16px 20px;
     font-size: 14px;
-    color: #111827;
-    border-bottom: 1px solid #f3f4f6;
+    color: var(--text);
+    border-bottom: 1px solid var(--surface-2);
 }
 
 .data-table tbody tr:hover {
-    background: #f9fafb;
+    background: var(--surface-2);
 }
 
 .data-table tbody tr:last-child td {
@@ -47,8 +47,8 @@
 
 .category-badge {
     padding: 4px 12px;
-    background: #e0e7ff;
-    color: #4f46e5;
+    background: var(--accent-soft);
+    color: var(--accent);
     border-radius: 12px;
     font-size: 12px;
     font-weight: 500;
@@ -58,7 +58,7 @@
 .proficiency-bar {
     width: 200px;
     height: 24px;
-    background: #e5e7eb;
+    background: var(--border);
     border-radius: 12px;
     overflow: hidden;
     position: relative;
@@ -66,11 +66,11 @@
 
 .proficiency-fill {
     height: 100%;
-    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    background: var(--accent);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: var(--accent-ink);
     font-size: 11px;
     font-weight: 600;
     transition: width 0.3s ease;
@@ -93,27 +93,27 @@
 }
 
 .btn-edit-small {
-    background: #dbeafe;
-    color: #1e40af;
+    background: var(--accent-soft);
+    color: var(--accent-text);
 }
 
 .btn-edit-small:hover {
-    background: #bfdbfe;
+    background: var(--accent-line);
 }
 
 .btn-delete-small {
-    background: #fee2e2;
-    color: #991b1b;
+    background: var(--danger-soft);
+    color: var(--danger);
 }
 
 .btn-delete-small:hover {
-    background: #fecaca;
+    background: var(--danger);
 }
 
 .form-range {
     width: 100%;
     height: 8px;
-    background: #667eea;
+    background: var(--accent);
     cursor: pointer;
     border: none;
 }

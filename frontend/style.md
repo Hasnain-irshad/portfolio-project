@@ -1,302 +1,63 @@
-# Portfolio Design System Reference
-
-This document defines the **visual design system** for the portfolio website.
-All UI components must follow this style guide to maintain a **consistent modern portfolio aesthetic** similar to the provided reference design.
-
----
-
-# 1. Core Color Palette
-
-Primary theme is **dark with strong orange accent**.
-
-```css
-:root {
-  --color-background: #0f0f10;
-  --color-surface: #1b1b1d;
-  --color-surface-soft: #242427;
-
-  --color-primary: #f2652a;
-  --color-primary-hover: #ff7a42;
-
-  --color-text-main: #ffffff;
-  --color-text-secondary: #b8b8b8;
-
-  --color-border: #2c2c2f;
-
-  --color-shadow: rgba(0,0,0,0.4);
-}
-```
-
-Design philosophy:
-
-* Dark UI for modern developer aesthetic
-* Orange used only as **highlight color**
-* Avoid overusing the primary color
-
----
-
-# 2. Typography
-
-Use a **modern sans-serif font**.
-
-Recommended fonts:
-
-* Inter
-* Poppins
-* Montserrat
-
-Example CSS:
-
-```css
-body {
-  font-family: "Poppins", sans-serif;
-  background-color: var(--color-background);
-  color: var(--color-text-main);
-}
-```
-
-Typography scale:
-
-| Element       | Size | Weight |
-| ------------- | ---- | ------ |
-| Hero Title    | 48px | 700    |
-| Section Title | 36px | 600    |
-| Card Title    | 20px | 600    |
-| Body Text     | 16px | 400    |
-| Small Text    | 14px | 400    |
-
----
-
-# 3. Layout Structure
-
-The layout should follow a **split hero layout**:
-
-Left side:
-
-* Portfolio introduction
-* Title
-* subtitle
-* CTA button
-
-Right side:
-
-* Profile image
-* orange abstract background shape
-
-Example structure:
-
-```
-Hero Section
-------------------------------
-| Text Content | Profile Img |
-------------------------------
-```
-
----
-
-# 4. Hero Section Styling
-
-Hero background should be dark.
-
-Profile image area should contain **large orange abstract shape behind image**.
-
-Example CSS concept:
-
-```css
-.hero {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  min-height: 90vh;
-  align-items: center;
-}
-
-.hero-image-container {
-  position: relative;
-}
-
-.hero-accent-shape {
-  position: absolute;
-  width: 600px;
-  height: 600px;
-  background: var(--color-primary);
-  border-radius: 40% 60% 70% 30% / 30% 40% 60% 70%;
-  right: -100px;
-  top: -50px;
-  z-index: 0;
-}
-```
-
----
-
-# 5. Button Style
-
-Primary CTA buttons should use **orange accent**.
-
-```css
-.button-primary {
-  background: var(--color-primary);
-  color: white;
-  border: none;
-  padding: 14px 26px;
-  font-size: 15px;
-  font-weight: 600;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.button-primary:hover {
-  background: var(--color-primary-hover);
-  transform: translateY(-2px);
-}
-```
-
-Button style principles:
-
-* Rounded corners
-* Smooth hover animation
-* Subtle elevation
-
----
-
-# 6. Card Design (Blogs / Projects / Publications)
-
-Cards should follow this structure:
-
-```css
-.card {
-  background: var(--color-surface);
-  border-radius: 12px;
-  padding: 20px;
-  border: 1px solid var(--color-border);
-  transition: all 0.25s ease;
-}
-
-.card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 10px 25px var(--color-shadow);
-}
-```
-
-Card layout example:
-
-```
--------------------------
-| Image                  |
-| Title                  |
-| Short description      |
-| Tags                   |
-| Read More →            |
--------------------------
-```
-
----
-
-# 7. Section Spacing
-
-Sections must maintain generous whitespace.
-
-```css
-.section {
-  padding: 100px 10%;
-}
-```
-
----
-
-# 8. Navigation Style
-
-Navbar should be minimal.
-
-```css
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  padding: 24px 10%;
-}
-
-.nav-links a {
-  color: var(--color-text-secondary);
-  margin-left: 20px;
-  text-decoration: none;
-}
-
-.nav-links a:hover {
-  color: var(--color-primary);
-}
-```
-
----
-
-# 9. Animations
-
-Use **smooth subtle animations only**.
-
-Recommended library:
-
-```
-framer-motion
-```
-
-Examples:
-
-* fade-in
-* slide-up
-* card hover lift
-* button hover animation
-
-Avoid excessive motion.
-
----
-
-# 10. Design Principles
-
-The UI should follow these principles:
-
-Modern developer portfolio aesthetic
-
-Dark theme dominance
-
-Orange accent used sparingly
-
-Clean typography
-
-Large whitespace
-
-Smooth animations
-
-Minimalistic layout
-
-Professional feel
-
----
-
-# 11. Responsive Design
-
-Breakpoints:
-
-```
-Desktop: 1200px+
-Tablet: 768px
-Mobile: 480px
-```
-
-Hero layout should collapse on mobile:
-
-```
-Text
-Image
-```
-
----
-
-# Final Goal
-
-The final UI should resemble a **modern professional developer portfolio** with:
-
-* dark interface
-* orange highlight theme
-* strong hero section
-* smooth animations
-* clean card-based content sections
-* minimal clutter
+# Portfolio Design System
+
+Brand: **Prompt Blue `#0B132B`** × **AI Green `#39FF88`**.
+Philosophy: minimal, editorial typography, bento grids, subtle glass, purposeful motion.
+
+All tokens live in [`src/styles/index.css`](src/styles/index.css). Components use tokens only — never hard-coded colours.
+
+## Themes
+
+Dark is the default. Light is designed separately, not inverted.
+
+| Token | Dark | Light | Use |
+|---|---|---|---|
+| `--bg` | `#0B132B` | `#F7F9FC` | Page background |
+| `--bg-2` | `#101A33` | `#FFFFFF` | Secondary background, chips, inputs |
+| `--surface` | `#15213D` | `#FFFFFF` | Cards / tiles |
+| `--surface-2` | `#1A2947` | `#EEF2F8` | Elevated surfaces, image placeholders |
+| `--text` | `#F5F7FA` | `#0B132B` | Primary text |
+| `--text-2` | `#AAB5C8` | `#526079` | Secondary text |
+| `--text-3` | `#8E9BB2` | `#56647C` | Meta / mono labels (≥4.5:1) |
+| `--icon` | `#8E9BB2` | `#66758C` | Muted icons |
+| `--accent` | `#39FF88` | `#087A43` | Primary buttons, active states, focus ring |
+| `--accent-hover` | `#74FFAA` | `#065F35` | Hover |
+| `--accent-ink` | `#0B132B` | `#FFFFFF` | Text **on** an accent background |
+| `--accent-text` | `#39FF88` | `#087A43` | Accent used **as** text |
+| `--decor` | `#39FF88` | `#39FF88` | Decorative dots / indicators only |
+| `--border` | `#263550` | `#DCE3ED` | Subtle borders |
+
+Rules:
+- AI Green is an accent, never a large background. In light mode `#39FF88` is decorative only (dots, indicators); text and buttons use `#087A43`.
+- Prompt Blue anchors both themes: brand mark, admin sidebar, and the Contact panel (rendered with `data-theme="dark"` in both themes).
+- No purple, pink or orange accents. Gradients are limited to very soft accent washes.
+
+### Theme mechanics
+- `index.html` sets `data-theme` before first paint: saved choice (`localStorage['theme-preference']`), then the OS preference, then dark.
+- Only an explicit toggle is persisted. Without one, the theme follows OS changes live.
+- `meta[name=theme-color]` is kept in sync.
+- Switching adds `html.theme-switching` for 320 ms to fade colours (skipped with reduced motion).
+- A subtree can be forced to a theme with `data-theme="dark|light"`.
+
+## Typography
+- Display: **Instrument Serif** (section titles, hero name, large numbers; italic `<em>` for the accent word).
+- UI/body: **Inter** 400/500/600.
+- Meta labels: **JetBrains Mono** 500, uppercase, letter-spaced.
+- Fonts load non-blocking with `display=swap`.
+
+## Layout & components
+- Container 1200px + fluid gutter `clamp(16px, 4vw, 40px)`; section padding `clamp(80px, 11vw, 136px)`.
+- Section header: `01 —— EYEBROW` + serif title (`SectionHeader`). Indices are assigned only to sections that render.
+- `.bento` (3 cols → 2 → 1) with `.span-2` / `.span-3`; `.tile` cards (`--radius-lg`, 1px border, minimal shadow).
+- Buttons: `.btn.btn--primary` / `.btn--ghost` / `.btn--sm` (BEM names avoid clashing with admin's `.btn-primary`).
+- Chips: `.chip`, `.chip--accent`, `.chip--mono`. Status: `.status-dot`.
+- Icons: inline SVG via `components/common/Icon.jsx` (no icon font).
+- Images: `lib/media.js` adds Cloudinary `f_auto,q_auto,w_*`; `ZoomableImage` is a lazy, keyboard-accessible lightbox trigger with gallery support.
+
+## Motion
+- `.reveal` fade-up (600 ms) via one IntersectionObserver. Content is never hidden without JS or with reduced motion.
+- Hover: 2px lift on interactive tiles, arrow nudges. No infinite decorative animations except the status-dot ping.
+
+## Accessibility
+- WCAG 2.2 AA contrast in both themes. Focus ring: 2px `--accent`, 3px offset.
+- Skip link, semantic landmarks, `aria-current` on active nav, labelled icon buttons, `aria-live` form status.
+- `prefers-reduced-motion` disables animation and transitions.

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { useAuth } from '../../../contexts/AuthContext';
 import Sidebar from './Sidebar';
+import Icon from '../../common/Icon';
+import ThemeToggle from '../../common/ThemeToggle';
 import './AdminLayout.css';
 
 const AdminLayout = () => {
@@ -45,7 +47,7 @@ const AdminLayout = () => {
                                 onClick={() => setSidebarOpen(true)}
                                 aria-label="Open menu"
                             >
-                                <i className="fas fa-bars"></i>
+                                <Icon name="menu" width="20" height="20" />
                             </button>
                             <h1 className="admin-page-title">Admin Dashboard</h1>
                         </div>
@@ -54,6 +56,7 @@ const AdminLayout = () => {
                                 <span className="admin-user-name">{admin?.name}</span>
                                 <span className="admin-user-email">{admin?.email}</span>
                             </div>
+                            <ThemeToggle />
                             <button onClick={logout} className="btn-logout">
                                 Logout
                             </button>

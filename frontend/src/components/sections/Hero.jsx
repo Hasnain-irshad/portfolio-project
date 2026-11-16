@@ -1,125 +1,126 @@
-import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
-import HeroWave from './HeroWave';
+import React from 'react';
+import Icon from '../common/Icon';
+import { cld } from '../../lib/media';
+import { firstSentence } from '../../lib/format';
+import { resumeUrl, socialLinks } from '../../lib/links';
 import './Hero.css';
 
-const fadeUp = {
-    hidden: { opacity: 0, y: 26 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.4, 0, 0.2, 1] } },
+const splitTitle = (title = '') => {
+    const [role, ...rest] = title.split('|').map((s) => s.trim());
+    return { role, focus: rest.join(' · ') };
 };
 
-const Hero = ({ profile, resume }) => {
-    const [displayText, setDisplayText] = useState('');
-    const fullText = profile?.title || 'Full Stack Developer';
+const Hero = ({ profile, resume, experience = [], education = [], activities = [] }) => {
+    const name = profile?.name || 'Your Name';
+    const parts = name.trim().split(/\s+/);
+    const last = parts.length > 1 ? parts.pop() : '';
+    const first = parts.join(' ');
 
-    useEffect(() => {
-        let currentIndex = 0;
-        const interval = setInterval(() => {
-            if (currentIndex <= fullText.length) {
-                setDisplayText(fullText.substring(0, currentIndex));
-                currentIndex++;
-            } else {
-                clearInterval(interval);
-            }
-        }, 100);
+    const { role, focus } = splitTitle(profile?.title);
+    const lede = firstSentence(profile?.bio || '');
+    const cv = resumeUrl(resume);
+    const socials = socialLinks(profile);
 
-        return () => clearInterval(interval);
-    }, [fullText]);
+    const nowActivity = activities.find((a) => a.current);
+    const currentRole = experience.find((e) => e.current);
+    const topEducation = education.find((e) => e.grade) || education[0];
 
-    const handleDownloadResume = () => {
-        if (resume?.fileUrl) {
-            const encoded = encodeURIComponent(resume.fileUrl || resume.url);
-            const viewer = `https://docs.google.com/gview?url=${encoded}&embedded=true`;
-            window.open(viewer, '_blank');
-        }
-    };
+    const facts = [
+        profile?.location && { k: 'Based in', v: profile.location },
+        focus && { k: 'Focus', v: focus },
+        currentRole && { k: 'Now', v: `${currentRole.position} · ${currentRole.company}` },
+        topEducation && {
+            k: 'Education',
+            v: [topEducation.degree, topEducation.grade && `GPA ${topEducation.grade}`].filter(Boolean).join(' · '),
+        },
+    ].filter(Boolean);
 
-    const nameParts = (profile?.name || 'Your Name').trim().split(' ');
-    const lastName = nameParts.pop();
-    const firstName = nameParts.join(' ');
-
-    const social = profile?.socialLinks || {};
+    const portrait = profile?.profileImage?.url;
+    const bgImage = profile?.backgroundImage?.url;
 
     return (
-        <section id="home" className="hero">
-            <div className="hero-background">
-                <HeroWave />
-                <div className="hero-scrim"></div>
+        <section id="home" className="hero" aria-labelledby="hero-title">
+            <div className="hero__bg" aria-hidden="true">
+                {bgImage && <div className="hero__photo" style={{ backgroundImage: `url(${cld(bgImage, { w: 1600 })})` }} />}
+                <div className="hero__grid" />
             </div>
 
-            <div className="container">
-                <motion.div
-                    className="hero-content"
-                    initial="hidden"
-                    animate="show"
-                    variants={{ hidden: {}, show: { transition: { staggerChildren: 0.12 } } }}
-                >
-                    {(social.github || social.linkedin || social.twitter) && (
-                        <motion.div className="hero-socials" variants={fadeUp}>
-                            {social.github && (
-                                <a href={social.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-                                    <i className="fab fa-github"></i>
-                                </a>
-                            )}
-                            {social.linkedin && (
-                                <a href={social.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                                    <i className="fab fa-linkedin-in"></i>
-                                </a>
-                            )}
-                            {social.twitter && (
-                                <a href={social.twitter} target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-                                    <i className="fab fa-twitter"></i>
-                                </a>
-                            )}
-                        </motion.div>
+            <div className="container hero__inner">
+                <div className="hero__copy">
+                    {(nowActivity || role) && (
+                        <p className="hero__status">
+                            <span className="status-dot" aria-hidden="true" />
+                            <span className="meta">{nowActivity ? 'Currently' : 'Role'}</span>
+                            <span className="hero__status-text">{nowActivity ? nowActivity.title : role}</span>
+                        </p>
                     )}
 
-                    <motion.div className="hero-identity" variants={fadeUp}>
-                        {profile?.profileImage?.url && (
-                            <div className="hero-avatar">
-                                <span className="hero-avatar-ring"></span>
-                                <img src={profile.profileImage.url} alt={profile.name} />
-                            </div>
+                    <h1 id="hero-title" className="hero__name">
+                        {first && <span>{first} </span>}
+                        <em>{last || first}</em>
+                    </h1>
+
+                    {role && <p className="hero__role">{role}</p>}
+                    {lede && <p className="hero__lede">{lede}</p>}
+
+                    <div className="hero__actions">
+                        <a className="btn btn--primary" href="#projects">
+                            View selected work
+                            <Icon name="arrow-right" />
+                        </a>
+                        {cv && (
+                            <a className="btn btn--ghost" href={cv} target="_blank" rel="noopener noreferrer">
+                                Résumé
+                                <Icon name="arrow-up-right" />
+                            </a>
                         )}
-                        <h1 className="hero-name">
-                            {firstName && <span className="name-first">{firstName}</span>}
-                            <span className="name-accent">{lastName}</span>
-                        </h1>
-                    </motion.div>
+                    </div>
 
-                    <motion.h2 className="hero-title" variants={fadeUp}>
-                        <span className="typing-text">{displayText}</span>
-                        <span className="cursor">|</span>
-                    </motion.h2>
-
-                    {profile?.bio && (
-                        <motion.p className="hero-description" variants={fadeUp}>
-                            {profile.bio}
-                        </motion.p>
+                    {(socials.length > 0 || profile?.email) && (
+                        <ul role="list" className="hero__social" aria-label="Elsewhere">
+                            {socials.map((s) => (
+                                <li key={s.key}>
+                                    <a className="icon-btn" href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}>
+                                        <Icon name={s.icon} />
+                                    </a>
+                                </li>
+                            ))}
+                            {profile?.email && (
+                                <li>
+                                    <a className="icon-btn" href={`mailto:${profile.email}`} aria-label={`Email ${name}`}>
+                                        <Icon name="mail" />
+                                    </a>
+                                </li>
+                            )}
+                        </ul>
                     )}
+                </div>
 
-                    <motion.div className="hero-buttons" variants={fadeUp}>
-                        <button
-                            className="btn btn-primary"
-                            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                        >
-                            Get In Touch
-                        </button>
-                        {resume && (
-                            <button className="btn btn-ghost-line" onClick={handleDownloadResume}>
-                                <i className="fas fa-arrow-down"></i> Download Resume
-                            </button>
-                        )}
-                    </motion.div>
-                </motion.div>
+                <aside className="hero__card glass" aria-label="Profile summary">
+                    {portrait && (
+                        <div className="hero__portrait">
+                            <img
+                                src={cld(portrait, { w: 720 })}
+                                alt={`Portrait of ${name}`}
+                                width="720"
+                                height="900"
+                                fetchPriority="high"
+                                decoding="async"
+                            />
+                        </div>
+                    )}
+                    {facts.length > 0 && (
+                        <dl className="hero__facts">
+                            {facts.map((f) => (
+                                <div key={f.k} className="hero__fact">
+                                    <dt className="meta">{f.k}</dt>
+                                    <dd>{f.v}</dd>
+                                </div>
+                            ))}
+                        </dl>
+                    )}
+                </aside>
             </div>
-
-            <a href="#about" className="scroll-indicator" aria-label="Scroll to content">
-                <span className="scroll-text">Scroll</span>
-                <span className="mouse">
-                    <span className="wheel"></span>
-                </span>
-            </a>
         </section>
     );
 };

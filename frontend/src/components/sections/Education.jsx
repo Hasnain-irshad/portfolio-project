@@ -1,111 +1,88 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import ZoomableImage from '../common/ZoomableImage';
+import SectionHeader from '../common/SectionHeader';
+import Icon from '../common/Icon';
+import { useLightbox } from '../../contexts/LightboxContext';
+import { formatYear } from '../../lib/format';
 import './Education.css';
 
-const Education = ({ education }) => {
-    if (!education || education.length === 0) return null;
+const Transcript = ({ edu }) => {
+    const { openLightbox } = useLightbox();
+    const t = edu.transcript;
+    if (!t?.url) return null;
 
-    const formatDate = (date) => {
-        return new Date(date).toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
-    };
+    if (t.fileType === 'image') {
+        return (
+            <button type="button" className="link-arrow edu__proof" onClick={() => openLightbox(t.url, `${edu.degree} — transcript`)}>
+                <Icon name="image" /> View transcript
+                <span className="sr-only"> for {edu.degree}</span>
+            </button>
+        );
+    }
+    return (
+        <a className="link-arrow edu__proof" href={t.url} target="_blank" rel="noopener noreferrer">
+            <Icon name="file-text" /> {t.originalName || 'Transcript (PDF)'}
+            <span className="sr-only"> for {edu.degree}</span>
+        </a>
+    );
+};
+
+const Education = ({ index, education }) => {
+    if (!education?.length) return null;
+
+    const items = [...education].sort((a, b) => new Date(b.startDate) - new Date(a.startDate));
 
     return (
-        <section id="education" className="section education">
+        <section id="education" className="sec education" aria-labelledby="education-title">
             <div className="container">
-                <h2 className="section-title">Education</h2>
+                <SectionHeader
+                    id="education-title"
+                    index={index}
+                    eyebrow="Education"
+                    title={
+                        <>
+                            Foundations &amp; <em>study</em>.
+                        </>
+                    }
+                />
 
-                <div className="education-timeline">
-                    {education.map((edu, index) => (
-                        <motion.div
-                            key={edu._id}
-                            initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.5, delay: index * 0.1 }}
-                            className={`education-item ${index % 2 === 0 ? 'left' : 'right'}`}
-                        >
-                            <div className="education-content">
-                                <div className="education-header">
-                                    <h3 className="education-degree">{edu.degree}</h3>
-                                    <p className="education-field">{edu.field}</p>
-                                </div>
-
-                                <div className="education-info">
-                                    <p className="education-school">
-                                        <i className="fas fa-university"></i> {edu.school}
+                <ol role="list" className="edu">
+                    {items.map((edu) => {
+                        const start = formatYear(edu.startDate);
+                        const end = edu.current ? 'Present' : formatYear(edu.endDate);
+                        return (
+                            <li key={edu._id} className="edu__row reveal">
+                                <p className="edu__years meta">
+                                    {start}
+                                    {end && end !== start ? ` — ${end}` : ''}
+                                </p>
+                                <div className="edu__main">
+                                    <h3 className="edu__degree">{edu.degree}</h3>
+                                    <p className="edu__school">
+                                        {edu.school}
+                                        {edu.location && <span className="edu__loc"> · {edu.location}</span>}
                                     </p>
-                                    {edu.location && (
-                                        <p className="education-location">
-                                            <i className="fas fa-map-marker-alt"></i> {edu.location}
-                                        </p>
-                                    )}
-                                    <p className="education-duration">
-                                        <i className="fas fa-calendar-alt"></i>
-                                        {' '}{formatDate(edu.startDate)} - {edu.current ? 'Present' : formatDate(edu.endDate)}
-                                    </p>
-                                </div>
-
-                                {edu.grade && (
-                                    <p className="education-grade">
-                                        <i className="fas fa-star"></i> GPA: {edu.grade}
-                                    </p>
-                                )}
-
-                                {edu.description && (
-                                    <p className="education-description">{edu.description}</p>
-                                )}
-
-                                {edu.activities && edu.activities.length > 0 && (
-                                    <div className="education-activities">
-                                        <h4>Activities & Societies</h4>
-                                        <ul>
-                                            {edu.activities.map((activity, idx) => (
-                                                <li key={idx}>
-                                                    <i className="fas fa-check-circle"></i> {activity}
-                                                </li>
+                                    {edu.description && <p className="edu__desc">{edu.description}</p>}
+                                    {edu.activities?.length > 0 && (
+                                        <ul role="list" className="chip-list edu__acts" aria-label="Activities and societies">
+                                            {edu.activities.map((a, i) => (
+                                                <li key={i} className="chip">{a}</li>
                                             ))}
                                         </ul>
-                                    </div>
-                                )}
-
-                                {edu.transcript?.url && (
-                                    <div className="education-transcript">
-                                        {edu.transcript.fileType === 'image' ? (
-                                            <>
-                                                <p className="education-transcript-label">
-                                                    <i className="fas fa-file-image"></i> Transcript / Result
-                                                </p>
-                                                <ZoomableImage
-                                                    src={edu.transcript.url}
-                                                    alt={`${edu.degree} transcript`}
-                                                    className="education-transcript-image"
-                                                />
-                                            </>
-                                        ) : (
-                                            <a
-                                                href={edu.transcript.url}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="education-transcript-link"
-                                            >
-                                                <i className="fas fa-file-pdf"></i>
-                                                <span>View Transcript</span>
-                                                <span className="education-transcript-file">
-                                                    {edu.transcript.originalName || 'transcript.pdf'}
-                                                </span>
-                                            </a>
-                                        )}
-                                    </div>
-                                )}
-                            </div>
-
-                            <div className="timeline-marker">
-                                <i className="fas fa-graduation-cap"></i>
-                            </div>
-                        </motion.div>
-                    ))}
-                </div>
+                                    )}
+                                </div>
+                                <div className="edu__side">
+                                    {edu.grade && (
+                                        <p className="edu__grade">
+                                            <span className="meta">Result</span>
+                                            <span>{edu.grade}</span>
+                                        </p>
+                                    )}
+                                    <Transcript edu={edu} />
+                                </div>
+                            </li>
+                        );
+                    })}
+                </ol>
             </div>
         </section>
     );

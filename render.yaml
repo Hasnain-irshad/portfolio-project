@@ -62,6 +62,11 @@ services:
     buildCommand: npm install && npm run build
     staticPublishPath: dist
     headers:
+      # Hashed build assets never change — cache them for a year.
+      - path: /assets/*
+        name: Cache-Control
+        value: public, max-age=31536000, immutable
+      # HTML (and SPA routes) must always revalidate so deploys show up immediately.
       - path: /*
         name: Cache-Control
         value: no-cache

@@ -1,76 +1,56 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import SectionHeader from '../common/SectionHeader';
 import ZoomableImage from '../common/ZoomableImage';
+import Icon from '../common/Icon';
+import { formatMonthYear } from '../../lib/format';
 import './CurrentlyDoing.css';
 
-const CurrentlyDoing = ({ activities }) => {
-    if (!activities || activities.length === 0) return null;
-
-    const formatDate = (date) => {
-        return new Date(date).toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
-    };
+const CurrentlyDoing = ({ index, activities }) => {
+    if (!activities?.length) return null;
 
     return (
-        <section id="activities" className="section currently-doing">
+        <section id="activities" className="sec now" aria-labelledby="now-title">
             <div className="container">
-                <h2 className="section-title">Currently Doing</h2>
+                <SectionHeader
+                    id="now-title"
+                    index={index}
+                    eyebrow="Now"
+                    title={
+                        <>
+                            What I&rsquo;m <em>working on</em>.
+                        </>
+                    }
+                />
 
-                <div className="activities-grid">
-                    {activities.map((activity, index) => (
-                        <motion.div
-                            key={activity._id}
-                            initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.5, delay: index * 0.12 }}
-                            className="activity-card card"
-                        >
-                            {activity.current && (
-                                <div className="activity-pulse">
-                                    <span className="pulse-dot"></span>
-                                    <span className="pulse-label">Active</span>
+                <ul role="list" className={`bento ${activities.length % 2 === 0 ? 'bento--2' : ''}`}>
+                    {activities.map((a, i) => (
+                        <li key={a._id} className="tile now__item reveal" style={{ '--reveal-delay': `${(i % 3) * 70}ms` }}>
+                            {a.image?.url && (
+                                <div className="now__media">
+                                    <ZoomableImage src={a.image.url} alt={a.title} widths={[480, 800]} sizes="(max-width: 640px) 100vw, 560px" />
                                 </div>
                             )}
-
-                            {activity.image?.url && (
-                                <div className="activity-image">
-                                    <ZoomableImage src={activity.image.url} alt={activity.title} />
-                                </div>
-                            )}
-
-                            <div className="activity-content">
-                                <h3 className="activity-title">{activity.title}</h3>
-
-                                {activity.role && (
-                                    <p className="activity-role">{activity.role}</p>
+                            <div className="now__top">
+                                {a.current ? (
+                                    <span className="chip chip--accent chip--mono">
+                                        <span className="status-dot" aria-hidden="true" /> In progress
+                                    </span>
+                                ) : (
+                                    <span className="chip chip--mono">Paused</span>
                                 )}
-
-                                {activity.startDate && (
-                                    <p className="activity-date">
-                                        <i className="fas fa-clock"></i>
-                                        Since {formatDate(activity.startDate)}
-                                    </p>
-                                )}
-
-                                {activity.description && (
-                                    <p className="activity-description">{activity.description}</p>
-                                )}
-
-                                {activity.document?.url && (
-                                    <a
-                                        href={activity.document.url}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="activity-attachment"
-                                    >
-                                        <i className="fas fa-paperclip"></i>
-                                        {activity.document.originalName || 'Attachment'}
-                                    </a>
-                                )}
+                                {a.startDate && <span className="meta">Since {formatMonthYear(a.startDate)}</span>}
                             </div>
-                        </motion.div>
+                            <h3 className="now__title">{a.title}</h3>
+                            {a.role && <p className="now__role">{a.role}</p>}
+                            {a.description && <p className="now__desc">{a.description}</p>}
+                            {a.document?.url && (
+                                <a className="link-arrow now__doc" href={a.document.url} target="_blank" rel="noopener noreferrer">
+                                    <Icon name="paperclip" /> {a.document.originalName || 'Attachment'}
+                                </a>
+                            )}
+                        </li>
                     ))}
-                </div>
+                </ul>
             </div>
         </section>
     );

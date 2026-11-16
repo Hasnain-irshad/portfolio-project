@@ -1,64 +1,46 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import Icon from '../common/Icon';
+import { initials, socialLinks } from '../../lib/links';
 import './Footer.css';
 
 const Footer = ({ profile }) => {
-    const currentYear = new Date().getFullYear();
+    const year = new Date().getFullYear();
+    const name = profile?.name || 'Portfolio';
+    const socials = socialLinks(profile);
 
     return (
-        <footer className="footer">
-            <div className="container">
-                <div className="footer-content">
-                    <div className="footer-section">
-                        <h3 className="footer-title">Get In Touch</h3>
-                        {profile?.email && (
-                            <p><a href={`mailto:${profile.email}`}>{profile.email}</a></p>
-                        )}
-                        {profile?.phone && (
-                            <p><a href={`tel:${profile.phone}`}>{profile.phone}</a></p>
-                        )}
-                    </div>
-
-                    <div className="footer-section">
-                        <h3 className="footer-title">Follow Me</h3>
-                        <div className="social-links">
-                            {profile?.socialLinks?.github && (
-                                <a href={profile.socialLinks.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-                                    <i className="fab fa-github"></i>
-                                </a>
-                            )}
-                            {profile?.socialLinks?.linkedin && (
-                                <a href={profile.socialLinks.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                                    <i className="fab fa-linkedin"></i>
-                                </a>
-                            )}
-                            {profile?.socialLinks?.twitter && (
-                                <a href={profile.socialLinks.twitter} target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-                                    <i className="fab fa-twitter"></i>
-                                </a>
-                            )}
-                            {profile?.socialLinks?.instagram && (
-                                <a href={profile.socialLinks.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                                    <i className="fab fa-instagram"></i>
-                                </a>
-                            )}
-                        </div>
-                    </div>
-
-                    <div className="footer-section">
-                        <h3 className="footer-title">Quick Links</h3>
-                        <ul className="footer-links">
-                            <li><a href="#home">Home</a></li>
-                            <li><a href="#about">About</a></li>
-                            <li><a href="#projects">Projects</a></li>
-                            <li><a href="#contact">Contact</a></li>
-                        </ul>
-                    </div>
+        <footer className="site-footer">
+            <div className="container site-footer__inner">
+                <div className="site-footer__brand">
+                    <span className="brand__mark" aria-hidden="true">
+                        {initials(name)}
+                        <span className="brand__dot" />
+                    </span>
+                    <p>
+                        © {year} {name}
+                        {profile?.location && <span className="site-footer__muted"> · {profile.location}</span>}
+                    </p>
                 </div>
 
-                <div className="footer-bottom">
-                    <p>&copy; {currentYear} {profile?.name || 'Portfolio'}. All rights reserved.</p>
-                    <p>Built with React & ❤️</p>
-                </div>
+                <ul role="list" className="site-footer__links">
+                    <li><Link to="/blogs">Writing</Link></li>
+                    {profile?.email && (
+                        <li><a href={`mailto:${profile.email}`}>Email</a></li>
+                    )}
+                    {socials.map((s) => (
+                        <li key={s.key}>
+                            <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} className="site-footer__icon">
+                                <Icon name={s.icon} />
+                            </a>
+                        </li>
+                    ))}
+                    <li>
+                        <a href="#top" className="site-footer__top" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
+                            Back to top <Icon name="arrow-up-right" />
+                        </a>
+                    </li>
+                </ul>
             </div>
         </footer>
     );

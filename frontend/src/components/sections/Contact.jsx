@@ -1,173 +1,125 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import Button from '../common/Button';
+import SectionHeader from '../common/SectionHeader';
+import Icon from '../common/Icon';
 import { contactAPI } from '../../services/api';
+import { socialLinks } from '../../lib/links';
 import './Contact.css';
 
-const Contact = ({ profile }) => {
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        subject: '',
-        message: ''
-    });
-    const [loading, setLoading] = useState(false);
-    const [success, setSuccess] = useState(false);
-    const [error, setError] = useState('');
+const EMPTY = { name: '', email: '', subject: '', message: '' };
 
-    const handleChange = (e) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value
-        });
-    };
+const Contact = ({ index, profile }) => {
+    const [form, setForm] = useState(EMPTY);
+    const [status, setStatus] = useState({ state: 'idle', message: '' }); // idle | sending | success | error
 
-    const handleSubmit = async (e) => {
+    const onChange = (e) => setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
+
+    const onSubmit = async (e) => {
         e.preventDefault();
-        setLoading(true);
-        setError('');
-        setSuccess(false);
-
+        setStatus({ state: 'sending', message: '' });
         try {
-            await contactAPI.submit(formData);
-            setSuccess(true);
-            setFormData({ name: '', email: '', subject: '', message: '' });
-            setTimeout(() => setSuccess(false), 5000);
+            await contactAPI.submit(form);
+            setForm(EMPTY);
+            setStatus({ state: 'success', message: "Thanks — your message is on its way. I'll reply soon." });
         } catch (err) {
-            setError(err.response?.data?.message || 'Failed to send message. Please try again.');
-        } finally {
-            setLoading(false);
+            setStatus({
+                state: 'error',
+                message: err.response?.data?.message || 'Something went wrong sending your message. Please try again or email me directly.',
+            });
         }
     };
 
+    const socials = socialLinks(profile);
+    const sending = status.state === 'sending';
+
     return (
-        <section id="contact" className="section contact">
+        <section id="contact" className="sec contact" aria-labelledby="contact-title">
             <div className="container">
-                <h2 className="section-title">Get In Touch</h2>
+                {/* Always rendered with dark tokens: Prompt Blue anchors the brand in both themes */}
+                <div className="contact__panel reveal" data-theme="dark">
+                    <div className="contact__intro">
+                        <SectionHeader
+                            id="contact-title"
+                            index={index}
+                            eyebrow="Contact"
+                            title={
+                                <>
+                                    Let&rsquo;s build something <em>intelligent</em>.
+                                </>
+                            }
+                            lede="Open to AI engineering roles, research collaborations and interesting problems. The fastest way to reach me is email."
+                        />
 
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
-                    className="contact-content"
-                >
-                    <div className="contact-info">
-                        <div className="info-header">
-                            <h3>Let's work together!</h3>
-                            <p>Have a project in mind or just want to say hi? Feel free to drop me a message!</p>
-                        </div>
+                        {profile?.email && (
+                            <a className="contact__email" href={`mailto:${profile.email}`}>
+                                <span>{profile.email}</span>
+                                <Icon name="arrow-up-right" />
+                            </a>
+                        )}
 
-                        <div className="contact-details">
-                            <div className="contact-detail">
-                                <div className="detail-icon">
-                                    <i className="fas fa-envelope"></i>
-                                </div>
-                                <div className="detail-info">
-                                    <h4>Email</h4>
-                                    <p>{profile?.email || 'your@email.com'}</p>
-                                </div>
-                            </div>
+                        <ul role="list" className="contact__details">
+                            {profile?.location && (
+                                <li>
+                                    <Icon name="map-pin" /> {profile.location}
+                                </li>
+                            )}
+                            {profile?.phone && (
+                                <li>
+                                    <Icon name="phone" />
+                                    <a href={`tel:${profile.phone.replace(/\s+/g, '')}`}>{profile.phone}</a>
+                                </li>
+                            )}
+                        </ul>
 
-                            <div className="contact-detail">
-                                <div className="detail-icon">
-                                    <i className="fas fa-map-marker-alt"></i>
-                                </div>
-                                <div className="detail-info">
-                                    <h4>Location</h4>
-                                    <p>{profile?.location || 'Your City, Country'}</p>
-                                </div>
-                            </div>
-
-                            <div className="contact-detail">
-                                <div className="detail-icon">
-                                    <i className="fas fa-clock"></i>
-                                </div>
-                                <div className="detail-info">
-                                    <h4>Work Hours</h4>
-                                    <p>Mon - Fri: 9am - 6pm</p>
-                                </div>
-                            </div>
-                        </div>
+                        {socials.length > 0 && (
+                            <ul role="list" className="contact__social">
+                                {socials.map((s) => (
+                                    <li key={s.key}>
+                                        <a className="icon-btn" href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}>
+                                            <Icon name={s.icon} />
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
                     </div>
 
-                    <div className="contact-form-container">
-                        <form className="contact-form" onSubmit={handleSubmit}>
-                            {success && (
-                                <div className="alert alert-success">
-                                    <i className="fas fa-check-circle"></i> Message sent successfully! I'll get back to you soon.
-                                </div>
-                            )}
-
-                            {error && (
-                                <div className="alert alert-error">
-                                    <i className="fas fa-exclamation-circle"></i> {error}
-                                </div>
-                            )}
-
-                            <div className="form-row">
-                                <div className="form-group">
-                                    <input
-                                        type="text"
-                                        name="name"
-                                        placeholder="Your Name"
-                                        value={formData.name}
-                                        onChange={handleChange}
-                                        required
-                                    />
-                                    <span className="focus-border"></span>
-                                </div>
-
-                                <div className="form-group">
-                                    <input
-                                        type="email"
-                                        name="email"
-                                        placeholder="Your Email"
-                                        value={formData.email}
-                                        onChange={handleChange}
-                                        required
-                                    />
-                                    <span className="focus-border"></span>
-                                </div>
+                    <form className="cf" onSubmit={onSubmit} noValidate={false}>
+                        <div className="cf__row">
+                            <div className="cf__field">
+                                <label htmlFor="cf-name">Name</label>
+                                <input id="cf-name" name="name" type="text" autoComplete="name" required value={form.name} onChange={onChange} />
                             </div>
-
-                            <div className="form-group">
-                                <input
-                                    type="text"
-                                    name="subject"
-                                    placeholder="Subject"
-                                    value={formData.subject}
-                                    onChange={handleChange}
-                                    required
-                                />
-                                <span className="focus-border"></span>
+                            <div className="cf__field">
+                                <label htmlFor="cf-email">Email</label>
+                                <input id="cf-email" name="email" type="email" autoComplete="email" required value={form.email} onChange={onChange} />
                             </div>
+                        </div>
+                        <div className="cf__field">
+                            <label htmlFor="cf-subject">Subject</label>
+                            <input id="cf-subject" name="subject" type="text" required value={form.subject} onChange={onChange} />
+                        </div>
+                        <div className="cf__field">
+                            <label htmlFor="cf-message">Message</label>
+                            <textarea id="cf-message" name="message" rows="5" maxLength={2000} required value={form.message} onChange={onChange} />
+                        </div>
 
-                            <div className="form-group">
-                                <textarea
-                                    name="message"
-                                    placeholder="Your Message"
-                                    rows="5"
-                                    value={formData.message}
-                                    onChange={handleChange}
-                                    required
-                                ></textarea>
-                                <span className="focus-border"></span>
-                            </div>
-
-                            <Button
-                                type="submit"
-                                variant="primary"
-                                className="submit-btn"
-                                loading={loading}
-                                disabled={loading}
-                                style={{ width: '100%', padding: '1.2rem' }}
+                        <div className="cf__footer">
+                            <button type="submit" className="btn btn--primary" disabled={sending}>
+                                {sending ? 'Sending…' : 'Send message'}
+                                {!sending && <Icon name="send" />}
+                            </button>
+                            <p
+                                className={`cf__status cf__status--${status.state}`}
+                                role={status.state === 'error' ? 'alert' : 'status'}
+                                aria-live="polite"
                             >
-                                {loading ? 'Sending...' : 'Send Message'}
-                            </Button>
-                        </form>
-                    </div>
-                </motion.div>
+                                {status.state === 'success' && <Icon name="check-circle" />}
+                                {status.state === 'error' && <Icon name="alert" />}
+                                {status.message}
+                            </p>
+                        </div>
+                    </form>
+                </div>
             </div>
         </section>
     );

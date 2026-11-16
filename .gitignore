@@ -1,0 +1,4 @@
+
+# Raw Lighthouse output (large; summary is in docs/perf-baseline/BASELINE.md)
+docs/perf-baseline/runs/
+docs/perf-baseline/*.html

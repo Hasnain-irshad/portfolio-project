@@ -13,13 +13,13 @@
 .page-title {
   font-size: 1.25rem;
   font-weight: 700;
-  color: #333;
+  color: var(--text);
 }
 
 .btn-primary {
   padding: 10px 16px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: #fff;
+  background: var(--accent);
+  color: var(--accent-ink);
   border: none;
   border-radius: 6px;
   font-weight: 600;
@@ -34,8 +34,8 @@
 .empty-state {
   padding: 40px;
   text-align: center;
-  color: #666;
-  background: #fff;
+  color: var(--text-2);
+  background: var(--surface);
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
@@ -43,7 +43,7 @@
 .loading-spinner {
   padding: 40px;
   text-align: center;
-  color: #666;
+  color: var(--text-2);
 }
 
 .project-form {

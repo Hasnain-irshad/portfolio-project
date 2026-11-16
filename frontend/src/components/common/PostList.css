@@ -1,0 +1,112 @@
+.posts {
+    border-top: 1px solid var(--border);
+}
+
+.post {
+    border-bottom: 1px solid var(--border);
+}
+
+.post__link {
+    display: grid;
+    grid-template-columns: 180px minmax(0, 1fr) 240px;
+    gap: 24px 40px;
+    align-items: start;
+    padding: 32px 0;
+    color: inherit;
+}
+
+.post__meta {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-top: 8px;
+}
+
+.post__title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(1.5rem, 2.8vw, 2.125rem);
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+    color: var(--text);
+    transition: color var(--dur-fast) var(--ease);
+}
+
+.post__link:hover .post__title {
+    color: var(--accent-text);
+}
+
+.post__excerpt {
+    margin-top: 12px;
+    font-size: 0.9375rem;
+    color: var(--text-2);
+    max-width: 60ch;
+}
+
+.post__tags {
+    margin-top: 16px;
+}
+
+.post__thumb {
+    aspect-ratio: 3 / 2;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+}
+
+.post__thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 600ms var(--ease);
+}
+
+.post__link:hover .post__thumb img {
+    transform: scale(1.03);
+}
+
+.post__arrow {
+    justify-self: end;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    color: var(--icon);
+}
+
+.post__arrow svg {
+    width: 18px;
+    height: 18px;
+}
+
+.post__link:focus-visible {
+    outline-offset: 6px;
+}
+
+@media (max-width: 960px) {
+    .post__link {
+        grid-template-columns: minmax(0, 1fr) 200px;
+    }
+    .post__meta {
+        grid-column: 1 / -1;
+        flex-direction: row;
+        gap: 16px;
+        padding-top: 0;
+    }
+}
+
+@media (max-width: 640px) {
+    .post__link {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 14px;
+    }
+    .post__thumb {
+        grid-row: 1;
+    }
+    .post__arrow {
+        display: none;
+    }
+}

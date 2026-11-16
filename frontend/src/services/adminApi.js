@@ -157,4 +157,16 @@ export const adminActivitiesAPI = {
     toggleVisibility: (token, id) => createAdminAPI(token).patch(`/activities/${id}/visibility`)
 };
 
+// Contact messages (inbox) — submissions are stored even if email delivery fails
+export const adminMessagesAPI = {
+    getAll: (token, params) => createAdminAPI(token).get('/contact', { params }),
+    markRead: (token, id) => createAdminAPI(token).patch(`/contact/${id}/read`),
+    delete: (token, id) => createAdminAPI(token).delete(`/contact/${id}`)
+};
+
+// Dashboard stats (includes unread message count)
+export const adminDashboardAPI = {
+    getStats: (token) => createAdminAPI(token).get('/dashboard')
+};
+
 export default createAdminAPI;

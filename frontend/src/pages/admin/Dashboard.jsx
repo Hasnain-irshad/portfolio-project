@@ -1,20 +1,24 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
+import { adminDashboardAPI } from '../../services/adminApi';
+import Icon from '../../components/common/Icon';
 import './Dashboard.css';
 
 const Dashboard = () => {
-    const { admin } = useAuth();
-    const [stats, setStats] = useState({
-        projects: 0,
-        skills: 0,
-        experience: 0,
-        certificates: 0
-    });
+    const { admin, token } = useAuth();
+    const [unread, setUnread] = useState(null);
 
     useEffect(() => {
-        // You can fetch actual stats from your API here
-        // For now, showing a welcome message
-    }, []);
+        let cancelled = false;
+        adminDashboardAPI
+            .getStats(token)
+            .then((res) => !cancelled && setUnread(res.data?.data?.unreadMessages ?? 0))
+            .catch(() => !cancelled && setUnread(null));
+        return () => {
+            cancelled = true;
+        };
+    }, [token]);
 
     const quickActions = [
         { icon: '💼', label: 'Add Project', link: '/admin/projects', color: '#3b82f6' },
@@ -34,6 +38,21 @@ const Dashboard = () => {
                     Manage your portfolio content from this dashboard. All changes are reflected on your public portfolio immediately.
                 </p>
             </div>
+
+            {unread !== null && (
+                <Link to="/admin/messages" className={`dashboard-inbox ${unread > 0 ? 'has-unread' : ''}`}>
+                    <span className="dashboard-inbox__icon" aria-hidden="true">
+                        <Icon name="mail" width="22" height="22" />
+                    </span>
+                    <span className="dashboard-inbox__text">
+                        <strong>
+                            {unread > 0 ? `${unread} unread message${unread === 1 ? '' : 's'}` : 'No unread messages'}
+                        </strong>
+                        <span>Contact-form submissions — saved here even if email delivery fails.</span>
+                    </span>
+                    <Icon name="arrow-right" width="18" height="18" />
+                </Link>
+            )}
 
             <div className="quick-actions">
                 <h3 className="section-title">Quick Actions</h3>

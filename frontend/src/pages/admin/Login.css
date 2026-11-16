@@ -3,14 +3,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: var(--bg);
+    background-image: radial-gradient(var(--grid-dot) 1px, transparent 1px);
+    background-size: 24px 24px;
     padding: 20px;
 }
 
 .login-container {
     width: 100%;
     max-width: 440px;
-    background: white;
+    background: var(--surface);
     border-radius: 16px;
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
     padding: 48px 40px;
@@ -24,13 +26,13 @@
 .login-title {
     font-size: 32px;
     font-weight: 700;
-    color: #111827;
+    color: var(--text);
     margin: 0 0 8px 0;
 }
 
 .login-subtitle {
     font-size: 14px;
-    color: #6b7280;
+    color: var(--text-3);
     margin: 0;
 }
 
@@ -42,10 +44,10 @@
 
 .login-error {
     padding: 12px 16px;
-    background: #fee2e2;
-    border: 1px solid #fecaca;
+    background: var(--danger-soft);
+    border: 1px solid var(--danger);
     border-radius: 8px;
-    color: #dc2626;
+    color: var(--danger);
     font-size: 14px;
     text-align: center;
 }
@@ -59,12 +61,12 @@
 .form-label {
     font-size: 14px;
     font-weight: 600;
-    color: #374151;
+    color: var(--text-2);
 }
 
 .form-input {
     padding: 12px 16px;
-    border: 1px solid #d1d5db;
+    border: 1px solid var(--border);
     border-radius: 8px;
     font-size: 14px;
     transition: all 0.2s;
@@ -72,18 +74,18 @@
 
 .form-input:focus {
     outline: none;
-    border-color: #667eea;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
 }
 
 .form-input::placeholder {
-    color: #9ca3af;
+    color: var(--text-3);
 }
 
 .btn-login {
     padding: 14px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+    background: var(--accent);
+    color: var(--accent-ink);
     border: none;
     border-radius: 8px;
     font-size: 16px;
@@ -95,7 +97,7 @@
 
 .btn-login:hover:not(:disabled) {
     transform: translateY(-2px);
-    box-shadow: 0 10px 15px -3px rgba(102, 126, 234, 0.3);
+    box-shadow: 0 10px 15px -3px var(--accent-soft);
 }
 
 .btn-login:disabled {
@@ -109,7 +111,7 @@
 }
 
 .back-to-site {
-    color: #667eea;
+    color: var(--accent);
     text-decoration: none;
     font-size: 14px;
     font-weight: 500;
@@ -117,7 +119,7 @@
 }
 
 .back-to-site:hover {
-    color: #764ba2;
+    color: var(--accent);
     text-decoration: underline;
 }
 

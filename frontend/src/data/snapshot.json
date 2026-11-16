@@ -1,0 +1,1053 @@
+{
+  "generatedAt": "2026-11-16T09:49:58.154Z",
+  "profile": {
+    "profileImage": {
+      "url": "https://res.cloudinary.com/da3llthlj/image/upload/v1779210538/portfolio/profile/yygwip5bmvndbzujwt60.jpg",
+      "publicId": "portfolio/profile/yygwip5bmvndbzujwt60"
+    },
+    "backgroundImage": {
+      "url": "https://res.cloudinary.com/da3llthlj/image/upload/v1779211308/portfolio/background/tscdovwysk10cdqzouup.jpg",
+      "publicId": "portfolio/background/tscdovwysk10cdqzouup"
+    },
+    "socialLinks": {
+      "github": "https://github.com/Hasnain-irshad",
+      "linkedin": "https://linkedin.com/in/hasnain-irshad-56",
+      "twitter": "",
+      "instagram": "",
+      "website": ""
+    },
+    "_id": "6938f94d8b92d4fe2f372d2b",
+    "name": "Hasnain Irshad",
+    "title": "AI Engineer | Generative AI, LLMs & RAG Systems",
+    "bio": "AI Engineer building production LLM systems, RAG, agentic workflows, and fine-tuned models. I make language models reliable: retrieval-grounded answers, guardrails against hallucination, and automated evaluation to prove it. Python, LangChain, LangGraph, PyTorch, FastAPI, AWS.",
+    "email": "irshadhasnain827@gmail.com",
+    "phone": "03244673961",
+    "location": "Islamabad, Pakistan",
+    "isVisible": true,
+    "createdAt": "2025-12-10T04:38:37.772Z",
+    "updatedAt": "2026-08-28T12:50:12.634Z",
+    "__v": 0
+  },
+  "resume": {
+    "_id": "6a918445a2790c9f679cf2d0",
+    "title": "Resume",
+    "description": "",
+    "fileUrl": "https://res.cloudinary.com/da3llthlj/raw/upload/v1787921477/portfolio/resumes/file",
+    "publicId": "portfolio/resumes/file",
+    "fileName": "Hasnain_AI_Engineer_Resume.pdf",
+    "fileSize": 155923,
+    "isActive": true,
+    "uploadedAt": "2026-08-28T12:51:17.773Z",
+    "createdAt": "2026-08-28T12:51:17.774Z",
+    "updatedAt": "2026-08-28T12:51:17.774Z",
+    "__v": 0
+  },
+  "projects": [
+    {
+      "_id": "6a91c84cadccda368a999d25",
+      "title": "Air Quality Index Predictor",
+      "description": "AI-powered AQI forecasting system predicting air quality for the next 3 days with automated ML pipelines, explainable predictions, monitoring, and interactive analytics.",
+      "images": [
+        {
+          "url": "https://res.cloudinary.com/da3llthlj/image/upload/v1787938892/portfolio/projects/gek5qb0msaz75h3pmnfz.png",
+          "publicId": "portfolio/projects/gek5qb0msaz75h3pmnfz",
+          "_id": "6a91c84cadccda368a999d26"
+        }
+      ],
+      "technologies": [
+        "Python",
+        "Scikit-learn",
+        "TensorFlow",
+        "Hopsworks",
+        "GitHub Actions",
+        "Streamlit",
+        "Flask",
+        "SHAP",
+        "AQICN",
+        "OpenWeather",
+        "Vercel",
+        "Git"
+      ],
+      "liveUrl": "https://10pearlsaqi.me/",
+      "githubUrl": "https://github.com/Hasnain-irshad/10pearls-aqi-predictor",
+      "featured": false,
+      "isVisible": true,
+      "order": 0,
+      "createdAt": "2026-08-28T17:41:32.508Z",
+      "updatedAt": "2026-09-15T09:35:29.897Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a91bf10805f9e7bc7e9937d",
+      "title": "Nishmat-Chatbot",
+      "description": "AI platform that writes Torah lessons in a teacher's own voice, grounded in stored Hebrew sources rather than model recall, with every quotation verified against the text before publishing.",
+      "images": [
+        {
+          "url": "https://res.cloudinary.com/da3llthlj/image/upload/v1787936527/portfolio/projects/oy8nenefuhbuxxo1cw3x.png",
+          "publicId": "portfolio/projects/oy8nenefuhbuxxo1cw3x",
+          "_id": "6a91bf10805f9e7bc7e9937e"
+        }
+      ],
+      "technologies": [
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "FastAPI",
+        "Python",
+        "PostgreSQL",
+        "Supabase",
+        "pgvector",
+        "OpenAI API",
+        "RAG",
+        "Docker",
+        "Railway",
+        "Vercel"
+      ],
+      "liveUrl": "https://nishmat-ai.vercel.app/",
+      "githubUrl": "https://github.com/Hasnain-irshad/Nishmat-Chatbot",
+      "featured": false,
+      "isVisible": true,
+      "order": 0,
+      "createdAt": "2026-08-28T17:02:08.544Z",
+      "updatedAt": "2026-08-28T17:02:08.544Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a91a2e4991b4153a7534ae4",
+      "title": "Agentic AI Web Navigator",
+      "description": "Autonomous AI browser agent that understands natural-language commands, plans tasks, navigates websites, and performs multi-step actions in a real browser.",
+      "images": [
+        {
+          "url": "https://res.cloudinary.com/da3llthlj/image/upload/v1787929315/portfolio/projects/brwsmtm0kyiufey01bao.png",
+          "publicId": "portfolio/projects/brwsmtm0kyiufey01bao",
+          "_id": "6a91a2e4991b4153a7534ae5"
+        }
+      ],
+      "technologies": [
+        "Python",
+        "JavaScript",
+        "Electron",
+        "Chromium",
+        "Playwright",
+        "Patchright",
+        "Chrome DevTools Protocol (CDP)",
+        "OpenAI GPT-4o mini",
+        "LLM Agents",
+        "Prompt Engineering",
+        "WebSockets"
+      ],
+      "liveUrl": "https://agentic-web-navigator.vercel.app",
+      "githubUrl": "https://github.com/Hasnain-irshad/Agentic-AI-Web-Navigator",
+      "featured": false,
+      "isVisible": true,
+      "order": 0,
+      "createdAt": "2026-08-28T15:01:56.261Z",
+      "updatedAt": "2026-09-15T09:36:11.615Z",
+      "__v": 2
+    },
+    {
+      "_id": "6a0d85414bd7230a846e7395",
+      "title": "Hospital Queue Management System",
+      "description": "Digital queue management platform designed to reduce waiting times and improve appointment and patient flow management.",
+      "images": [
+        {
+          "url": "https://res.cloudinary.com/da3llthlj/image/upload/v1779270977/portfolio/projects/fiq9bufatyelrmopzhun.jpg",
+          "publicId": "portfolio/projects/fiq9bufatyelrmopzhun",
+          "_id": "6a0d85414bd7230a846e7396"
+        },
+        {
+          "url": "https://res.cloudinary.com/da3llthlj/image/upload/v1781984282/portfolio/projects/lk6ceseodrtol1wdlagb.jpg",
+          "publicId": "portfolio/projects/lk6ceseodrtol1wdlagb",
+          "_id": "6a36ec1a3831c7cd689ea4c6"
+        }
+      ],
+      "technologies": [
+        "Python",
+        "Database Systems",
+        "APIs",
+        "Web Development"
+      ],
+      "githubUrl": "https://github.com/Hasnain-irshad/QueueCare",
+      "featured": false,
+      "isVisible": true,
+      "order": 0,
+      "createdAt": "2026-05-20T09:56:17.328Z",
+      "updatedAt": "2026-06-20T20:12:42.176Z",
+      "__v": 1,
+      "liveUrl": "https://queuecare--queuecare-495808.asia-southeast1.hosted.app/"
+    },
+    {
+      "_id": "6a0d84d04bd7230a846e738b",
+      "title": "Facebook Ads Lead Extraction System",
+      "description": "Automated system for extracting, processing, and storing Facebook Ads leads for marketing analytics and workflow management.",
+      "images": [
+        {
+          "url": "https://res.cloudinary.com/da3llthlj/image/upload/v1779270864/portfolio/projects/n93fhozjbf9u6xtklkay.jpg",
+          "publicId": "portfolio/projects/n93fhozjbf9u6xtklkay",
+          "_id": "6a0d84d04bd7230a846e738c"
+        }
+      ],
+      "technologies": [
+        "Python",
+        "APIs",
+        "MongoDB",
+        "Automation",
+        "Data Processing"
+      ],
+      "githubUrl": "https://github.com/Hasnain-irshad/MetaLead-Manager",
+      "featured": false,
+      "isVisible": true,
+      "order": 0,
+      "createdAt": "2026-05-20T09:54:24.255Z",
+      "updatedAt": "2026-06-20T20:09:14.495Z",
+      "__v": 0,
+      "liveUrl": "https://crm.mac.org.pk/"
+    },
+    {
+      "_id": "6a0d6b954bd7230a846e7346",
+      "title": "RAG-Based AI Chatbot",
+      "description": "AI chatbot enabling users to query uploaded documents and websites using Retrieval-Augmented Generation and natural language interaction.",
+      "images": [
+        {
+          "url": "https://res.cloudinary.com/da3llthlj/image/upload/v1779264406/portfolio/projects/nmk2djres583u95vqrqx.jpg",
+          "publicId": "portfolio/projects/nmk2djres583u95vqrqx",
+          "_id": "6a0d6b954bd7230a846e7347"
+        },
+        {
+          "url": "https://res.cloudinary.com/da3llthlj/image/upload/v1779264405/portfolio/projects/vphaw3bwd60ncgzi035n.jpg",
+          "publicId": "portfolio/projects/vphaw3bwd60ncgzi035n",
+          "_id": "6a0d6b954bd7230a846e7348"
+        },
+        {
+          "url": "https://res.cloudinary.com/da3llthlj/image/upload/v1779264405/portfolio/projects/sp37irr0j1ysxliuwk81.jpg",
+          "publicId": "portfolio/projects/sp37irr0j1ysxliuwk81",
+          "_id": "6a0d6b954bd7230a846e7349"
+        },
+        {
+          "url": "https://res.cloudinary.com/da3llthlj/image/upload/v1779270620/portfolio/projects/fgolncg3ugtiu4ledwfc.jpg",
+          "publicId": "portfolio/projects/fgolncg3ugtiu4ledwfc",
+          "_id": "6a0d83dc4bd7230a846e737b"
+        }
+      ],
+      "technologies": [
+        "Python",
+        "LangChain",
+        "LLMs",
+        "Vector Database",
+        "Streamlit",
+        "Hugging Face",
+        "NLP"
+      ],
+      "githubUrl": "https://github.com/Hasnain-irshad/Chat-with-your-PDF-and-website",
+      "featured": false,
+      "isVisible": true,
+      "order": 0,
+      "createdAt": "2026-05-20T08:06:45.852Z",
+      "updatedAt": "2026-05-20T09:50:20.991Z",
+      "__v": 1
+    }
+  ],
+  "skills": [
+    {
+      "_id": "6a918977a2790c9f679cf343",
+      "name": "LangChain",
+      "category": "AI/ML",
+      "proficiency": "Expert",
+      "proficiencyLevel": 100,
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2026-08-28T13:13:27.813Z",
+      "updatedAt": "2026-08-28T13:13:27.813Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a918991a2790c9f679cf346",
+      "name": "LangGraph",
+      "category": "AI/ML",
+      "proficiency": "Expert",
+      "proficiencyLevel": 100,
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2026-08-28T13:13:53.422Z",
+      "updatedAt": "2026-08-28T13:13:53.422Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a9189a5a2790c9f679cf349",
+      "name": "LamaIndex",
+      "category": "AI/ML",
+      "proficiency": "Expert",
+      "proficiencyLevel": 100,
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2026-08-28T13:14:13.012Z",
+      "updatedAt": "2026-08-28T13:14:13.012Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a9189cca2790c9f679cf34c",
+      "name": "RAG",
+      "category": "AI/ML",
+      "proficiency": "Expert",
+      "proficiencyLevel": 100,
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2026-08-28T13:14:52.609Z",
+      "updatedAt": "2026-08-28T13:14:52.609Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a9189e4a2790c9f679cf34f",
+      "name": "Prompt Engineering",
+      "category": "AI/ML",
+      "proficiency": "Expert",
+      "proficiencyLevel": 100,
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2026-08-28T13:15:16.092Z",
+      "updatedAt": "2026-08-28T13:15:16.092Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a918a04a2790c9f679cf352",
+      "name": "Embeddings",
+      "category": "AI/ML",
+      "proficiency": "Expert",
+      "proficiencyLevel": 100,
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2026-08-28T13:15:48.886Z",
+      "updatedAt": "2026-08-28T13:15:48.886Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a918a14a2790c9f679cf355",
+      "name": "Agentic AI",
+      "category": "AI/ML",
+      "proficiency": "Expert",
+      "proficiencyLevel": 100,
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2026-08-28T13:16:04.908Z",
+      "updatedAt": "2026-08-28T13:16:04.908Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a918a4da2790c9f679cf358",
+      "name": "LLM Fine-Tuning (LoRA / PEFT)",
+      "category": "AI/ML",
+      "proficiency": "Expert",
+      "proficiencyLevel": 100,
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2026-08-28T13:17:01.387Z",
+      "updatedAt": "2026-08-28T13:17:01.387Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a918a5ea2790c9f679cf35b",
+      "name": "OpenAI & Anthropic APIs",
+      "category": "AI/ML",
+      "proficiency": "Expert",
+      "proficiencyLevel": 100,
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2026-08-28T13:17:18.735Z",
+      "updatedAt": "2026-08-28T13:17:18.735Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a918f7aa2790c9f679cf39b",
+      "name": "Guardrails",
+      "category": "AI/ML",
+      "proficiency": "Expert",
+      "proficiencyLevel": 100,
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2026-08-28T13:39:06.223Z",
+      "updatedAt": "2026-08-28T13:39:06.223Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a0d88534bd7230a846e73eb",
+      "name": "AWS Cloud",
+      "category": "Cloud & DevOps",
+      "proficiency": "Expert",
+      "proficiencyLevel": 90,
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2026-05-20T10:09:23.374Z",
+      "updatedAt": "2026-05-20T10:09:23.374Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a0d887c4bd7230a846e73ee",
+      "name": "MLOps Fundamentals",
+      "category": "Cloud & DevOps",
+      "proficiency": "Expert",
+      "proficiencyLevel": 80,
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2026-05-20T10:10:04.004Z",
+      "updatedAt": "2026-05-20T10:10:04.004Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a0d888e4bd7230a846e73f1",
+      "name": "REST APIs",
+      "category": "Cloud & DevOps",
+      "proficiency": "Expert",
+      "proficiencyLevel": 80,
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2026-05-20T10:10:22.663Z",
+      "updatedAt": "2026-05-20T10:10:22.663Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a91877da2790c9f679cf2f2",
+      "name": "FastAPI",
+      "category": "Cloud & DevOps",
+      "proficiency": "Expert",
+      "proficiencyLevel": 100,
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2026-08-28T13:05:01.536Z",
+      "updatedAt": "2026-08-28T13:05:01.536Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a9187c8a2790c9f679cf2f5",
+      "name": "Docker",
+      "category": "Cloud & DevOps",
+      "proficiency": "Expert",
+      "proficiencyLevel": 100,
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2026-08-28T13:06:16.595Z",
+      "updatedAt": "2026-08-28T13:06:16.595Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a9187fca2790c9f679cf2f8",
+      "name": "CI/CD",
+      "category": "Cloud & DevOps",
+      "proficiency": "Expert",
+      "proficiencyLevel": 100,
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2026-08-28T13:07:08.524Z",
+      "updatedAt": "2026-08-28T13:07:08.524Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a918f8ca2790c9f679cf39e",
+      "name": "Model Monitoring",
+      "category": "Cloud & DevOps",
+      "proficiency": "Expert",
+      "proficiencyLevel": 100,
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2026-08-28T13:39:24.180Z",
+      "updatedAt": "2026-08-28T13:39:24.180Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a0d86a84bd7230a846e73cd",
+      "name": "MongoDB",
+      "category": "Data & Databases",
+      "proficiency": "Expert",
+      "proficiencyLevel": 85,
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2026-05-20T10:02:16.757Z",
+      "updatedAt": "2026-05-20T10:02:16.757Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a0d86bf4bd7230a846e73d0",
+      "name": "ETL",
+      "category": "Data & Databases",
+      "proficiency": "Expert",
+      "proficiencyLevel": 80,
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2026-05-20T10:02:40.000Z",
+      "updatedAt": "2026-05-20T10:02:40.000Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a0d86d74bd7230a846e73d3",
+      "name": "Data Pipeline",
+      "category": "Data & Databases",
+      "proficiency": "Expert",
+      "proficiencyLevel": 80,
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2026-05-20T10:03:03.150Z",
+      "updatedAt": "2026-05-20T10:03:03.150Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a91886fa2790c9f679cf312",
+      "name": "FAISS",
+      "category": "Data & Databases",
+      "proficiency": "Expert",
+      "proficiencyLevel": 100,
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2026-08-28T13:09:03.424Z",
+      "updatedAt": "2026-08-28T13:09:03.424Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a91887da2790c9f679cf315",
+      "name": "Pinecone",
+      "category": "Data & Databases",
+      "proficiency": "Expert",
+      "proficiencyLevel": 100,
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2026-08-28T13:09:17.894Z",
+      "updatedAt": "2026-08-28T13:09:17.894Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a91889ea2790c9f679cf318",
+      "name": "ChromaDB",
+      "category": "Data & Databases",
+      "proficiency": "Expert",
+      "proficiencyLevel": 100,
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2026-08-28T13:09:50.490Z",
+      "updatedAt": "2026-08-28T13:09:50.490Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a9188f1a2790c9f679cf32f",
+      "name": "PostgreSQL",
+      "category": "Data & Databases",
+      "proficiency": "Expert",
+      "proficiencyLevel": 100,
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2026-08-28T13:11:13.523Z",
+      "updatedAt": "2026-08-28T13:11:13.523Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a0d873d4bd7230a846e73d9",
+      "name": "Pandas",
+      "category": "Frameworks/Tools",
+      "proficiency": "Expert",
+      "proficiencyLevel": 100,
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2026-05-20T10:04:45.684Z",
+      "updatedAt": "2026-05-20T10:04:45.684Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a0d874e4bd7230a846e73dc",
+      "name": "Numpy",
+      "category": "Frameworks/Tools",
+      "proficiency": "Expert",
+      "proficiencyLevel": 90,
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2026-05-20T10:05:02.621Z",
+      "updatedAt": "2026-05-20T10:05:02.621Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a0d87754bd7230a846e73df",
+      "name": "Scikit-Learn",
+      "category": "Frameworks/Tools",
+      "proficiency": "Expert",
+      "proficiencyLevel": 95,
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2026-05-20T10:05:41.944Z",
+      "updatedAt": "2026-05-20T10:05:41.944Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a0d87884bd7230a846e73e2",
+      "name": "Hugging Face",
+      "category": "Frameworks/Tools",
+      "proficiency": "Expert",
+      "proficiencyLevel": 85,
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2026-05-20T10:06:00.360Z",
+      "updatedAt": "2026-05-20T10:06:00.360Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a0d87994bd7230a846e73e5",
+      "name": "Git",
+      "category": "Frameworks/Tools",
+      "proficiency": "Expert",
+      "proficiencyLevel": 90,
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2026-05-20T10:06:17.147Z",
+      "updatedAt": "2026-05-20T10:06:17.147Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a0d87aa4bd7230a846e73e8",
+      "name": "GitHub",
+      "category": "Frameworks/Tools",
+      "proficiency": "Expert",
+      "proficiencyLevel": 85,
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2026-05-20T10:06:34.593Z",
+      "updatedAt": "2026-05-20T10:06:34.593Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a918f2aa2790c9f679cf395",
+      "name": "PyTorch",
+      "category": "Frameworks/Tools",
+      "proficiency": "Expert",
+      "proficiencyLevel": 100,
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2026-08-28T13:37:46.679Z",
+      "updatedAt": "2026-08-28T13:37:46.679Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a918f3ea2790c9f679cf398",
+      "name": "TensorFlow",
+      "category": "Frameworks/Tools",
+      "proficiency": "Expert",
+      "proficiencyLevel": 100,
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2026-08-28T13:38:06.808Z",
+      "updatedAt": "2026-08-28T13:38:06.808Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a0d85cf4bd7230a846e73b5",
+      "name": "Python",
+      "category": "Languages",
+      "proficiency": "Expert",
+      "proficiencyLevel": 90,
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2026-05-20T09:58:39.636Z",
+      "updatedAt": "2026-05-20T09:59:58.616Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a0d85fe4bd7230a846e73b8",
+      "name": "Java",
+      "category": "Languages",
+      "proficiency": "Expert",
+      "proficiencyLevel": 80,
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2026-05-20T09:59:26.966Z",
+      "updatedAt": "2026-05-20T09:59:26.966Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a0d860c4bd7230a846e73bb",
+      "name": "SQL",
+      "category": "Languages",
+      "proficiency": "Expert",
+      "proficiencyLevel": 90,
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2026-05-20T09:59:40.280Z",
+      "updatedAt": "2026-05-20T09:59:40.280Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a0d88ee4bd7230a846e7409",
+      "name": "C++",
+      "category": "Languages",
+      "proficiency": "Expert",
+      "proficiencyLevel": 80,
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2026-05-20T10:11:58.664Z",
+      "updatedAt": "2026-05-20T10:11:58.664Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a918e47a2790c9f679cf37e",
+      "name": "Ownership",
+      "category": "Languages",
+      "proficiency": "Expert",
+      "proficiencyLevel": 100,
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2026-08-28T13:33:59.033Z",
+      "updatedAt": "2026-08-28T13:33:59.033Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a918de9a2790c9f679cf372",
+      "name": "Problem Solving",
+      "category": "Soft Skills",
+      "proficiency": "Expert",
+      "proficiencyLevel": 100,
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2026-08-28T13:32:25.004Z",
+      "updatedAt": "2026-08-28T13:32:25.004Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a918e04a2790c9f679cf375",
+      "name": "Technical Communication",
+      "category": "Soft Skills",
+      "proficiency": "Expert",
+      "proficiencyLevel": 100,
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2026-08-28T13:32:52.076Z",
+      "updatedAt": "2026-08-28T13:32:52.076Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a918e1fa2790c9f679cf378",
+      "name": "Research & Experimentation",
+      "category": "Soft Skills",
+      "proficiency": "Expert",
+      "proficiencyLevel": 100,
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2026-08-28T13:33:19.542Z",
+      "updatedAt": "2026-08-28T13:33:19.542Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a918e39a2790c9f679cf37b",
+      "name": "Collaboration",
+      "category": "Soft Skills",
+      "proficiency": "Expert",
+      "proficiencyLevel": 100,
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2026-08-28T13:33:45.346Z",
+      "updatedAt": "2026-08-28T13:33:45.346Z",
+      "__v": 0
+    }
+  ],
+  "experience": [
+    {
+      "logo": {
+        "url": "https://res.cloudinary.com/da3llthlj/image/upload/v1787925263/portfolio/experience/yehne6ftsxowcd13jmg0.png",
+        "publicId": "portfolio/experience/yehne6ftsxowcd13jmg0"
+      },
+      "_id": "6a919310a2790c9f679cf3b6",
+      "company": "10Pearls",
+      "position": "Data Science Intern",
+      "location": "Remote",
+      "type": "Full-time",
+      "startDate": "2026-07-01T00:00:00.000Z",
+      "current": true,
+      "description": "Building an end-to-end ML forecasting system (Pearls AQI Predictor) on a serverless stack, with automated feature engineering and training pipelines. Deployed the model behind a Streamlit/Flask service with SHAP-based explainability, and orchestrated scheduled retraining through GitHub Actions and Airflow so predictions stay accurate as new data arrives.",
+      "achievements": [],
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2026-08-28T13:54:24.233Z",
+      "updatedAt": "2026-08-28T13:54:24.233Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a0d8f4b4bd7230a846e7451",
+      "company": "Prosilent System INC.",
+      "position": "AI Research Intern",
+      "location": "Remote",
+      "type": "Full-time",
+      "startDate": "2025-06-25T00:00:00.000Z",
+      "endDate": "2025-09-05T00:00:00.000Z",
+      "current": false,
+      "description": "Conducted research on voice utterance detection and studied speech processing models including Wav2Vec and Word2Vec.",
+      "achievements": [],
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2026-05-20T10:39:07.584Z",
+      "updatedAt": "2026-05-20T10:39:07.584Z",
+      "__v": 0
+    },
+    {
+      "logo": {
+        "url": "https://res.cloudinary.com/da3llthlj/image/upload/v1779273400/portfolio/experience/zan2wf58xeqyqispu4jt.jpg",
+        "publicId": "portfolio/experience/zan2wf58xeqyqispu4jt"
+      },
+      "_id": "6a0d8eb74bd7230a846e7439",
+      "company": "CARE (center for advanced research in engineering)",
+      "position": "AI Engineer Intern",
+      "location": "Islamabad, Pakistan",
+      "type": "Full-time",
+      "startDate": "2024-06-20T00:00:00.000Z",
+      "endDate": "2024-09-20T00:00:00.000Z",
+      "current": false,
+      "description": "Worked on developing a RAG-based AI chatbot for document and website interaction using LLMs and vector retrieval techniques.",
+      "achievements": [],
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2026-05-20T10:36:39.782Z",
+      "updatedAt": "2026-05-20T10:36:39.782Z",
+      "__v": 0
+    }
+  ],
+  "achievements": [
+    {
+      "_id": "6a0d90b24bd7230a846e745c",
+      "title": "Academic Excellence Award",
+      "description": "Received recognition for maintaining outstanding academic performance and high CGPA across university semesters.",
+      "category": "Award",
+      "date": "2026-05-10T00:00:00.000Z",
+      "icon": "fas fa-star",
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2026-05-20T10:45:06.692Z",
+      "updatedAt": "2026-05-20T10:45:06.692Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a0d905e4bd7230a846e7459",
+      "title": "AWS Cloud Certification",
+      "description": "Earned certification demonstrating foundational knowledge of AWS cloud services, networking, storage, and compute.",
+      "category": "Certification",
+      "date": "2026-03-18T00:00:00.000Z",
+      "icon": "fas fa-star",
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2026-05-20T10:43:42.233Z",
+      "updatedAt": "2026-05-20T10:45:35.987Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a0d910a4bd7230a846e7462",
+      "title": "LeetCode Problem Solving",
+      "description": "Solved 150+ coding and algorithmic problems to strengthen data structures and problem-solving skills",
+      "category": "Milestone",
+      "date": "2026-01-14T00:00:00.000Z",
+      "icon": "fas fa-star",
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2026-05-20T10:46:34.014Z",
+      "updatedAt": "2026-09-22T05:23:59.785Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a0d91654bd7230a846e7465",
+      "title": "AI Internship Certifications",
+      "description": "Successfully completed internships in AI Engineering and AI Research with practical industry experience.",
+      "category": "Milestone",
+      "date": "2025-09-22T00:00:00.000Z",
+      "icon": "fas fa-star",
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2026-05-20T10:48:05.470Z",
+      "updatedAt": "2026-05-20T10:48:05.470Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a0d8ff34bd7230a846e7456",
+      "title": "Data Science Certification – Dice Camp",
+      "description": "Successfully completed a Data Science certification focused on analytics, machine learning, and AI fundamentals.",
+      "category": "Certification",
+      "date": "2024-09-10T00:00:00.000Z",
+      "icon": "fas fa-star",
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2026-05-20T10:41:55.483Z",
+      "updatedAt": "2026-05-20T10:41:55.483Z",
+      "__v": 0
+    }
+  ],
+  "education": [
+    {
+      "transcript": {
+        "url": "https://res.cloudinary.com/da3llthlj/image/upload/v1787928200/portfolio/education/zvmekctyzkydmxld2bf6.jpg",
+        "publicId": "portfolio/education/zvmekctyzkydmxld2bf6",
+        "originalName": "8 Semesters Transcript.jpeg",
+        "fileType": "image"
+      },
+      "_id": "693911c8e583c7a35ee4bfb3",
+      "school": "Sir syed CASE Institute of Technology",
+      "degree": "Bachelor of Computer science",
+      "field": "Computer Science",
+      "startDate": "2022-09-05T00:00:00.000Z",
+      "endDate": null,
+      "current": false,
+      "grade": "3.85/4",
+      "description": "Focused on Artificial Intelligence, Data Science, Machine Learning, and Software Development with consistent high academic performance.",
+      "activities": [],
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2025-12-10T06:23:04.948Z",
+      "updatedAt": "2026-08-28T14:43:20.907Z",
+      "__v": 0
+    },
+    {
+      "transcript": {
+        "url": "https://res.cloudinary.com/da3llthlj/image/upload/v1787926747/portfolio/education/mp9upoy56kaevjd3zcsy.jpg",
+        "publicId": "portfolio/education/mp9upoy56kaevjd3zcsy",
+        "originalName": "fsc.jpeg",
+        "fileType": "image"
+      },
+      "_id": "6a0d20679453f76c61b0c165",
+      "school": "Punjab Group of College, Khanewal",
+      "degree": "Fsc Pre Medical",
+      "field": "Pre-Medical",
+      "startDate": "2019-04-15T00:00:00.000Z",
+      "endDate": "2021-07-24T00:00:00.000Z",
+      "current": false,
+      "grade": "1045/1100",
+      "description": "Built a strong analytical and problem-solving foundation through science and mathematics coursework.",
+      "activities": [],
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2026-05-20T02:45:59.924Z",
+      "updatedAt": "2026-08-28T14:19:08.022Z",
+      "__v": 0
+    },
+    {
+      "transcript": {
+        "url": "https://res.cloudinary.com/da3llthlj/image/upload/v1787926729/portfolio/education/rfta7vxyicceg6yrcbkk.jpg",
+        "publicId": "portfolio/education/rfta7vxyicceg6yrcbkk",
+        "originalName": "matrik.jpeg",
+        "fileType": "image"
+      },
+      "_id": "6a0d21bc9453f76c61b0c168",
+      "school": "Government Higher Secondary school, Khanewal",
+      "degree": "Matric",
+      "field": "Science",
+      "startDate": "2017-03-13T00:00:00.000Z",
+      "endDate": "2019-03-20T00:00:00.000Z",
+      "current": false,
+      "grade": "1021/1100",
+      "description": "Achieved excellent academic performance with a strong base in science and mathematics fundamentals.",
+      "activities": [],
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2026-05-20T02:51:40.623Z",
+      "updatedAt": "2026-08-28T14:18:49.671Z",
+      "__v": 0
+    }
+  ],
+  "certificates": [
+    {
+      "image": {
+        "url": "https://res.cloudinary.com/da3llthlj/image/upload/v1781977940/portfolio/certificates/d6rh109aad3q2dkzl9jh.jpg",
+        "publicId": "portfolio/certificates/d6rh109aad3q2dkzl9jh"
+      },
+      "_id": "6a36d354dc26362025ced7c1",
+      "title": "AWS Cloud Computing",
+      "issuer": "AWS",
+      "issueDate": "2026-06-11T00:00:00.000Z",
+      "credentialUrl": "https://www.credly.com/go/4DDruDdm",
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2026-06-20T17:52:20.570Z",
+      "updatedAt": "2026-06-20T17:52:20.570Z",
+      "__v": 0
+    },
+    {
+      "image": {
+        "url": "https://res.cloudinary.com/da3llthlj/image/upload/v1781977888/portfolio/certificates/ll3z8aht63jrtkp2wkyz.png",
+        "publicId": "portfolio/certificates/ll3z8aht63jrtkp2wkyz"
+      },
+      "_id": "6a36d320dc26362025ced7be",
+      "title": "CARE Internship",
+      "issuer": "Center for Advance Research and Engineering (CARE)",
+      "issueDate": "2024-06-10T00:00:00.000Z",
+      "expiryDate": "2024-09-15T00:00:00.000Z",
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2026-06-20T17:51:28.980Z",
+      "updatedAt": "2026-06-20T17:51:28.980Z",
+      "__v": 0
+    }
+  ],
+  "blogs": [
+    {
+      "image": {
+        "url": "https://res.cloudinary.com/da3llthlj/image/upload/v1779275366/portfolio/blogs/ygd5andruoxk2p6nhxnk.jpg",
+        "publicId": "portfolio/blogs/ygd5andruoxk2p6nhxnk"
+      },
+      "_id": "6a0d96654bd7230a846e7484",
+      "title": "Why Data Engineering is the Backbone of Machine Learning Systems",
+      "content": "Machine Learning models are often seen as the “brain” of AI systems, but their success depends heavily on data quality and infrastructure. This is where Data Engineering plays a critical role.\r\n\r\nData Engineering focuses on collecting, cleaning, transforming, and storing data so that it can be used effectively by machine learning models.\r\n\r\nKey Responsibilities:\r\nBuilding ETL (Extract, Transform, Load) pipelines\r\nManaging large-scale databases\r\nEnsuring data quality and consistency\r\nSupporting real-time and batch data processing\r\nWhy It Matters for ML:\r\n\r\nEven the most advanced ML model will fail if trained on poor-quality data. Data Engineers ensure that:\r\n\r\nData is accurate\r\nData is available when needed\r\nData is properly structured\r\nTools Commonly Used:\r\nSQL for querying data\r\nPython for data processing\r\nMongoDB / SQL databases\r\nCloud platforms like AWS\r\n\r\nIn real-world systems, Data Engineering is what makes machine learning scalable and production-ready. Without it, AI systems cannot function reliably in production environments.\r\n\r\nFor anyone entering AI or Data Science, understanding Data Engineering is not optional — it is essential.",
+      "excerpt": "Data Engineering is the foundation of machine learning systems, ensuring high-quality, structured, and scalable data pipelines for AI applications.",
+      "tags": [
+        "Data Engineering",
+        "Machine Learning",
+        "Data Science",
+        "ETL",
+        "AI"
+      ],
+      "publishDate": "2026-05-09T00:00:00.000Z",
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2026-05-20T11:09:25.604Z",
+      "updatedAt": "2026-05-20T11:09:25.604Z",
+      "__v": 0
+    },
+    {
+      "image": {
+        "url": "https://res.cloudinary.com/da3llthlj/image/upload/v1779275032/portfolio/blogs/kcek5ph5kcfuupobiwj7.jpg",
+        "publicId": "portfolio/blogs/kcek5ph5kcfuupobiwj7"
+      },
+      "_id": "6a0d95174bd7230a846e7481",
+      "title": "Retrieval-Augmented Generation (RAG): Making LLMs Smarter with Your Own Data",
+      "content": "Large Language Models (LLMs) are powerful, but they have a key limitation — they do not know your private or real-time data. This is where Retrieval-Augmented Generation (RAG) comes in.\r\n\r\nRAG combines two components:\r\n\r\n1. Retriever: Finds relevant information from a knowledge source (like documents, PDFs, or websites).\r\n2. Generator: Uses an LLM to generate a response based on retrieved context.\r\n\r\nInstead of relying only on model memory, RAG allows systems to “look up” relevant data before answering.\r\n\r\nWhy RAG is Important:\r\nReduces hallucination in LLM responses\r\nAllows use of private/company data\r\nNo need to retrain large models\r\nHighly scalable and cost-efficient\r\nReal-World Use Cases:\r\nChatbots for company documents\r\nLegal and medical assistants\r\nCustomer support systems\r\nInternal knowledge search engines\r\n\r\nIn my own project, I implemented a RAG-based chatbot that allows users to upload documents and interact with them using natural language queries. This made information retrieval much faster and more intuitive.\r\n\r\nRAG is becoming a core building block in modern AI applications, especially in enterprise systems where accuracy and context matter the most.",
+      "excerpt": "RAG enhances LLMs by combining retrieval systems with generative models, allowing AI to answer questions using custom or private data sources.",
+      "tags": [
+        "AI",
+        "Machine Learning",
+        "LLM",
+        "RAG",
+        "NLP"
+      ],
+      "publishDate": "2026-04-08T00:00:00.000Z",
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2026-05-20T11:03:51.939Z",
+      "updatedAt": "2026-05-20T11:03:51.939Z",
+      "__v": 0
+    }
+  ],
+  "publications": [],
+  "activities": [
+    {
+      "_id": "6a0d97b04bd7230a846e7488",
+      "title": "MLOps Learning & Research in AI Systems",
+      "role": "Machine Learning Engineer",
+      "description": "Currently pursuing an MLOps course focused on model deployment, CI/CD pipelines, and production-grade machine learning systems. Alongside this, actively researching my Final Year Project (Agentic AI Web Navigator), focusing on how improved understanding of the DOM (Document Object Model) can enhance web automation performance and reduce error rates in AI-driven browser interactions.",
+      "startDate": "2026-05-08T00:00:00.000Z",
+      "current": true,
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2026-05-20T11:14:56.645Z",
+      "updatedAt": "2026-05-20T11:14:56.645Z",
+      "__v": 0
+    },
+    {
+      "_id": "6a0d984a4bd7230a846e748b",
+      "title": "Agentic AI Web Navigator Research",
+      "role": "AI/ML Research (Self-Driven)",
+      "description": "Actively conducting research for my Final Year Project on Agentic AI systems for autonomous web navigation. Focused on improving web automation reliability by studying DOM structure interaction, reducing execution errors, and enhancing decision-making capabilities of AI agents in browser environments.",
+      "startDate": "2025-12-29T00:00:00.000Z",
+      "current": true,
+      "order": 0,
+      "isVisible": true,
+      "createdAt": "2026-05-20T11:17:30.039Z",
+      "updatedAt": "2026-05-20T11:17:30.039Z",
+      "__v": 0
+    }
+  ]
+}

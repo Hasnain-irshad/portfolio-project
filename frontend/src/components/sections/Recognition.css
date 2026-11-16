@@ -1,0 +1,92 @@
+.ach {
+    gap: 10px;
+    min-height: 220px;
+}
+
+.ach__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+}
+
+.ach__icon {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--accent-line);
+    background: var(--accent-soft);
+    color: var(--accent-text);
+}
+
+.ach__icon svg {
+    width: 19px;
+    height: 19px;
+}
+
+.ach__cat {
+    text-transform: uppercase;
+    font-size: 0.6875rem;
+}
+
+.ach__title {
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+.ach--lead .ach__title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    letter-spacing: -0.015em;
+    max-width: 22ch;
+}
+
+.ach__desc {
+    font-size: 0.9375rem;
+    color: var(--text-2);
+}
+
+/* Certificates */
+.certs__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+    gap: 16px;
+}
+
+.cert__media {
+    aspect-ratio: 4 / 3;
+    background: var(--surface-2);
+    border-bottom: 1px solid var(--border);
+}
+
+.cert__media img {
+    object-fit: cover;
+    object-position: top;
+}
+
+.cert__body {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+    padding: 20px 22px 22px;
+}
+
+.cert__title {
+    font-size: 1.0625rem;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.cert__issuer {
+    font-size: 0.9375rem;
+    color: var(--text-2);
+}
+
+.cert__link {
+    margin-top: auto;
+    padding-top: 12px;
+}
